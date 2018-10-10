@@ -9,6 +9,6 @@ Team Members:
  - Sean Mendonca (QA)
  - Kyle Chin (UI)
 
-Team Motto: We are number one.
+Team Motto: Alexa ludere Despacito
 
 Pizza Topping: Jalapeño
