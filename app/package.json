@@ -48,7 +48,8 @@
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "typescript-eslint-parser"
+      "parser": "typescript-eslint-parser",
+      "linebreak-style": 0
     }
   },
   "postcss": {
