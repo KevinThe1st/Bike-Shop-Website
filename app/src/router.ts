@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
+import FoxcycleHome from './views/FoxcycleHome.vue';
 
 Vue.use(Router);
 
@@ -11,7 +12,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: FoxcycleHome,
     },
     {
       path: '/about',
@@ -21,5 +22,17 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
+    {
+      path: '/login',
+      name: 'login',
+      //redirect to login page
+      component: () => import(/* webpackChunkName: "login" */ './views/Login.vue'),
+    },
+    {
+      path: '/createCustomer',
+      name: 'createCustomer',
+      //redirect to create customer packages
+      component: () => import(/* webpackChunkName: "login" */ './views/CreateCustomer.vue'),
+    }
   ],
 });
