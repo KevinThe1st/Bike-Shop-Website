@@ -10,7 +10,6 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "mysql2": "^1.6.1",
     "sequelize": "^4.39.0",
     "vue": "^2.5.17",
@@ -49,8 +48,7 @@
     ],
     "rules": {},
     "parserOptions": {
-      "parser": "typescript-eslint-parser",
-      "linebreak-style": 0
+      "parser": "typescript-eslint-parser"
     }
   },
   "postcss": {
