@@ -28,5 +28,11 @@ export default new Router({
       //redirect to login page
       component: () => import(/* webpackChunkName: "login" */ './views/Login.vue'),
     },
+    {
+      path: '/createCustomer',
+      name: 'createCustomer',
+      //redirect to create customer packages
+      component: () => import(/* webpackChunkName: "login" */ './views/CreateCustomer.vue'),
+    }
   ],
 });
