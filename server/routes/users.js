@@ -16,7 +16,7 @@ router.get('/:id', function(req, res) {
   });
 });
 
-router.get('/login', function(req, res) => {
+router.get('/login', function(req, res) {
   const { body: { user } } = req;
 
   if(!user.username) {
@@ -45,7 +45,7 @@ router.get('/login', function(req, res) => {
   });
 });
 
-router.delete('/:id', function(req, res) => {
+router.delete('/:id', function(req, res) {
   const idToDelete = req.params.id;
   //// TODO: make sure person calling is admin
   User.findById(idToDelete).then((item) => {

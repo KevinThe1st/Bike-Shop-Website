@@ -24,3 +24,5 @@ router.put('/', function(req, res) {
     res.json({ created: 'Failure' });
   });
 });
+
+module.exports = router;
