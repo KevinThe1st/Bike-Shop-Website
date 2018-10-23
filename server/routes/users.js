@@ -16,10 +16,39 @@ router.get('/:id', function(req, res) {
   });
 });
 
+router.get('/login', function(req, res) => {
+  const { body: { user } } = req;
+
+  if(!user.username) {
+    return res.status(422).json({
+      errors: {
+        username: 'is required',
+      },
+    });
+  }
+
+  if(!user.password) {
+    return res.status(422).json({
+      errors: {
+        password: 'is required',
+      },
+    });
+  }
+
+  User.findOne({where: { username: user.username}}).then(u => {
+    if(u.password = user.password) {
+      return res.json({ id: u.id, success: true });
+    }
+    else{
+      return res.json({success: false});
+    }
+  });
+});
+
 router.delete('/:id', function(req, res) => {
   const idToDelete = req.params.id;
   //// TODO: make sure person calling is admin
-  Item.findById(idToDelete).then((item) => {
+  User.findById(idToDelete).then((item) => {
     item.destroy().then(() => {
       res.json({ delete: true });
     });
