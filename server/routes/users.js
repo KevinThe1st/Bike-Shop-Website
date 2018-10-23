@@ -1,4 +1,5 @@
 var express = require('express');
+var { User } = require('../models');
 var router = express.Router();
 const { User } = require('../models');
 
@@ -54,6 +55,30 @@ router.delete('/:id', function(req, res) {
     });
   }).catch(() => {
     res.json({ delete: false });
+  });
+});
+
+router.post((req, res) => {
+  const {
+    username,
+    password,
+    lastName,
+    firstName,
+    type,
+    createdAt,
+    updatedAt,
+  } = req.body;
+  // validate potentially here
+  User.create({
+    username,
+    password,
+    lastName,
+    firstName,
+    type,
+    createdAt,
+    updatedAt,
+  }).then((user) => {
+    res.json(user);
   });
 });
 
