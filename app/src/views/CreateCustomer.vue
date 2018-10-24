@@ -24,12 +24,13 @@ export default class CreateCustomer extends Vue {
   FirstNameMessage: string = '';
   LastNameMessage: string = '';
   updateDone () {
-    axios.put(`/api/users`, {
+    axios.put(`/api/register`, {
       username: this.UsernameMessage,
       password: this.PasswordMessage,
       lastName: this.LastNameMessage,
       firstName: this.FirstNameMessage
     }).then((res) => {
+      //console.log(res)
       this.user = res.data; //this is not accurate
     })
   }
