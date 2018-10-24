@@ -31,6 +31,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
+      ship_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Addresses',
+          key: 'id'
+        },
+        allowNull: true
+      },
+      bill_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Addresses',
+          key: 'id'
+        },
+        allowNull: true
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

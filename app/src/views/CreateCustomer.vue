@@ -1,19 +1,38 @@
 <template>
-  <div class="createcustomer">
+  <div class="CreateCustomer">
     <h1>Create a New Customer Account</h1>
     <h3>Please enter a username and password:</h3>
-    <input type = "text"  id = "createUserUsernameInput" placeholder = "Username">
-    <input type = "submit" id = "createUserButton" v-on:click="updateDone"/>
+    <input class="input" type="text" placeholder="Username" v-model="UsernameMessage">
+    <input type="submit" id="createUserButton" v-on:click="updateDone"/>
     <br>
-    <input type = "text"  id = "createUserPasswordInput" placeholder = "Password">
+    <input class="input" type="text" placeholder="Password" v-model="PasswordMessage">
+    <input class="input" type="text" placeholder="First Name" v-model="FirstNameMessage">
+    <input class="input" type="text" placeholder="Last Name" v-model="LastNameMessage">
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
-
+import { CreateUserItem } from '@/models';
 
 @Component
-export default class CreateCustomer extends Vue {}
+export default class CreateCustomer extends Vue {
+  user: CreateUserItem|null = null;
+  UsernameMessage: string = '';
+  PasswordMessage: string = '';
+  FirstNameMessage: string = '';
+  LastNameMessage: string = '';
+  updateDone () {
+    axios.put(`/api/register`, {
+      username: this.UsernameMessage,
+      password: this.PasswordMessage,
+      lastName: this.LastNameMessage,
+      firstName: this.FirstNameMessage
+    }).then((res) => {
+      //console.log(res)
+      this.user = res.data; //this is not accurate
+    })
+  }
+}
 </script>

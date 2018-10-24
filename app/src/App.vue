@@ -3,11 +3,37 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/login">Login</router-link>
+      <router-link to="" v-on:click.native="showModal">Login</router-link>
+      <LoginPopup
+        v-show="isPopupVisible"
+        @close="closeModal"
+      />
     </div>
     <router-view/>
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import LoginPopup from '@/components/LoginPopup.vue';
+
+@Component({
+  components: {
+    LoginPopup
+  },
+})
+export default class App extends Vue {
+  isPopupVisible: boolean = false
+
+  showModal() {
+    this.isPopupVisible = true;
+  }
+  closeModal() {
+    this.isPopupVisible = false;
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

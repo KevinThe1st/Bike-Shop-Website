@@ -4,6 +4,6 @@ export class CreateUserItem {
   lastName!: string;
   firstName!: string;
   type!: string;
-  createdAt!: Date;
-  updatedAt!: Date;
+  createdAt!: datetime;
+  updatedAt!: datetime;
 }
