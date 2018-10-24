@@ -9,14 +9,13 @@ router.put('/', function(req, res) {
     password,
     lastName,
     firstName,
-    type,
   } = req.body;
   User.create({
     username,
     password,
     lastName,
     firstName,
-    type,
+    type:"Customer",
   }).then((item) => {
     res.json({ created: 'Success' });
   }).catch(() => {

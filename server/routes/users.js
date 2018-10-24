@@ -16,10 +16,9 @@ router.get('/:id', function(req, res) {
   });
 });
 
-router.get('/login', function(req, res) {
-  const { body: { user } } = req;
-
-  if(!user.username) {
+router.put('/login', function(req, res) {
+  const { username, password } = req.body;
+  if(!username) {
     return res.status(422).json({
       errors: {
         username: 'is required',
@@ -27,7 +26,7 @@ router.get('/login', function(req, res) {
     });
   }
 
-  if(!user.password) {
+  if(!password) {
     return res.status(422).json({
       errors: {
         password: 'is required',
@@ -35,8 +34,8 @@ router.get('/login', function(req, res) {
     });
   }
 
-  User.findOne({where: { username: user.username}}).then(u => {
-    if(u.password = user.password) {
+  User.findOne({where: { username: username}}).then(u => {
+    if(u.password == password) {
       return res.json({ id: u.id, success: true });
     }
     else{
