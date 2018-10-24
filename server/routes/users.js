@@ -35,7 +35,7 @@ router.put('/login', function(req, res) {
   }
 
   User.findOne({where: { username: username}}).then(u => {
-    if(u.password == password) {
+    if(u != null && u.password == password) {
       return res.json({ id: u.id, success: true });
     }
     else{
