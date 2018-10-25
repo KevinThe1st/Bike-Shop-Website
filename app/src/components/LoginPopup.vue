@@ -29,12 +29,12 @@
          <footer class="modal-footer">
             <slot name="register">
               <router-link :to="{name: 'register'}">
-                <button id="registerButton" v-on:click="close()">Register</button>
+                <button class="register-button" v-on:click="close()">Register</button>
               </router-link>
             </slot>
             <div class="divider"/>
             <slot name="submit">
-              <input id="submitButton" type="submit" value="Sign In" v-on:click="save()">
+              <input class="submit-button" type="submit" value="Sign In" v-on:click="save()">
             </button>
           </slot>
         </footer>
@@ -68,7 +68,7 @@ export default class LoginPopup extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -87,57 +87,85 @@ export default class LoginPopup extends Vue {
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    height: 40%;
+    width: 10%;
+    height: 10%;
+    min-width:200px;
+    min-height:200px;
   }
 
   .modal-header {
-
+    font-weight: bold;
+    padding: 2px 15px;
+    text-align: left;
+    line-height: 35px;
+    border-bottom: 1px solid #eeeeee;
+    color: #000000;
+    justify-content: space-between;
+    background: #D0F0E0;
   }
 
   .modal-footer {
     padding: 15px;
     display: flex;
-  }
-
-  .modal-header {
-    border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
-    justify-content: space-between;
+    height:70px;
   }
 
   .modal-footer {
     border-top: 1px solid #eeeeee;
     justify-content: flex-end;
+    height:60px;
   }
 
   .modal-body {
     position: relative;
     padding: 10px 10px;
-    height: 80%;
+    height: 60%;
   }
 
   .btn-close {
     border: none;
-    font-size: 10px;
-    padding: 20px;
+    font-size: 20px;
+    padding: 5px;
     cursor: pointer;
     font-weight: bold;
     color: #4AAE9B;
     background: transparent;
-    text-align: right;
+    float: right;
   }
 
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
+  .register-button {
+    border: #000000;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 10px;
+    padding:10px;
+    line-height: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000000;
+    background: transparent;
+    border-radius: 25px;
+    float: right;
+  }
+
+  .submit-button {
+    border: none;
+    font-size: 10px;
+    padding:10px;
+    line-height: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    background: #328632;
+    border-radius: 25px;
+    float: right;
+    height: 25px;
   }
 
   .divider{
-    width:5px;
+    width:10px;
     height:auto;
     display:inline-block;
   }
+
 </style>
