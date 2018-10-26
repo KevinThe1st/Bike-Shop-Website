@@ -24,8 +24,14 @@ router.put('/', function(req, res) {
   if(!firstName){
     missingFields.push("firstName");
   }
-  if(missingFields){
-    return res.status(422).json({
+  if(missingFields.length > 0){
+    /*
+     * I know I said I wanted this to be a 403 but the problem with
+     * returning an error code is that I can't get any request
+     * data back - chiefly the list of missing fields. Using
+     * a 203 code for now.
+     */
+    return res.status(203).json({
       missing: missingFields
     });
   }

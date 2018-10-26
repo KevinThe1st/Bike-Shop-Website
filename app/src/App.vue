@@ -29,12 +29,16 @@ import LoginPopup from '@/components/LoginPopup.vue';
   components: {
     LoginPopup
   },
+  props:{
+    loggedIn: Boolean = false
+  }
 })
 export default class App extends Vue {
-  isPopupVisible: boolean = false
+  isPopupVisible: boolean = false;
 
   showModal() {
     this.isPopupVisible = true;
+    console.log(this.loggedIn);
   }
   closeModal() {
     this.isPopupVisible = false;
