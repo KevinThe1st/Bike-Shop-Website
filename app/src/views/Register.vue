@@ -27,10 +27,11 @@ import { CreateUserItem } from '@/models';
 @Component
 export default class Register extends Vue {
   user: CreateUserItem|null = null;
-  UsernameMessage: string = ''
-  PasswordMessage: string = ''
-  FirstNameMessage: string = ''
-  LastNameMessage: string = ''
+  UsernameMessage: string = '';
+  PasswordMessage: string = '';
+  FirstNameMessage: string = '';
+  LastNameMessage: string = '';
+  
   register () {
     axios.put(`/api/register`, {
       username: this.UsernameMessage,
