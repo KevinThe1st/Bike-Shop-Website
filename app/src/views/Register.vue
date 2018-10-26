@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div id="register">
     <h1>Create a New Customer Account</h1>
     <h3>Please enter a username and password:</h3>
     <p>
@@ -14,7 +14,7 @@
     <p>
       <input type = "text"  id = "createUserLastNameInput" placeholder = "Last Name" v-model="LastNameMessage">
     </p>
-    <input type = "submit" id = "createUserButton" v-on:click="register"/>
+    <input type = "submit" id = "button" v-on:click="register"/>
     <br>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default class Register extends Vue {
   PasswordMessage: string = '';
   FirstNameMessage: string = '';
   LastNameMessage: string = '';
+  
   register () {
     axios.put(`/api/register`, {
       username: this.UsernameMessage,
@@ -43,3 +44,22 @@ export default class Register extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+#register {
+  padding: 50px 0px;
+  text-align: center;
+
+  #button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+  }
+}
+
+</style>

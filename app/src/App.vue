@@ -1,14 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="" v-on:click.native="showModal">Login</router-link>
-      <LoginPopup
-        v-show="isPopupVisible"
-        @close="closeModal"
-      />
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <div id="login">
+        <router-link to="" v-on:click.native="showModal" is-active=false>Login</router-link>
+      </div>
     </div>
+    <LoginPopup
+      v-show="isPopupVisible"
+      @close="closeModal"
+    />
     <router-view/>
   </div>
 </template>
@@ -40,17 +42,54 @@ export default class App extends Vue {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
+
 #nav {
-  padding: 30px;
+  list-style-type: none;
+  background-color: #f1f1f1;
+  display: inline;
+  background-color: #333;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: fixed;
+
   a {
+    display: inline-block;
+    padding: 8px 16px;
     font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    text-decoration: none;
+    text-align: center;
+    padding: 14px 16px;
+    color: white;
   }
+
+  a:hover {
+    background-color: #555;
+    color: white;
+  }
+
+  a.router-link-exact-active {
+    background-color: #4CAF50;
+    color: white;
+  }
+}
+
+#login {
+  position: absolute;
+  left: 90%;
+  top: 0px;
+  background-color: #f1f1f1;
+
+  a {
+    background-color: #002288;
+  }
+
+  a.router-link-exact-active {
+    background-color: #002288;
+    color: white;
+  }
+
 }
 </style>
