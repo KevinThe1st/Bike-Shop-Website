@@ -6,7 +6,7 @@
       <input type = "text"  id = "createUserUsernameInput" placeholder = "Username" v-model="UsernameMessage">
     </p>
     <p>
-      <input type = "text"  id = "createUserPasswordInput" placeholder = "Password" v-model="PasswordMessage">
+      <input type = "password"  id = "createUserPasswordInput" placeholder = "Password" v-model="PasswordMessage">
     </p>
     <p>
       <input type = "text"  id = "createUserFirstNameInput" placeholder = "First Name" v-model="FirstNameMessage">

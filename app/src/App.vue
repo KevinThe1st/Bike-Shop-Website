@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
+      <!--
+        <img src="./assets/logo.png" alt="logo" id="logo">
+      -->
       <router-link to="/">Home</router-link>
+      <router-link to="/shop">Shop</router-link>
+      <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
       <div id="login">
         <router-link to="" v-on:click.native="showModal" is-active=false>Login</router-link>
@@ -43,6 +48,12 @@ export default class App extends Vue {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+#logo {
+  padding: 0px 20px;
+  width: 20px;
+  height: 20px;
 }
 
 #nav {
