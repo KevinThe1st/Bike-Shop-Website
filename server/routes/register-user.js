@@ -10,6 +10,27 @@ router.put('/', function(req, res) {
     lastName,
     firstName,
   } = req.body;
+
+  var missingFields = []
+  if(!username){
+    missingFields.push("username");
+  }
+  if(!password){
+    missingFields.push("password");
+  }
+  if(!lastName){
+    missingFields.push("lastName");
+  }
+  if(!firstName){
+    missingFields.push("firstName");
+  }
+  if(missingFields){
+    return res.status(422).json({
+      missing: missingFields
+    });
+  }
+
+
   User.create({
     username,
     password,
