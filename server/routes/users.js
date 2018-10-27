@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { User } = require('../models');
+const Auth = require('./authenticator');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
@@ -34,14 +35,20 @@ router.put('/login', function(req, res) {
     });
   }
 
-  User.findOne({where: { username: username}}).then(u => {
-    if(u != null && u.password == password) {
-      return res.json({ id: u.id, success: true });
+  Auth.login(username, password).then(
+    session => {
+      if (session) {
+        session.getUser().then(user => {
+          res.json({ user_id: user.id });
+        });
+      } else {
+        res.status(403).json({ error: 'you are not logged in' });
+      }
+    },
+    error => {
+      res.status(403).json({ error: error.message });
     }
-    else{
-      return res.status(403).json({success: false});
-    }
-  });
+  );
 });
 
 router.delete('/:id', function(req, res) {

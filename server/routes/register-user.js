@@ -24,24 +24,29 @@ router.put('/', function(req, res) {
   if(!firstName){
     missingFields.push("firstName");
   }
-  if(missingFields){
+  if(missingFields == []){
     return res.status(422).json({
       missing: missingFields
     });
   }
 
-
-  User.create({
-    username,
-    password,
-    lastName,
-    firstName,
-    type:"Customer",
-  }).then((item) => {
-    res.json({ created: 'Success' });
-  }).catch(() => {
-    //// TODO: check if user already made and return appropiate message
-    res.json({ created: 'Failure' });
+  User.findOne({ where: { username } }).then(user => {
+    if(user) {
+      return res.status(403).json({
+        error: "username already taken."
+      });
+    }
+    User.create({
+      username,
+      password,
+      lastName,
+      firstName,
+      type:"Customer",
+    }).then((item) => {
+      res.json({ created: 'Success' });
+    }).catch(() => {
+      res.status(403).json({ created: 'Failure' });
+    });
   });
 });
 
