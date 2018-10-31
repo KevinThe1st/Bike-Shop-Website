@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   OrderItem.associate = function(models) {
     // associations can be defined here
-    OrderItem.hasOne(models.Item);
+    OrderItem.belongsTo(models.Item);
     OrderItem.belongsTo(models.Order);
   };
   return OrderItem;
