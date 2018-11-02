@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { User } = require('../models');
+const Auth = require('./authenticator');
 
 /* CREATE user. */
 router.put('/', function(req, res) {
@@ -24,8 +25,14 @@ router.put('/', function(req, res) {
   if(!firstName){
     missingFields.push("firstName");
   }
-  if(missingFields == []){
-    return res.status(422).json({
+  if(missingFields.length > 0){
+    /*
+     * I know I said I wanted this to be a 403 but the problem with
+     * returning an error code is that I can't get any request
+     * data back - chiefly the list of missing fields. Using
+     * a 203 code for now.
+     */
+    return res.status(203).json({
       missing: missingFields
     });
   }
@@ -43,7 +50,18 @@ router.put('/', function(req, res) {
       firstName,
       type:"Customer",
     }).then((item) => {
-      res.json({ created: 'Success' });
+      Auth.login(item.username, item.password).then(
+        session => {
+          if (session) {
+            res.json({ user_id: item.id });
+          } else {
+            res.status(403).json({ error: 'you are not logged in' });
+          }
+        },
+        error => {
+          res.status(403).json({ error: error.message });
+        }
+      );
     }).catch(() => {
       res.status(403).json({ created: 'Failure' });
     });
