@@ -58,6 +58,7 @@ export default class LoginPopup extends Vue {
       if(res.data.success){
         this.close();
       }
+      console.log("Login response:" + res.data.success);
     })
   }
   close() {
