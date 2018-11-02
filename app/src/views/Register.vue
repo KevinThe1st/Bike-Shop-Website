@@ -63,10 +63,11 @@ export default class Register extends App {
       firstName: this.FirstNameMessage
     }).then((res) => {
       this.userItem = res.data;
-      if(res.data.created == "Success"){
+      if(res.status == 200){
         console.log("Registration Successful");
         this.missing = [];
         this.$store.commit('login', res.data.user_id);
+        this.$router.push('/')
       }
       else{
         console.log("Missing: " + res.data.missing); //an array
