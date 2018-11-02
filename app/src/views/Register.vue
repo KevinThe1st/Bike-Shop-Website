@@ -40,7 +40,7 @@ export default class Register extends App {
   PasswordMessage: string = '';
   FirstNameMessage: string = '';
   LastNameMessage: string = '';
-  missing;
+  missing: string[] = [];
 
   errorColor: string = '1px solid red';
   normalColor: string = '0.5px solid #888888';
@@ -66,10 +66,6 @@ export default class Register extends App {
       if(res.data.created == "Success"){
         console.log("Registration Successful");
         this.missing = [];
-        computed: {
-          this.login();
-          //hot mess
-        }
       }
       else{
         console.log("Missing: " + res.data.missing); //an array
@@ -116,10 +112,6 @@ export default class Register extends App {
       this.borderColorLastName = this.normalColor;
       this.errorDisplayLastName = 'none';
     }
-  }
-
-  login () {
-    return this.loggedIn;
   }
 }
 </script>

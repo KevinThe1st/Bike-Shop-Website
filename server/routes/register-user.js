@@ -24,10 +24,6 @@ router.put('/', function(req, res) {
   if(!firstName){
     missingFields.push("firstName");
   }
-<<<<<<< HEAD
-  if(missingFields == []){
-    return res.status(422).json({
-=======
   if(missingFields.length > 0){
     /*
      * I know I said I wanted this to be a 403 but the problem with
@@ -36,7 +32,6 @@ router.put('/', function(req, res) {
      * a 203 code for now.
      */
     return res.status(203).json({
->>>>>>> e38b9eb0319d11e4ee407d627c51a37bec4584f1
       missing: missingFields
     });
   }
