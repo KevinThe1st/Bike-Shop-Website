@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { User } = require('../models');
+const Auth = require('./authenticator');
 
 /* CREATE user. */
 router.put('/', function(req, res) {
@@ -49,7 +50,18 @@ router.put('/', function(req, res) {
       firstName,
       type:"Customer",
     }).then((item) => {
-      res.json({ created: 'Success' });
+      Auth.login(item.username, item.password).then(
+        session => {
+          if (session) {
+            res.json({ user_id: item.id });
+          } else {
+            res.status(403).json({ error: 'you are not logged in' });
+          }
+        },
+        error => {
+          res.status(403).json({ error: error.message });
+        }
+      );
     }).catch(() => {
       res.status(403).json({ created: 'Failure' });
     });
