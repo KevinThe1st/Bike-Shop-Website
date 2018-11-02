@@ -35,7 +35,7 @@ import App from '../App.vue';
 
 @Component
 export default class Register extends App {
-  user: CreateUserItem|null = null;
+  userItem: CreateUserItem|null = null;
   UsernameMessage: string = '';
   PasswordMessage: string = '';
   FirstNameMessage: string = '';
@@ -62,10 +62,11 @@ export default class Register extends App {
       lastName: this.LastNameMessage,
       firstName: this.FirstNameMessage
     }).then((res) => {
-      this.user = res.data;
+      this.userItem = res.data;
       if(res.data.created == "Success"){
         console.log("Registration Successful");
         this.missing = [];
+        this.$store.commit('login', res.data.user_id);
       }
       else{
         console.log("Missing: " + res.data.missing); //an array

@@ -56,12 +56,14 @@ export default class LoginPopup extends Vue {
       password: this.password
     }).then((res) => {
       if(res.data.success){
+        this.$store.commit('login', res.data.user_id)
         this.close();
       }
       console.log("Login response:" + res.data.success);
     })
   }
   close() {
+    console.log("asdf");
     this.username = ''
     this.password = ''
     this.$emit('close');

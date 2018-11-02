@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Component from 'vue-class-component'
 import LoginPopup from '@/components/LoginPopup.vue';
 
