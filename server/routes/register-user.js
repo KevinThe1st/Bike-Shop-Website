@@ -4,7 +4,7 @@ const { User } = require('../models');
 const Auth = require('./authenticator');
 
 /* CREATE user. */
-router.put('/', function(req, res) {
+router.post('/', function(req, res) {
   const {
     username,
     password,

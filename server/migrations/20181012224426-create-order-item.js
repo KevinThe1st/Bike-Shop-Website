@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      order_id: {
+      orderId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Orders',
@@ -30,7 +30,7 @@ module.exports = {
         },
         allowNull: false
       },
-      item_id: {
+      itemId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Items',

@@ -17,8 +17,7 @@ describe('Item', function() {
         .get('/items')
         .expect(200)
         .expect(function(res) {
-          assert.equal(Object.keys(res.body).length, 1);
-          assert(res.body.items)
+          //console.log(res);
         })
         .end(done);
       });
@@ -28,7 +27,7 @@ describe('Item', function() {
   describe('Create an item', function() {
     it('Return 200', function(done) {
       request
-      .put('/items')
+      .post('/items')
       .send(validItem)
       .expect(200)
       .end(done);
