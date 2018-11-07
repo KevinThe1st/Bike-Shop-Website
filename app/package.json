@@ -14,7 +14,9 @@
     "mysql2": "^1.6.1",
     "sequelize": "^4.39.0",
     "vue": "^2.5.17",
+    "vue-carousel": "^0.16.0-rc2",
     "vue-class-component": "^6.0.0",
+    "vue-flux": "^5.1.5",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -35,6 +37,7 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "typescript": "^3.0.0",
+    "vue-carousel": "^0.16.0-rc2",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {

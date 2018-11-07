@@ -22,6 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Component from 'vue-class-component'
 import LoginPopup from '@/components/LoginPopup.vue';
 
@@ -29,16 +30,12 @@ import LoginPopup from '@/components/LoginPopup.vue';
   components: {
     LoginPopup
   },
-  props:{
-    loggedIn: Boolean = false
-  }
 })
 export default class App extends Vue {
   isPopupVisible: boolean = false;
 
   showModal() {
     this.isPopupVisible = true;
-    console.log(this.loggedIn);
   }
   closeModal() {
     this.isPopupVisible = false;

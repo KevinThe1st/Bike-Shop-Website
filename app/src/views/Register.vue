@@ -35,12 +35,12 @@ import App from '../App.vue';
 
 @Component
 export default class Register extends App {
-  user: CreateUserItem|null = null;
+  userItem: CreateUserItem|null = null;
   UsernameMessage: string = '';
   PasswordMessage: string = '';
   FirstNameMessage: string = '';
   LastNameMessage: string = '';
-  missing;
+  missing: string[] = [];
 
   errorColor: string = '1px solid red';
   normalColor: string = '0.5px solid #888888';
@@ -62,14 +62,12 @@ export default class Register extends App {
       lastName: this.LastNameMessage,
       firstName: this.FirstNameMessage
     }).then((res) => {
-      this.user = res.data;
-      if(res.data.created == "Success"){
+      this.userItem = res.data;
+      if(res.status == 200){
         console.log("Registration Successful");
         this.missing = [];
-        computed: {
-          this.login();
-          //hot mess
-        }
+        this.$store.commit('login', res.data.user_id);
+        this.$router.push('/')
       }
       else{
         console.log("Missing: " + res.data.missing); //an array
@@ -116,10 +114,6 @@ export default class Register extends App {
       this.borderColorLastName = this.normalColor;
       this.errorDisplayLastName = 'none';
     }
-  }
-
-  login () {
-    return this.loggedIn;
   }
 }
 </script>
