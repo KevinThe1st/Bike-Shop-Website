@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      parId: {
+      parentId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {
