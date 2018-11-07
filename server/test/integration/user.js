@@ -7,20 +7,7 @@ const validUser = {
   "firstName": "Justin",
 };
 
-describe('Register', function() {  
-  describe('Register a user', function() {
-    it('Valid body returns 200', function(done) {
-      request
-      .put('/register')
-      .send(validUser)
-      .expect(200)
-      .expect(function(res) {
-        //console.log(res.body);
-        assert.equal(res.body['created'], 'Success')
-      })
-      .end(done);
-    });
-  });
+describe('Register', function() {
 });
 
 describe('User', function() {
@@ -68,6 +55,20 @@ describe('User', function() {
         })
         .end(done);
       });
+    });
+  });
+
+  describe('Register a user', function() {
+    it('Valid body returns 200', function(done) {
+      request
+      .post('/register')
+      .send(validUser)
+      .expect(200)
+      .expect(function(res) {
+        //console.log(res.body);
+        assert.equal(res.body['created'], 'Success')
+      })
+      .end(done);
     });
   });
 });

@@ -3,7 +3,7 @@ var router = express.Router();
 const { User } = require('../models');
 
 /* CREATE user. */
-router.put('/', function(req, res) {
+router.post('/', function(req, res) {
   const {
     username,
     password,
