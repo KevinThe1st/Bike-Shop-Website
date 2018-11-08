@@ -2,7 +2,7 @@
   <div id="shop">
     <div id="category-bar">
       <ul>
-        <li v-for="(item, index) in temp"><input type="checkbox" v-on:click="printer(index)">{{item}}</li>
+        <li v-for="(category, index) in categoryNames"><input type="checkbox" v-on:click="getSubCategories(index)">{{category}}</li>
       </ul>
     </div>
   </div>
@@ -17,11 +17,35 @@ import { CategoryItem } from '@/models';
 @Component
 export default class Shop extends App {
   categories: CategoryItem[] = [];
-  temp: string[] = [ "aaaa", "bbb", "cc" ];
-  subtemp: string[][] = [[ "dddd", "eee", "ff" ], ["111", "222"], ["a"]];
+  categoryNames: string[] = [];
 
-  printer(input){
-    console.log(input);
+  getTopLevelCategories(){
+    axios.get(`/api/categories/parents`)
+    .then((res) => {
+      this.categories = res.data.categories;
+      this.categoryNames = [];
+      for(var i = 0; i < this.categories.length; i++){
+        this.categoryNames[i] = this.categories[i].name;
+      }
+      console.log("from top level: " + this.categoryNames);
+    })
+  }
+
+  getSubCategories(index){
+    console.log(this.categories[index].id);
+    axios.get(`/api/categories/parents/` + this.categories[index].id)
+    .then((res) => {
+      this.categories = res.data.category;
+      this.categoryNames = [];
+      for(var i = 0; i < this.categories.length; i++){
+        this.categoryNames[i] = this.categories[i].name;
+      }
+      console.log("from sub level: " + this.categoryNames);
+    })
+  }
+
+  beforeMount(){
+    this.getTopLevelCategories()
   }
 }
 
