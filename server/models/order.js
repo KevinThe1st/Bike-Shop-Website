@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.DOUBLE,
     storePickup: DataTypes.BOOLEAN
   }, {});
-  Order.associate = function(models) {
+  Order.associate = function (models) {
     // associations can be defined here
     Order.hasMany(models.OrderItem);
     Order.belongsTo(models.User);
