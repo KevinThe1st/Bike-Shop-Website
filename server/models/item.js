@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     stock: DataTypes.INTEGER,
     descShort: DataTypes.STRING,
     descLong: DataTypes.STRING,
-    category: DataTypes.STRING
   }, {});
   Item.associate = function(models) {
     // associations can be defined here
     Item.hasMany(models.OrderItem);
+    Item.hasMany(models.ItemCategory);
   };
   return Item;
 };

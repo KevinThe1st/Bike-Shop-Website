@@ -1,11 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const { Item } = require('../models');
+const { ItemCategory } = require('../models');
 
 router.get('/', function(req, res) {
   Item.findAll().then((items) => {
     res.json({items});
   });
+});
+
+router.get('/byCat', function(req, res) {
+
 });
 
 router.get('/:id', function(req, res) {
