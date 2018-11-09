@@ -66,6 +66,7 @@ export default class App extends Vue {
   left: 0;
   width: 100%;
   position: fixed;
+  z-index: 10;
 
   a {
     display: inline-block;

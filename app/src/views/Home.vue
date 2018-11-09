@@ -16,12 +16,29 @@
           <img alt="Vue logo" src="../assets/homepagenew4.png" width = 100%>
         </slide>
     </carousel>
+
+    <div class = "container">
+        <div class = "row">
+          <div class = "col-sm-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit.
+          </div>
+          <div class = "col-sm-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Quisque non tellus orci ac. Purus faucibus ornare suspendisse sed nisi lacus sed.
+          </div>
+          <div class = "col-sm-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. 
+          </div>
+        </div>
+    </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Carousel, Slide } from 'vue-carousel';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 @Component({
   components: {
