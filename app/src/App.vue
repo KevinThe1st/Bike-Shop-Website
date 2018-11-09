@@ -9,12 +9,12 @@
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
       <div id="login">
-        <router-link to="" v-on:click.native="showModal" is-active=false>Login</router-link>
+        <a v-on:click="showModal" is-active=false>Login</a>
       </div>
     </div>
     <LoginPopup
-      v-show="isPopupVisible"
-      @close="closeModal"
+      v-bind:visible="isPopupVisible"
+      v-on:close="closeModal"
     />
     <router-view/>
   </div>
@@ -35,6 +35,7 @@ export default class App extends Vue {
   isPopupVisible: boolean = false;
 
   showModal() {
+    debugger;
     this.isPopupVisible = true;
   }
   closeModal() {
