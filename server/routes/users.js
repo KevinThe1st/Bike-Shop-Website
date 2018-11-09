@@ -17,7 +17,7 @@ router.get('/:id', function(req, res) {
   });
 });
 
-router.post('/login', function(req, res) {
+router.put('/login', function(req, res) {
   const { username, password } = req.body;
   if(!username) {
     return res.status(422).json({
