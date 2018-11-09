@@ -1,8 +1,11 @@
 <template>
   <div id="product">
-    <h1>bike</h1>
-    <h4>price</h4>
-    <div>desc</div>
+    <p>
+      {{name}}
+    </p>
+    <p>
+      {{price}}
+    </P>
   </div>
 </template>
 

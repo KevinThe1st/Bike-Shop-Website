@@ -26,7 +26,7 @@ router.get('/parents/:id', function (req, res) {
   });
 });
 
-router.post('/', function (req, res) {
+router.put('/', function (req, res) {
   const {
     name,
     type,

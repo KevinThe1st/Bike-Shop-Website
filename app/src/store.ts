@@ -29,17 +29,10 @@ const mutations = {
   }
 }
 
-const getters = {
-  isLoggedIn(state){
-    return state.logged_in
-  }
-}
-
 export default new Vuex.Store({
   state,
   getters,
   mutations,
-  getters,
   actions: {
 
   },

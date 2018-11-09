@@ -15,7 +15,12 @@
     <div id="item-panel">
       <li v-for="item in items">
         <Product
-          v-bind:id="item"
+          v-bind:id="item.id"
+          v-bind:price="item.price"
+          v-bind:stock="item.stock"
+          v-bind:name="item.name"
+          v-bind:descShort="item.descShort"
+          v-bind:descLong="item.descLong"
         ></Product>
       </li>
     </div>
@@ -47,13 +52,12 @@ export default class Shop extends App {
   }
 
   getSubCategories(index){
-    console.log(this.categories[index].id);
     this.appliedCategories.push(this.categories[index]);
-    console.log(this.appliedCategories);
     axios.get(`/api/categories/parents/` + this.categories[index].id)
     .then((res) => {
       this.categories = res.data.category;
     })
+    this.getSpecificCategoryItems(index);
   }
 
   beforeMount(){
@@ -64,6 +68,15 @@ export default class Shop extends App {
   getAllItems(){
     axios.get(`/api/items`)
     .then((res) => {
+      this.items = res.data.items;
+    })
+  }
+
+  getSpecificCategoryItems(index){
+    console.log(this.categories[index].id)
+    axios.get(`/api/items/byCat/` + this.categories[index].id)
+    .then((res) => {
+      console.log(res.data.items)
       this.items = res.data.items;
     })
   }
