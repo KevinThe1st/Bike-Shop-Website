@@ -10,12 +10,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/byCat', function(req, res) {
-
+  ItemCategory.findAll({ where: { parentId: req.body }}).then((items) => {
+    return res.json({items});
+  });
 });
 
 router.get('/:id', function(req, res) {
   Item.findById(req.params.id).then((item) => {
-    res.json({item});
+    return res.json({item});
   });
 });
 
@@ -34,9 +36,9 @@ router.post('/', function(req, res) {
     descLong,
     category,
   }).then((item) => {
-    res.json({ created: 'Success' });
+    return res.json({ created: 'Success' });
   }).catch(() => {
-    res.json({ created: 'Failure' });
+    return res.json({ created: 'Failure' });
   });
 });
 
@@ -44,10 +46,10 @@ router.delete('/:id', function(req, res) {
   const idToDelete = req.params.id;
   Item.findById(idToDelete).then((item) => {
     item.destroy().then(() => {
-      res.json({ delete: true });
+      return res.json({ delete: true });
     });
   }).catch(() => {
-    res.json({ delete: false });
+    return res.json({ delete: false });
   });
 });
 
