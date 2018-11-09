@@ -5,13 +5,20 @@ const { ItemCategory } = require('../models');
 
 router.get('/', function(req, res) {
   Item.findAll().then((items) => {
-    res.json({items});
+    return res.json({items});
   });
 });
 
-router.get('/byCat', function(req, res) {
-  ItemCategory.findAll({ where: { parentId: req.body }}).then((items) => {
-    return res.json({items});
+//axios set params for array
+router.get('/byCat/:categoryId', function(req, res) {
+  ItemCategory.findAll({ where: { categoryId: req.params.categoryId }}).then((catItems) => {
+    var ids = []
+    for(var i = 0; i < catItems.length; i++){
+      ids.push(catItems[i])
+    }
+    Item.findAll({ where: { id: ids }}).then((items) => {
+      return res.json({items});
+    });
   });
 });
 
@@ -21,24 +28,30 @@ router.get('/:id', function(req, res) {
   });
 });
 
-router.post('/', function(req, res) {
+router.put('/', function(req, res) {
   const {
+    name,
     price,
     stock,
     descShort,
     descLong,
-    category,
+    categoryId,
   } = req.body;
   Item.create({
+    name,
     price,
     stock,
     descShort,
     descLong,
-    category,
   }).then((item) => {
-    return res.json({ created: 'Success' });
+    ItemCategory.create({
+      itemId: item.id,
+      categoryId
+    }).then((ic) => {
+        return res.json({ created: 'Success' });
+      });
   }).catch(() => {
-    return res.json({ created: 'Failure' });
+    return res.status(403).json({ created: 'Failure' });
   });
 });
 
