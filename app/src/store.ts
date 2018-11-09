@@ -8,6 +8,17 @@ const state = {
   id: 0
 }
 
+const getters = {
+  getLoginStatus(state){
+    if(state.logged_in){
+      return state.id;
+    }
+    else{
+      return false;
+    }
+  }
+}
+
 const mutations = {
   login(state, id){
     state.id = id,
@@ -26,6 +37,7 @@ const getters = {
 
 export default new Vuex.Store({
   state,
+  getters,
   mutations,
   getters,
   actions: {

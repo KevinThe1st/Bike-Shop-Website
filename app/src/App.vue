@@ -8,8 +8,8 @@
       <router-link to="/shop">Shop</router-link>
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
-      <button id="login" v-on:click="showModal" is-active=false v-if="!this.$store.getters.isLoggedIn">Login</button>
-      <UserDropdown id="dropdown" v-if="this.$store.getters.isLoggedIn"/>
+      <button id="login" v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</button>
+      <UserDropdown id="dropdown" v-if="this.$store.getters.getLoginStatus"/>
     </div>
     <LoginPopup
       v-show="isPopupVisible"

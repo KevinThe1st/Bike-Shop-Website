@@ -8,6 +8,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING
+      },
       price: {
         type: Sequelize.DOUBLE
       },
@@ -18,9 +21,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       descLong: {
-        type: Sequelize.STRING
-      },
-      category: {
         type: Sequelize.STRING
       },
       createdAt: {

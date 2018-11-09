@@ -1,14 +1,13 @@
+'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Sessions', {
+    return queryInterface.createTable('ItemCategories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      expiration: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -18,17 +17,25 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      userId: {
+      categoryId: {
         type: Sequelize.INTEGER,
-        unique: true,
         references: {
-          model: 'Users',
-          key: 'id',
+          model: 'Categories',
+          key: 'id'
         },
+        allowNull: false
+      },
+      itemId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Items',
+          key: 'id'
+        },
+        allowNull: false
       },
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Sessions');
+    return queryInterface.dropTable('ItemCategories');
   }
 };

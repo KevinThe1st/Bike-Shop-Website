@@ -1,14 +1,18 @@
+'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Sessions', {
+    return queryInterface.createTable('Textboxes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      expiration: {
-        type: Sequelize.DATE
+      name: {
+        type: Sequelize.STRING
+      },
+      text: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -17,18 +21,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        unique: true,
-        references: {
-          model: 'Users',
-          key: 'id',
-        },
-      },
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Sessions');
+    return queryInterface.dropTable('Textboxes');
   }
 };

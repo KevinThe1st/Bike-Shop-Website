@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var registerRouter = require('./routes/register-user');
 var itemsRouter = require('./routes/items');
+var textRouter = require('./routes/text')
 var ordersRouter = require('./routes/orders');
 var categoriesRouter = require('./routes/categories');
 
@@ -27,6 +28,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/items', itemsRouter);
+app.use('/textbox', textRouter);
 app.use('/orders', ordersRouter);
 app.use('/categories', categoriesRouter);
 
