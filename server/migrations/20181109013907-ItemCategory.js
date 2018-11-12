@@ -23,7 +23,7 @@ module.exports = {
           model: 'Categories',
           key: 'id'
         },
-        allowNull: false
+        allowNull: true
       },
       itemId: {
         type: Sequelize.INTEGER,
@@ -31,7 +31,7 @@ module.exports = {
           model: 'Items',
           key: 'id'
         },
-        allowNull: false
+        allowNull: true
       },
     });
   },

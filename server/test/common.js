@@ -5,7 +5,7 @@ const truncate = require('./truncate');
 const { Category, Item, Order, User } = require('../models');
 
 beforeEach(() => {
-  truncate();
+  return truncate();
 });
 
 after(() => {

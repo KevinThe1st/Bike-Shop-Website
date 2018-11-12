@@ -1,5 +1,5 @@
-const { User, Address, Item, Order, OrderItem, Session, Category} = require('../models');
-const {Op} = require('sequelize');
+const { User, Address, Item, Order, OrderItem, Session, Category } = require('../models');
+const { Op } = require('sequelize');
 const models = [User, Address, Item, Order, OrderItem, Session];
 
 module.exports = function truncate() {
@@ -11,8 +11,8 @@ module.exports = function truncate() {
       })
     )
   ).then(() => {
-    return Category.destroy( {where: { parentId: {[Op.not]: null}}});
+    return Category.destroy({ where: { parentId: { [Op.not]: null } } });
   }).then(() => {
-    return Category.destroy( {where: {}});
+    return Category.destroy({ where: {} });
   })
 };

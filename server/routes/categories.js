@@ -4,13 +4,13 @@ const { Category } = require('../models');
 
 router.get('/', function (req, res) {
   Category.findAll().then((categories) => {
-    return res.json({ categories });
+    res.json({ categories });
   });
 });
 
 router.get('/parents', function (req, res) {
   Category.findAll({ where: { parentId: null } }).then((categories) => {
-    return res.json({ categories });
+    res.json({ categories });
   });
 });
 
@@ -20,7 +20,7 @@ router.get('/:id', function (req, res) {
   });
 });
 
-router.get('/parents/:id', function (req, res) {
+router.get('/parent/:id', function (req, res) {
   Category.findAll({where: {parentId: req.params.id}}).then((category) => {
     res.json({ category });
   });
