@@ -12,6 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       type: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
@@ -22,7 +23,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      par_id: {
+      parentId: {
         allowNull: true,
         type: Sequelize.INTEGER,
         references: {

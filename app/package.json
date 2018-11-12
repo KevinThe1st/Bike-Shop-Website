@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "mysql2": "^1.6.1",
     "sequelize": "^4.39.0",
     "vue": "^2.5.17",

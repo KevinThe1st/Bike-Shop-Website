@@ -8,13 +8,14 @@
       <router-link to="/shop">Shop</router-link>
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
+      <UserDropdown id="dropdown" v-if="this.$store.getters.getLoginStatus"/>
       <div id="login">
-        <router-link to="" v-on:click.native="showModal" is-active=false>Login</router-link>
+        <a v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</a>
       </div>
     </div>
     <LoginPopup
-      v-show="isPopupVisible"
-      @close="closeModal"
+      v-bind:visible="isPopupVisible"
+      v-on:close="closeModal"
     />
     <router-view/>
   </div>
@@ -25,10 +26,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Component from 'vue-class-component'
 import LoginPopup from '@/components/LoginPopup.vue';
+import UserDropdown from '@/components/UserDropdown.vue';
 
 @Component({
   components: {
-    LoginPopup
+    LoginPopup,
+    UserDropdown,
   },
 })
 export default class App extends Vue {
@@ -36,6 +39,7 @@ export default class App extends Vue {
 
   showModal() {
     this.isPopupVisible = true;
+    console.log(this.$store.getters.isLoggedIn);
   }
   closeModal() {
     this.isPopupVisible = false;
@@ -50,13 +54,11 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
 #logo {
   padding: 0px 20px;
   width: 20px;
   height: 20px;
 }
-
 #nav {
   list-style-type: none;
   background-color: #f1f1f1;
@@ -66,7 +68,7 @@ export default class App extends Vue {
   left: 0;
   width: 100%;
   position: fixed;
-
+  z-index: 10;
   a {
     display: inline-block;
     padding: 8px 16px;
@@ -76,32 +78,34 @@ export default class App extends Vue {
     padding: 14px 16px;
     color: white;
   }
-
   a:hover {
     background-color: #555;
     color: white;
   }
-
   a.router-link-exact-active {
     background-color: #4CAF50;
     color: white;
   }
 }
-
 #login {
   position: absolute;
   left: 90%;
   top: 0px;
   background-color: #f1f1f1;
-
   a {
     background-color: #002288;
   }
-
   a.router-link-exact-active {
     background-color: #002288;
     color: white;
   }
-
+}
+#dropdown {
+  float: right;
+  top: 0px;
+  a.router-link-exact-active {
+    background-color: #4444FF;
+    color: white;
+  }
 }
 </style>

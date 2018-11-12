@@ -5,15 +5,15 @@ const Auth = require('./authenticator');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
-  User.findAll().then((items) => {
-    res.json({items});
+  User.findAll().then((users) => {
+    res.json({users});
   });
 });
 
 /* GET specific user listing. */
 router.get('/:id', function(req, res) {
-  User.findById(req.params.id).then((item) => {
-    res.json({item});
+  User.findById(req.params.id).then((user) => {
+    res.json({user});
   });
 });
 
@@ -54,8 +54,8 @@ router.put('/login', function(req, res) {
 router.delete('/:id', function(req, res) {
   const idToDelete = req.params.id;
   //// TODO: make sure person calling is admin
-  User.findById(idToDelete).then((item) => {
-    item.destroy().then(() => {
+  User.findById(idToDelete).then((user) => {
+    user.destroy().then(() => {
       res.json({ delete: true });
     });
   }).catch(() => {
