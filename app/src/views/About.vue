@@ -8,12 +8,7 @@
       <div class = "row">
         <div class = "col-sm-1"></div>
         <div class = "col-sm-3" id = "contactBox">
-          <div>
-            <p>Foxcycle Cyclery</p>
-            <p>(805)492-4821</p>
-            <p>5934 Grand Ave</p>
-            <p>San Luis Obispo, CA 93410</p>
-          </div>
+          <p id = "location" style="white-space: pre;">{{location}}</p>
         </div>
         <div class = "col-sm-8">
         </div>
@@ -29,12 +24,7 @@
       <div class = "container infoBoxContainer">
         <div class = "row">
           <div class = "col-sm-6">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Euismod lacinia at quis risus. Facilisis leo vel fringilla est. Neque viverra justo nec ultrices dui sapien eget mi proin.</p>
-            <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna.</p>
-            <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis.</p>
-            <br>
+            <p id = "aboutText" style="white-space: pre;">{{aboutUs}}</p>
           </div>
           <div class = "col-sm-1">
           </div>
@@ -91,13 +81,38 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Carousel, Slide } from 'vue-carousel';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import axios from 'axios';
 
 @Component({
   components: {
   }
 
 })
-export default class About extends Vue {}
+
+export default class About extends Vue {
+
+  aboutUs: string = "I am a placeholder, look at me!\nI am a placeholder, look at me!\n";
+  location: string = "Very\nNice\nPlaceholder";
+
+  data(){
+    return {
+      location: this.location,
+      aboutUs: this.aboutUs
+    }
+  }
+  mounted(){
+    axios
+      .get('/api/textbox/location')
+      .then((res) => {
+        this.location = res.data.item.text;
+      })
+    axios
+      .get('/api/textbox/about')
+      .then((res) => {
+        this.aboutUs = res.data.item.text;
+      })
+  }
+}
 </script>
 
 <style lang="scss">

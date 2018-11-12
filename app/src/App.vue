@@ -8,8 +8,9 @@
       <router-link to="/shop">Shop</router-link>
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
+      <UserDropdown id="dropdown" v-if="this.$store.getters.getLoginStatus"/>
       <div id="login">
-        <a v-on:click="showModal" is-active=false>Login</a>
+        <a v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</a>
       </div>
     </div>
     <LoginPopup
@@ -37,7 +38,6 @@ export default class App extends Vue {
   isPopupVisible: boolean = false;
 
   showModal() {
-    debugger;
     this.isPopupVisible = true;
     console.log(this.$store.getters.isLoggedIn);
   }
@@ -97,6 +97,14 @@ export default class App extends Vue {
   }
   a.router-link-exact-active {
     background-color: #002288;
+    color: white;
+  }
+}
+#dropdown {
+  float: right;
+  top: 0px;
+  a.router-link-exact-active {
+    background-color: #4444FF;
     color: white;
   }
 }
