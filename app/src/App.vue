@@ -54,7 +54,11 @@ export default class App extends Vue {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
+#logo {
+  padding: 0px 20px;
+  width: 20px;
+  height: 20px;
+}
 #nav {
   list-style-type: none;
   background-color: #f1f1f1;
@@ -64,8 +68,7 @@ export default class App extends Vue {
   left: 0;
   width: 100%;
   position: fixed;
-  z-index: 5;
-
+  z-index: 10;
   a {
     display: inline-block;
     padding: 8px 16px;
@@ -75,34 +78,25 @@ export default class App extends Vue {
     padding: 14px 16px;
     color: white;
   }
-
   a:hover {
     background-color: #555;
     color: white;
   }
-
   a.router-link-exact-active {
     background-color: #4CAF50;
     color: white;
   }
 }
-
 #login {
-  margin-left: 60%;
-  background-color: #AA7777;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-#dropdown {
-  float: right;
+  position: absolute;
+  left: 90%;
   top: 0px;
-
+  background-color: #f1f1f1;
+  a {
+    background-color: #002288;
+  }
   a.router-link-exact-active {
-    background-color: #4444FF;
+    background-color: #002288;
     color: white;
   }
 }
