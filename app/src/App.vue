@@ -8,12 +8,13 @@
       <router-link to="/shop">Shop</router-link>
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
-      <button id="login" v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</button>
-      <UserDropdown id="dropdown" v-if="this.$store.getters.getLoginStatus"/>
+      <div id="login">
+        <a v-on:click="showModal" is-active=false>Login</a>
+      </div>
     </div>
     <LoginPopup
-      v-show="isPopupVisible"
-      @close="closeModal"
+      v-bind:visible="isPopupVisible"
+      v-on:close="closeModal"
     />
     <router-view/>
   </div>
@@ -36,6 +37,7 @@ export default class App extends Vue {
   isPopupVisible: boolean = false;
 
   showModal() {
+    debugger;
     this.isPopupVisible = true;
     console.log(this.$store.getters.isLoggedIn);
   }
