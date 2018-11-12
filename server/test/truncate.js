@@ -1,13 +1,18 @@
-const models = require('../models');
+const { User, Address, Item, Order, OrderItem, Session, Category} = require('../models');
+const {Op} = require('sequelize');
+const models = [User, Address, Item, Order, OrderItem, Session];
 
 module.exports = function truncate() {
   return Promise.all(
-    Object.keys(models).map((key) => {
-      if (['sequelize', 'Sequelize'].includes(key)) return null;
-      return models[key].destroy({
+    models.reverse().map(model =>
+      model.destroy({
         where: {},
-        force: true,
-      });
-    }),
-  );
+        force: true
+      })
+    )
+  ).then(() => {
+    return Category.destroy( {where: { parentId: {[Op.not]: null}}});
+  }).then(() => {
+    return Category.destroy( {where: {}});
+  })
 };
