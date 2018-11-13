@@ -6,7 +6,7 @@
 
 <style lang="scss">
 #shop {
-  padding: 50px 0px;
+  padding: 0px 0px;
   text-align: center;
 }
 </style>

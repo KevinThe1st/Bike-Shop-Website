@@ -109,7 +109,7 @@ export default class About extends Vue {}
 }
 
 #about {
-  padding: 50px 0px;
+  padding: 0px 0px;
 
 }
 

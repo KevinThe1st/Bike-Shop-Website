@@ -1,6 +1,6 @@
 <template>
-  <div id="home">
-    <p id = "homepageText">Foxycle Cyclery
+  <div id="account">
+    <p id = "accountText">Foxycle Cyclery
     </p>
     <carousel id="carousel1" perPage=1 autoplay autoplayTimeout=3500 loop>
         <slide>
@@ -47,11 +47,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
   }
 
 })
-export default class Home extends Vue {}
+export default class Account extends Vue {}
 </script>
 
 <style lang="scss">
-#home {
+#account {
   padding: 0px 0px;
   text-align: center;
 }
@@ -62,7 +62,7 @@ export default class Home extends Vue {}
   z-index: -1;
 }
 
-#homepageText {
+#accountText {
   color: #FFFF00;
   font-family: "Courier New", "Times New Roman", serif;
   font-style: italic;

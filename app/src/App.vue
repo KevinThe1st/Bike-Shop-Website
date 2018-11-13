@@ -1,17 +1,55 @@
 <template>
   <div id="app">
-    <div id="nav">
+
+    <b-navbar toggleable="md" type="dark" variant="secondary">
+
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+
+      <b-navbar-brand to="/">Foxcycle</b-navbar-brand>
+
+      <b-collapse is-nav id="nav_collapse">
+
+        <b-navbar-nav>
+          <b-nav-item to="/shop">Shop</b-nav-item>
+          <b-nav-item href="/services">Services</b-nav-item>
+          <b-nav-item href="/about">About</b-nav-item>
+        </b-navbar-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+
+          <b-nav-form>
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+          </b-nav-form>
+
+          <b-nav-item-dropdown text="Profile" right>
+            <b-dropdown-item href="/account">Account</b-dropdown-item>
+            <b-dropdown-item href="#">Orders</b-dropdown-item>
+            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+        </b-navbar-nav>
+
+      </b-collapse>
+    </b-navbar>
+
+    <!-- navbar-1.vue -->
+
+<!--
+    <div id="nav"> -->
       <!--
         <img src="./assets/logo.png" alt="logo" id="logo">
       -->
-      <router-link to="/">Home</router-link>
+<!--      <router-link to="/">Home</router-link>
       <router-link to="/shop">Shop</router-link>
       <router-link to="/services">Services</router-link>
       <router-link to="/about">About</router-link>
+      <router-link to="/account">Account</router-link>
       <div id="login">
         <a v-on:click="showModal" is-active=false>Login</a>
       </div>
-    </div>
+    </div> -->
     <LoginPopup
       v-bind:visible="isPopupVisible"
       v-on:close="closeModal"
@@ -21,14 +59,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Component from 'vue-class-component'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import Component from 'vue-class-component';
 import LoginPopup from '@/components/LoginPopup.vue';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 
 @Component({
   components: {
-    LoginPopup
+    LoginPopup,
+
   },
 })
 export default class App extends Vue {

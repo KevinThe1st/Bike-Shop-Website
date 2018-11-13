@@ -13,6 +13,7 @@
     "axios": "^0.18.0",
     "bootstrap-vue": "^2.0.0-rc.11",
     "mysql2": "^1.6.1",
+    "popper.js": "^1.14.5",
     "sequelize": "^4.39.0",
     "vue": "^2.5.17",
     "vue-carousel": "^0.16.0-rc2",

@@ -50,6 +50,11 @@ export default new Router({
       name: 'createCustomer',
       //redirect to create customer packages
       component: () => import(/* webpackChunkName: "login" */ './views/CreateCustomer.vue'),
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: () => import(/* webpackChunkName: "account" */ './views/Account.vue'),
     }
   ],
 });
