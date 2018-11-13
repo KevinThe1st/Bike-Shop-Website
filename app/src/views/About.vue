@@ -127,6 +127,7 @@ export default class About extends Vue {}
 
 #backgroundImg {
   position: fixed;
+
 }
 
 #aboutImageBanner {

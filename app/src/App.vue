@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <b-navbar toggleable="md" type="dark" variant="secondary">
+    <b-navbar toggleable="md" type="dark" variant="secondary" fixed = "top">
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
@@ -94,12 +94,14 @@ export default class App extends Vue {
   color: #2c3e50;
 }
 
+
 #logo {
   padding: 0px 20px;
   width: 20px;
   height: 20px;
 }
 
+/*
 #nav {
   list-style-type: none;
   background-color: #f1f1f1;
@@ -130,7 +132,7 @@ export default class App extends Vue {
     background-color: #4CAF50;
     color: white;
   }
-}
+} */
 
 #login {
   position: absolute;
