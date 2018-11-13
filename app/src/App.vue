@@ -11,8 +11,8 @@
 
         <b-navbar-nav>
           <b-nav-item to="/shop">Shop</b-nav-item>
-          <b-nav-item href="/services">Services</b-nav-item>
-          <b-nav-item href="/about">About</b-nav-item>
+          <b-nav-item to="/services">Services</b-nav-item>
+          <b-nav-item to="/about">About</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -28,6 +28,8 @@
             <b-dropdown-item href="#">Orders</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
+
+          <b-nav-item v-on:click = "showModal" is-active=false>Login</b-nav-item>
 
         </b-navbar-nav>
 
