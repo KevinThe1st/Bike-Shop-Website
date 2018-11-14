@@ -36,19 +36,19 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home1',
-        text: 'This is a very nice homepage.',
+        text: 'Locally-based in San Luis Obispo',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home2',
-        text: 'You could say it is the greatest.',
+        text: 'Best quality bicycles and gear',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home3',
-        text: 'It makes homepages great again.',
+        text: 'Experts in all things cycling',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
