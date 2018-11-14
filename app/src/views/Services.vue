@@ -6,29 +6,15 @@
 
     <div id = "infoBox">
       <div class = "container infoBoxContainer">
-        <div class = "row">
-          <div class = "col-sm-6">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Euismod lacinia at quis risus. Facilisis leo vel fringilla est. Neque viverra justo nec ultrices dui sapien eget mi proin.</p>
-            <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna.</p>
-            <br>
-          </div>
-          <div class = "col-sm-1">
-          </div>
-          <div class = "col-sm-5">
-            <img src = "../assets/servicesMan.png" id = "aboutImage" width = 100%>
-          </div>
-        </div>
-        <br>
-        <div class = "row">
-          <div class = "col-sm-6">
-            <img src = "../assets/servicesAngles.png" width = 100%>
-          </div>
 
+        <div class = "row" v-for="item in services">
           <div class = "col-sm-6">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Euismod lacinia at quis risus. Facilisis leo vel fringilla est. Neque viverra justo nec ultrices dui sapien eget mi proin.</p>
+            <img v-bind:src="item.picName" width = 100%>
+          </div>
+          <div class = "col-sm-6">
+            <p>{{item.name}}</p>
             <br>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna.</p>
+            <p>{{item.desc}}</p>
             <br>
           </div>
         </div>
@@ -59,13 +45,29 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Carousel, Slide } from 'vue-carousel';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import axios from 'axios';
 
 @Component({
   components: {
   }
 
 })
-export default class Services extends Vue {}
+export default class Services extends Vue {
+
+  services: any[] = [{
+    name: "Placeholder",
+    desc: "Placeholder Desc",
+    picName: "../assets/servicesMan.png"
+  }];
+
+  mounted(){
+    axios
+      .get('/api/services/')
+      .then((res) => {
+        this.services = res.data.items
+      })
+  }
+}
 </script>
 
 <style lang="scss">

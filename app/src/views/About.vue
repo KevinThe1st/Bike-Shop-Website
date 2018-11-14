@@ -94,12 +94,6 @@ export default class About extends Vue {
   aboutUs: string = "I am a placeholder, look at me!\nI am a placeholder, look at me!\n";
   location: string = "Very\nNice\nPlaceholder";
 
-  data(){
-    return {
-      location: this.location,
-      aboutUs: this.aboutUs
-    }
-  }
   mounted(){
     axios
       .get('/api/textbox/location')
