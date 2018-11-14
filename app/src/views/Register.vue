@@ -120,7 +120,7 @@ export default class Register extends App {
 
 <style lang="scss">
 #register {
-  padding: 50px 0px;
+  padding: 0px 0px;
   text-align: center;
 
   #button {

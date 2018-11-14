@@ -48,13 +48,8 @@ router.put('/', function(req, res) {
       itemId: item.id,
       categoryId
     }).then((ic) => {
-<<<<<<< HEAD
-        return res.json({ created: 'Success' });
-      });
-=======
       return res.json({ created: 'Success' });
     });
->>>>>>> origin/KyleChin
   }).catch(() => {
     return res.status(403).json({ created: 'Failure' });
   });

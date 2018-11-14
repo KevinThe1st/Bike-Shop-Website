@@ -85,7 +85,7 @@ export default class Shop extends App {
 
 <style lang="scss">
 #shop {
-  padding: 80px 0px;
+  padding: 0px 0px;
   text-align: center;
 }
 
