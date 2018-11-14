@@ -1,7 +1,7 @@
 <template>
   <div id="about">
 
-    <img id = "backgroundImg" alt="Vue logo" src="../assets/AboutUsBackground.png" width = 100%>
+    <img id = "backgroundImgAbout" alt="Vue logo" src="../assets/AboutUsBackground.png" width = 100%>
 
 
     <div class = "container">
@@ -20,8 +20,8 @@
     <br>
     <br>
     <br>
-    <div id = "infoBox">
-      <div class = "container infoBoxContainer">
+    <div id = "infoBoxAbout">
+      <div class = "container infoBoxContainerAbout">
         <div class = "row">
           <div class = "col-sm-6">
             <p id = "aboutText" style="white-space: pre;">{{aboutUs}}</p>
@@ -124,7 +124,7 @@ export default class About extends Vue {
 }
 
 #about {
-  padding: 50px 0px;
+  padding: 0px 0px;
 
 }
 
@@ -140,8 +140,9 @@ export default class About extends Vue {
   width: 100%;
 }
 
-#backgroundImg {
+#backgroundImgAbout {
   position: fixed;
+
 }
 
 #aboutImageBanner {
@@ -150,7 +151,7 @@ export default class About extends Vue {
   text-align: center;
 }
 
-#infoBox {
+#infoBoxAbout {
   width: 100%;
   background-color: white;
   height: 1400px;
@@ -169,14 +170,14 @@ export default class About extends Vue {
 
 }
 
-#infoBoxContainer
+#infoBoxContainerAbout
 {
   margin: 50px;
   padding: 50px;
 }
 
 
-#homepageText {
+#aboutpageText {
   color: #FFFF00;
   font-family: "Courier New", "Times New Roman", serif;
   font-style: italic;
