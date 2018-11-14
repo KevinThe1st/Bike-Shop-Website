@@ -1,7 +1,7 @@
 <template>
   <div id="about">
 
-    <img id = "backgroundImg" alt="Vue logo" src="../assets/AboutUsBackground.png" width = 100%>
+    <img id = "backgroundImgAbout" alt="Vue logo" src="../assets/AboutUsBackground.png" width = 100%>
 
 
     <div class = "container">
@@ -25,8 +25,8 @@
     <br>
     <br>
     <br>
-    <div id = "infoBox">
-      <div class = "container infoBoxContainer">
+    <div id = "infoBoxAbout">
+      <div class = "container infoBoxContainerAbout">
         <div class = "row">
           <div class = "col-sm-6">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Euismod lacinia at quis risus. Facilisis leo vel fringilla est. Neque viverra justo nec ultrices dui sapien eget mi proin.</p>
@@ -125,7 +125,7 @@ export default class About extends Vue {}
   width: 100%;
 }
 
-#backgroundImg {
+#backgroundImgAbout {
   position: fixed;
 
 }
@@ -136,7 +136,7 @@ export default class About extends Vue {}
   text-align: center;
 }
 
-#infoBox {
+#infoBoxAbout {
   width: 100%;
   background-color: white;
   height: 1400px;
@@ -155,14 +155,14 @@ export default class About extends Vue {}
 
 }
 
-#infoBoxContainer
+#infoBoxContainerAbout
 {
   margin: 50px;
   padding: 50px;
 }
 
 
-#homepageText {
+#aboutpageText {
   color: #FFFF00;
   font-family: "Courier New", "Times New Roman", serif;
   font-style: italic;
