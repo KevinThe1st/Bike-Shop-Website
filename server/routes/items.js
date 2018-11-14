@@ -9,12 +9,12 @@ router.get('/', function(req, res) {
   });
 });
 
-//axios set params for array
+// axios set params for array
 router.get('/byCat/:categoryId', function(req, res) {
-  ItemCategory.findAll({ where: { categoryId: req.params.categoryId }}).then((catItems) => {
+  ItemCategory.findAll({ where: { categoryId: req.params.categoryId }}).then((items) => {
     var ids = []
-    for(var i = 0; i < catItems.length; i++){
-      ids.push(catItems[i])
+    for(var i = 0; i < items.length; i++){
+      ids.push(items[i].getDataValue('ItemId'))
     }
     Item.findAll({ where: { id: ids }}).then((items) => {
       return res.json({items});
@@ -48,8 +48,13 @@ router.put('/', function(req, res) {
       itemId: item.id,
       categoryId
     }).then((ic) => {
+<<<<<<< HEAD
         return res.json({ created: 'Success' });
       });
+=======
+      return res.json({ created: 'Success' });
+    });
+>>>>>>> origin/KyleChin
   }).catch(() => {
     return res.status(403).json({ created: 'Failure' });
   });
