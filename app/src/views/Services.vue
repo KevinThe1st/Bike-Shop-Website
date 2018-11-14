@@ -132,18 +132,5 @@ export default class Services extends Vue {}
 }
 
 
-#homepageText {
-  color: #FFFF00;
-  font-family: "Courier New", "Times New Roman", serif;
-  font-style: italic;
-  font-weight: bold;
-  position: absolute;
-  text-align: center;
-  padding: 0px;
-  margin: auto 0px;
 
-  font-size: 70px;
-
-
-}
 </style>

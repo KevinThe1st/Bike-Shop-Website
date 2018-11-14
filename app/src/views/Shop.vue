@@ -53,7 +53,7 @@ export default class Shop extends App {
 
   getSubCategories(index){
     this.appliedCategories.push(this.categories[index]);
-    axios.get(`/api/categories/parents/` + this.categories[index].id)
+    axios.get(`/api/categories/parent/` + this.categories[index].id)
     .then((res) => {
       this.categories = res.data.category;
     })
