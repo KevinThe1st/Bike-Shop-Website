@@ -1,11 +1,27 @@
 const { assert, expect, request, Item } = require('../common');
 
 const validItem = {
+  "name": "chair",
   "price": 399.99,
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
-  "category": "bike",
+};
+
+const validItemExpensive = {
+  "name": "car",
+  "price": 399999.99,
+  "stock": 10,
+  "descShort": "short description",
+  "descLong": "long description",
+};
+
+const validItemCheap = {
+  "name": "bag",
+  "price": 3.99,
+  "stock": 10,
+  "descShort": "short description",
+  "descLong": "long description",
 };
 
 describe('Item', function () {
@@ -13,13 +29,103 @@ describe('Item', function () {
     it('Return 200', function (done) {
       Item.create(validItem)
         .then(() => {
-          request
-            .get('/items')
-            .expect(function (res) {
-              console.log(res.body);
-            })
-            .expect(200)
-            .end(done);
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
+        });
+    });
+  });
+
+  describe('Get all items by updatedAt', function () {
+    it('Return 200', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items/new')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
+        });
+    });
+  });
+
+  describe('Get all items by price low to high', function () {
+    it('Return 200', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items/pricesLow')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
+        });
+    });
+  });
+
+  describe('Get all items by price high to low', function () {
+    it('Return 200', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items/pricesHigh')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
+        });
+    });
+  });
+
+  describe('Get items with prefix \'c\'', function () {
+    it('Return 200', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items/search/c')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
         });
     });
   });
