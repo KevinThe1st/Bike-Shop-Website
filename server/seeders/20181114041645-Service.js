@@ -6,7 +6,7 @@ module.exports = {
     queryInterface.bulkInsert('Services', [{
       name: 'Get your bike serviced',
       desc: 'Get your trusty little companion thoroughly serviced. Prices range from $5 - $100',
-      picName: '../assets/servicesMan.png',
+      picName: '../assets/homepagenew6.png',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {}),
