@@ -87,6 +87,52 @@
         </div>
     </div>
 
+    <br>
+    <br>
+
+    <div class = "container">
+      <h3 id = "BrandsTextHome">Brands we carry</h3>
+    </div>
+
+    <br>
+
+    <div class = "container">
+        <div class = "row">
+          <div class = "col-sm-1">
+          </div>
+          <div class = "col-sm-2">
+            <img alt="Vue logo" src="../assets/giantLogo.png" class = "logoClassHome">
+          </div>
+          <div class = "col-sm-2">
+            <img alt="Vue logo" src="../assets/trekLogo.png" class = "logoClassHome">
+          </div>
+          <div class = "col-sm-2">
+            <img alt="Vue logo" src="../assets/specializedLogo.png" class = "logoClassHome">
+          </div>
+          <div class = "col-sm-2">
+            <img alt="Vue logo" src="../assets/marinLogo.png" class = "logoClassHome">
+          </div>
+          <div class = "col-sm-2">
+            <img alt="Vue logo" src="../assets/electraLogo.png" class = "logoClassHome">
+          </div>
+          <div class = "col-sm-1">
+          </div>
+        </div>
+      </div>
+
+      <div class = "container">
+          <div class = "row">
+              <div class = "col-sm-12">
+                <router-link :to="{name: 'shop'}">
+                  <button class="btn btn-success">Shop Now</button>
+                </router-link>
+              </div>
+          </div>
+      </div>
+
+      <br>
+      <br>
+
   </div>
 </template>
 
@@ -149,6 +195,10 @@ export default class Home extends Vue {
   z-index: 0;
 }
 
+#BrandsTextHome {
+  text-align: center;
+}
+
 #homepageText {
   color: #FFD700;
   font-family: "Cambria", "Courier New", "Times New Roman", serif;
@@ -161,5 +211,11 @@ export default class Home extends Vue {
   font-size: 100px;
 
 
+}
+
+.logoClassHome {
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
 }
 </style>
