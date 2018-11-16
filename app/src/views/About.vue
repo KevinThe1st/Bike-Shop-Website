@@ -8,7 +8,7 @@
       <div class = "row">
         <div class = "col-sm-1"></div>
         <div class = "col-sm-3" id = "contactBox">
-          <p id = "location" style="white-space: pre;">{{location}}</p>
+          <p id = "location" style="white-space: pre-wrap;">{{location}}</p>
         </div>
         <div class = "col-sm-8">
         </div>
@@ -24,7 +24,7 @@
       <div class = "container infoBoxContainerAbout">
         <div class = "row">
           <div class = "col-sm-6">
-            <p id = "aboutText" style="white-space: pre;">{{aboutUs}}</p>
+            <p id = "aboutText" style="white-space: pre-wrap;">{{aboutUs}}</p>
           </div>
           <div class = "col-sm-1">
           </div>
@@ -94,12 +94,6 @@ export default class About extends Vue {
   aboutUs: string = "I am a placeholder, look at me!\nI am a placeholder, look at me!\n";
   location: string = "Very\nNice\nPlaceholder";
 
-  data(){
-    return {
-      location: this.location,
-      aboutUs: this.aboutUs
-    }
-  }
   mounted(){
     axios
       .get('/api/textbox/location')

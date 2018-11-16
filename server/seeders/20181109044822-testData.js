@@ -1,4 +1,5 @@
 'use strict';
+const truncate = require('../test/truncate.js');
 
 // const { User, Session, Address, Order } = require('../models');
 //
@@ -60,7 +61,7 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'about',
-        text: 'We are the greatest. Buy our bikes. They will not disapoint you!',
+        text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the knowledge and support to ignite and fuel your biking passion',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
@@ -78,6 +79,6 @@ module.exports = {
       queryInterface.bulkDelete('Sessions', null, {}),
       queryInterface.bulkDelete('Users', null, {}),
       queryInterface.bulkDelete('Textboxes', null, {})
-    ]);
+    ])
   }
 };
