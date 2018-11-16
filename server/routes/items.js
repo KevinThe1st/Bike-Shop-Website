@@ -4,9 +4,18 @@ const { Item } = require('../models');
 const { ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
-  Item.findAll().then((items) => {
-    return res.json({ items });
-  });
+  if (req.query.search == undefined) {
+    Item.findAll().then((items) => {
+      return res.json({ items });
+    });
+  } else {
+    Item.findAll({
+      where: { name: { $like: req.query.search + '%' } },
+      order: [['name', 'ASC']]
+    }).then((items) => {
+      return res.json({ items });
+    });
+  };
 });
 
 router.get('/new', function (req, res) {
@@ -23,15 +32,6 @@ router.get('/pricesHigh', function (req, res) {
 
 router.get('/pricesLow', function (req, res) {
   Item.findAll({ order: [['price', 'ASC']] }).then((items) => {
-    return res.json({ items });
-  });
-});
-
-router.get('/search/:query', function (req, res) {
-  Item.findAll({
-    where: { name: { $like: req.params.query + '%' } },
-    order: [['name', 'ASC']]
-  }).then((items) => {
     return res.json({ items });
   });
 });
