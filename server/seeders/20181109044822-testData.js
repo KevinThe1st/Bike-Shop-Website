@@ -1,4 +1,5 @@
 'use strict';
+const truncate = require('../test/truncate.js');
 
 // const { User, Session, Address, Order } = require('../models');
 //
@@ -78,6 +79,6 @@ module.exports = {
       queryInterface.bulkDelete('Sessions', null, {}),
       queryInterface.bulkDelete('Users', null, {}),
       queryInterface.bulkDelete('Textboxes', null, {})
-    ]);
+    ])
   }
 };

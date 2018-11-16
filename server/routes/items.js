@@ -3,32 +3,59 @@ var router = express.Router();
 const { Item } = require('../models');
 const { ItemCategory } = require('../models');
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   Item.findAll().then((items) => {
-    return res.json({items});
+    return res.json({ items });
+  });
+});
+
+router.get('/new', function (req, res) {
+  Item.findAll({ order: [['updatedAt', 'DESC']] }).then((items) => {
+    return res.json({ items });
+  });
+});
+
+router.get('/pricesHigh', function (req, res) {
+  Item.findAll({ order: [['price', 'DESC']] }).then((items) => {
+    return res.json({ items });
+  });
+});
+
+router.get('/pricesLow', function (req, res) {
+  Item.findAll({ order: [['price', 'ASC']] }).then((items) => {
+    return res.json({ items });
+  });
+});
+
+router.get('/search/:query', function (req, res) {
+  Item.findAll({
+    where: { name: { $like: req.params.query + '%' } },
+    order: [['name', 'ASC']]
+  }).then((items) => {
+    return res.json({ items });
   });
 });
 
 // axios set params for array
-router.get('/byCat/:categoryId', function(req, res) {
-  ItemCategory.findAll({ where: { categoryId: req.params.categoryId }}).then((items) => {
+router.get('/byCat/:categoryId', function (req, res) {
+  ItemCategory.findAll({ where: { categoryId: req.params.categoryId } }).then((items) => {
     var ids = []
-    for(var i = 0; i < items.length; i++){
+    for (var i = 0; i < items.length; i++) {
       ids.push(items[i].getDataValue('ItemId'))
     }
-    Item.findAll({ where: { id: ids }}).then((items) => {
-      return res.json({items});
+    Item.findAll({ where: { id: ids } }).then((items) => {
+      return res.json({ items });
     });
   });
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
-    return res.json({item});
+    return res.json({ item });
   });
 });
 
-router.put('/', function(req, res) {
+router.put('/', function (req, res) {
   const {
     name,
     price,
@@ -55,7 +82,7 @@ router.put('/', function(req, res) {
   });
 });
 
-router.delete('/:id', function(req, res) {
+router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Item.findById(idToDelete).then((item) => {
     item.destroy().then(() => {
