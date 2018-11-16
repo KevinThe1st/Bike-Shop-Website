@@ -37,19 +37,21 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home1',
-        text: 'This is a very nice homepage.',
+        text: 'Located in San Luis Obispo, we are the closest bike shop to Cal Poly, San Luis Obispo; a quick ride from downtown and an easy commute from Cuesta college, '
+        + 'we place community first.',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home2',
-        text: 'You could say it is the greatest.',
+        text: 'Voted 2018\'s Best Bike Shop by Mustang News, our goal is to provide a high level of expertise while being completely honest with you when '
+        + 'it comes to advice, sales, fittings, and even guarantees.',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home3',
-        text: 'It makes homepages great again.',
+        text: 'We have been providing the Central Coast with great customer service since 1980.  From the beginning, we have put you and your bike first.',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
@@ -61,7 +63,8 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'about',
-        text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the knowledge and support to ignite and fuel your biking passion',
+        text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the'
+        + ' knowledge and support to ignite and fuel your biking passion',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
