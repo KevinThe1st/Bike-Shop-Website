@@ -8,9 +8,9 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/:id', function (req, res) {
-  Order.findById(req.params.id).then((order) => {
-    res.json({ order });
+router.get('/:userId', function (req, res) {
+  Order.findAll({ where: { userId: req.params.userId } }).then((orders) => {
+    return res.json({ orders });
   });
 });
 
