@@ -6,6 +6,7 @@ const validItem = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 const validItemExpensive = {
@@ -14,6 +15,7 @@ const validItemExpensive = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 const validItemCheap = {
@@ -22,6 +24,7 @@ const validItemCheap = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 describe('Item', function () {
@@ -35,6 +38,27 @@ describe('Item', function () {
                 .then(() => {
                   request
                     .get('/items')
+                    .expect(function (res) {
+                      console.log(res.body);
+                    })
+                    .expect(200)
+                    .end(done);
+                });
+            });
+        });
+    });
+  });
+
+  describe('Get items with prefix \'c\'', function () {
+    it('Return 200', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          Item.create(validItemExpensive)
+            .then(() => {
+              Item.create(validItemCheap)
+                .then(() => {
+                  request
+                    .get('/items?search=c')
                     .expect(function (res) {
                       console.log(res.body);
                     })
@@ -98,27 +122,6 @@ describe('Item', function () {
                 .then(() => {
                   request
                     .get('/items/pricesHigh')
-                    .expect(function (res) {
-                      console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
-        });
-    });
-  });
-
-  describe('Get items with prefix \'c\'', function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
-        .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items/search/c')
                     .expect(function (res) {
                       console.log(res.body);
                     })
