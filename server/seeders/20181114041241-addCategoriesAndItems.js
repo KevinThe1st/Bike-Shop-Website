@@ -70,6 +70,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -79,6 +80,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -88,6 +90,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -97,6 +100,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -106,6 +110,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -115,6 +120,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -124,6 +130,7 @@ module.exports = {
         stock: 5,
         descShort: 'foo',
         descLong: 'bar',
+        picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
       }
