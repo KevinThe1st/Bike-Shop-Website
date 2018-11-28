@@ -10,6 +10,8 @@
         <div class = "row" v-for="item in services">
           <div class = "col-sm-6">
             <img v-bind:src="item.picName" width = 100%>
+            <br>
+            <br>
           </div>
           <div class = "col-sm-6">
             <p>{{item.name}}</p>

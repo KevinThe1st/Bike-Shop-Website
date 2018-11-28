@@ -1,4 +1,3 @@
-/*
 const { assert, expect, request, User, Order } = require('../common');
 
 const createUser = () => User.create({
@@ -17,11 +16,11 @@ const createOrder = () => createUser.then((user) => {
   });
 });
 
-console.log(createOrder);
-
 describe('Order', function () {
+  /*
   describe('Get all orders', function () {
     it('Return 200', function (done) {
+      createOrder;
       request
         .get('/orders')
         .expect(200)
@@ -31,30 +30,30 @@ describe('Order', function () {
         .end(done);
     });
   });
-});
 
-describe('Create an order', function () {
-  it('Return 200', function (done) {
-    request
-      .put('/orders')
-      .send(validOrder)
-      .expect(200)
-      .end(done);
-  });
-});
-
-describe('Delete an order', function () {
-  it('Return 200', function (done) {
-    createOrder.then(() =>
+  describe('Create an order', function () {
+    it('Return 200', function (done) {
       request
-        .delete('/orders/' + order.id)
+        .put('/orders')
+        .send(validOrder)
         .expect(200)
-        .expect(function (res) {
-          assert.equal(Object.keys(res.body).length, 1);
-          assert.equal(res.body.delete, true);
-        })
         .end(done);
-    );
+    });
   });
+
+  describe('Delete an order', function () {
+    it('Return 200', function (done) {
+      createOrder.then(() => {
+        request
+          .delete('/orders/' + order.id)
+          .expect(200)
+          .expect(function (res) {
+            assert.equal(Object.keys(res.body).length, 1);
+            assert.equal(res.body.delete, true);
+          })
+          .end(done);
+      });
+    });
+  });
+  */
 });
-*/
