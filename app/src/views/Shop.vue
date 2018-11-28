@@ -3,7 +3,7 @@
     <div id="category-bar">
       <div id="applied-categories">
         <li v-for="(category, index) in appliedCategories">
-          {{ category.name }}
+          <input type="button" v-on:click="getSuperCategories(index)">{{category.name}}
         </li>
       </div>
       <ul>
@@ -53,11 +53,35 @@ export default class Shop extends App {
 
   getSubCategories(index){
     this.appliedCategories.push(this.categories[index]);
+    this.getSpecificCategoryItems(index);
     axios.get(`/api/categories/parent/` + this.categories[index].id)
     .then((res) => {
       this.categories = res.data.category;
     })
-    this.getSpecificCategoryItems(index);
+  }
+
+  getSuperCategories(index){
+    /*
+     * cut off a part of the applied categories
+     */
+    var temp = this.appliedCategories;
+    this.appliedCategories = [];
+    for(var i = 0; i < index; i++){
+      this.appliedCategories.push(temp[i]);
+    }
+    // get the subcategories of the new last category
+    if(index > 0){
+      axios.get(`/api/categories/parent/` + this.appliedCategories[index-1].id)
+      .then((res) => {
+        this.categories = res.data.category;
+        this.getSpecificCategoryItems(index-1);
+      })
+    }
+    // or all categories if all categories have removed
+    else{
+      this.getTopLevelCategories();
+      this.getAllItems();
+    }
   }
 
   beforeMount(){
@@ -73,10 +97,8 @@ export default class Shop extends App {
   }
 
   getSpecificCategoryItems(index){
-    console.log(this.categories[index].id)
     axios.get(`/api/items/byCat/` + this.categories[index].id)
     .then((res) => {
-      console.log(res.data.items)
       this.items = res.data.items;
     })
   }
