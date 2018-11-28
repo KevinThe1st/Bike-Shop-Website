@@ -7,7 +7,7 @@ const validUser = {
   "firstName": "Justin",
 };
 
-describe('User', function () {
+describe('User', function () { 
   describe('Register a user', function () {
     it('Valid body returns 200', function (done) {
       request
@@ -20,7 +20,7 @@ describe('User', function () {
         .end(done);
     });
   });
-
+  
   describe('Get all users', function () {
     it('Returns 200', function (done) {
       User.create(validUser)

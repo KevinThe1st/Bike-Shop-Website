@@ -7,30 +7,34 @@ const createUser = () => User.create({
   "firstName": "Justin",
 })
 
-const createOrder = () => createUser.then((user) => {
-  Order.create({
+const createOrder = () => createUser().then((user) => {
+  console.log(user.id);
+  var order = Order.build({
     "shippingStatus": "verified",
     "totalPrice": 399.99,
     "storePickup": true,
-    "userId": user.id,
-  });
+  })
+  order.setUser(user);
+  return order.save();
 });
 
 describe('Order', function () {
-  /*
   describe('Get all orders', function () {
     it('Return 200', function (done) {
-      createOrder;
-      request
-        .get('/orders')
-        .expect(200)
-        .expect(function (res) {
-          console.log(res.body);
-        })
-        .end(done);
+      createOrder()
+        .then(() => {
+          request
+            .get('/orders')
+            .expect(200)
+            .expect(function (res) {
+              console.log(res.body);
+            })
+            .end(done);
+        });
     });
   });
 
+  /*
   describe('Create an order', function () {
     it('Return 200', function (done) {
       request

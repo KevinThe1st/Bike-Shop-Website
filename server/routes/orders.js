@@ -41,6 +41,14 @@ router.put('/', function (req, res) {
   });
 });
 
+router.patch('/:id/:shippingStatus', function (req, res) {
+  Order.findById(req.params.id).then((order) => {
+    order.updateAttributes({
+      shippingStatus: req.params.shippingStatus,
+    });
+  });
+});
+
 router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Order.findById(idToDelete).then((order) => {
