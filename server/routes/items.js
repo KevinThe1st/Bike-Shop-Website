@@ -62,6 +62,7 @@ router.put('/', function (req, res) {
     stock,
     descShort,
     descLong,
+    picName,
     categoryId,
   } = req.body;
   Item.create({
@@ -70,6 +71,7 @@ router.put('/', function (req, res) {
     stock,
     descShort,
     descLong,
+    picName,
   }).then((item) => {
     ItemCategory.create({
       itemId: item.id,
