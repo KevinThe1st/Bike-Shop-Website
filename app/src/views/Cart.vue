@@ -1,11 +1,9 @@
 <template>
   <div id="cart">
     <input type="button" v-on:click="getUserOrder()">
-    <li id="item-quantities" v-for="(orderItem, index) in orderItemsInCurrentOrder">
-      quantity of item {{index}}: {{ orderItem.quantity }}
-    </li>
-    <li id="item-names" v-for="(item, index) in itemsInCurrentOrder">
-      name of item {{index}}: {{ item.name }}
+    <input type="button" v-on:click="getCombinedData()">
+    <li id="item-names" v-for="(item, index) in orderItemsInCurrentOrderWithItemData">
+      item {{index}}: name = {{item.name}}, quantity = {{item.quantity}}, price = {{item.price}}, picName = {{item.picName}}
     </li>
   </div>
 </template>
@@ -14,7 +12,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import App from '../App.vue';
-import { OrderItem, OrderItemItem, ShopItem } from '@/models';
+import { OrderItem, OrderItemItem, ShopItem, CurrentOrderItem } from '@/models';
 
 @Component({})
 export default class Cart extends App {
@@ -22,6 +20,7 @@ export default class Cart extends App {
   currentOrder: OrderItem;
   orderItemsInCurrentOrder: OrderItemItem[] = [];
   itemsInCurrentOrder: ShopItem[] = [];
+  orderItemsInCurrentOrderWithItemData: CurrentOrderItem[] = [];
 
   getUserOrder(){
     axios.get(`/api/orders/` + this.$store.getters.getLoginStatus)
@@ -59,6 +58,19 @@ export default class Cart extends App {
         this.itemsInCurrentOrder.push(res.data.item);
       })
     }
+  }
+
+  getCombinedData(){
+    this.orderItemsInCurrentOrderWithItemData = [];
+    for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
+      var temp = new CurrentOrderItem;
+      temp.picName = this.itemsInCurrentOrder[i].picName;
+      temp.name = this.itemsInCurrentOrder[i].name;
+      temp.price = this.orderItemsInCurrentOrder[i].price;
+      temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
+      this.orderItemsInCurrentOrderWithItemData.push(temp);
+    }
+    console.log(this.orderItemsInCurrentOrderWithItemData);
   }
 }
 </script>
