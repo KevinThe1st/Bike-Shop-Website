@@ -23,6 +23,9 @@ module.exports = {
       descLong: {
         type: Sequelize.TEXT
       },
+      picName: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

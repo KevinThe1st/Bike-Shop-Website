@@ -6,6 +6,7 @@ const validItem = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 const validItemExpensive = {
@@ -14,6 +15,7 @@ const validItemExpensive = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 const validItemCheap = {
@@ -22,6 +24,7 @@ const validItemCheap = {
   "stock": 10,
   "descShort": "short description",
   "descLong": "long description",
+  "picName": "pic",
 };
 
 describe('Item', function () {
