@@ -1,0 +1,548 @@
+[33mcommit 6316de852d282be845eb6d6296cd7bd94e8e8343[m[33m ([m[1;36mHEAD -> [m[1;32mKevinThe2nd[m[33m, [m[1;31morigin/KevinThe2nd[m[33m)[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Thu Nov 15 07:55:03 2018 -0800
+
+    changes to homepage
+
+[33mcommit 0b746483358b1bc95c579887a8fe660d2605ffd9[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Tue Nov 13 21:09:57 2018 -0800
+
+    updated homepage
+
+[33mcommit 4fdb0cd68ac6038d1cbc82ca4a5045ccae701844[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 394fa64 9bb83fd
+Author: scm2217 <smendonc@gmail.com>
+Date:   Tue Nov 13 18:38:40 2018 -0800
+
+    Merge pull request #28 from CSC307Fall2018/SeanMendonca
+    
+    Sean mendonca
+
+[33mcommit 9bb83fd65fa38bd63e7987122cd562f4d00ab4df[m
+Merge: 7626079 12ad393
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Nov 13 18:37:53 2018 -0800
+
+    Merge remote-tracking branch 'origin/KevinThe2nd' into SeanMendonca
+
+[33mcommit 762607923ec4c5b74ccfbb0592091bedcdce77af[m
+Merge: 0e005bd a5d55e8
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Nov 13 18:25:44 2018 -0800
+
+    Merge remote-tracking branch 'origin/KyleChin' into SeanMendonca
+
+[33mcommit 12ad393b3df03daf2e52e65e7a6a374e30661c8b[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Tue Nov 13 18:01:59 2018 -0800
+
+    fixed a weird bug with divs
+
+[33mcommit 3a4e12a8c757fbbda46418103a2bd124f6a6ce28[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Mon Nov 12 22:57:38 2018 -0800
+
+    added modal box to updated changes
+
+[33mcommit f19bdab44d0cec1682b1a3d01654eee149433d18[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Mon Nov 12 21:17:21 2018 -0800
+
+    completed services page
+
+[33mcommit cbf5e911f9a3051f64ba7c61d81ff83ba3040dae[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Mon Nov 12 20:03:38 2018 -0800
+
+    added working navbar
+
+[33mcommit 394fa64cf357ade97b542c76ae2f8c6adf069d29[m
+Merge: beac78e 0e005bd
+Author: scm2217 <smendonc@gmail.com>
+Date:   Mon Nov 12 15:28:15 2018 -0800
+
+    Merge pull request #25 from CSC307Fall2018/SeanMendonca
+    
+    Sean mendonca
+
+[33mcommit 0e005bd8efde8d7b35f6931a8798aaf1bbbaaf4a[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 15:23:51 2018 -0800
+
+    Merge branch 'justin' into SeanMendonca
+
+[33mcommit ded858c542dc6703e77a6497a67754d554a2ea44[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 15:15:45 2018 -0800
+
+    textboxes integrated on front end and basic seeds set up
+
+[33mcommit 49dd8cc5598e0fc873f5aeddea783d3852f0aa48[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 13:06:06 2018 -0800
+
+    nav bar fix for previous merge
+
+[33mcommit 222c2004f53d962178a4b57dc6a97908a0f0e73d[m
+Merge: 93655ce 75a010f
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 12:55:26 2018 -0800
+
+    Merge remote-tracking branch 'origin/KevinThe2nd' into SeanMendonca
+
+[33mcommit 93655cebd1856d93036a9d382792014ee8d3c61b[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 12:52:31 2018 -0800
+
+    Merge branch 'justin' into SeanMendonca
+
+[33mcommit ffece30be34f9ec4553a00040e83077d7427a335[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Nov 12 12:51:20 2018 -0800
+
+    seeds wip
+
+[33mcommit 75a010fc9d28bbeb8ac6c4a7ce9f214560b32c0c[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Fri Nov 9 02:32:18 2018 -0800
+
+    added changes to about page
+
+[33mcommit a5d55e8b0cd781b67f9aaff6e1a16adef186571f[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Fri Nov 9 00:18:12 2018 -0800
+
+    Can now get items from db and filter by category
+
+[33mcommit 0f70a3092d5d439eb2274f4a19c65b772bd23644[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 21:21:35 2018 -0800
+
+    items fix seeds wip
+
+[33mcommit b122d161e56957ddfe21e004ccd704944fa956a9[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Thu Nov 8 21:05:30 2018 -0800
+
+    kevin's changes
+
+[33mcommit fe02bccf54ed93d5a4591639816cb6be7e9ca766[m
+Merge: c182def 277ee5e
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 8 20:14:05 2018 -0800
+
+    Merge remote-tracking branch 'origin/SeanMendonca' into KyleChin
+
+[33mcommit c182def3939141a976f4ccdac56e2407185032eb[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 8 17:11:00 2018 -0800
+
+    storefront work
+
+[33mcommit 277ee5eb119f8eecbd203355e899c484b9e7515e[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 20:05:43 2018 -0800
+
+    itemcategories route
+
+[33mcommit 1bfc2ff82fe2488a100092f8c65c6665725572f0[m
+Merge: 1689d51 be342a7
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 19:13:48 2018 -0800
+
+    Merge remote-tracking branch 'origin/KevinThe2nd' into SeanMendonca
+
+[33mcommit be342a7624d3547e188e790324c686c8fcf556c2[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Thu Nov 8 18:25:43 2018 -0800
+
+    added Kevin's changes
+
+[33mcommit 1689d515219b54d4a309ad8246afa193fe1fd3ba[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 18:24:39 2018 -0800
+
+    Merge remote-tracking branch 'origin/KyleChin' into SeanMendonca
+
+[33mcommit 2da38ed25736e3ef30b0fb8b6c0ca0c052fe9eb8[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 18:09:33 2018 -0800
+
+    category retrieval wip
+
+[33mcommit 5aeac659a3ea4a5f889728b44aeebdd056c18efa[m
+Merge: 84c0544 6e3d879
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 8 17:30:43 2018 -0800
+
+    Merge branch 'justin' into SeanMendonca
+
+[33mcommit 93fab1ea3338315a3424e7034f9352c4adbdefc6[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 8 00:07:37 2018 -0800
+
+    preliminary category levels working
+
+[33mcommit 2f024a8c2913b3c3727d8262ae332ae25cf3477f[m
+Merge: 891f94e 6e3d879
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Wed Nov 7 09:30:59 2018 -0800
+
+    Merge remote-tracking branch 'origin/justin' into KyleChin
+
+[33mcommit 891f94e3dce26cf25e7e6ad08753e2665de9287c[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Wed Nov 7 09:22:09 2018 -0800
+
+    frontend: category listing
+
+[33mcommit 6e3d8795a6222c8e9c1dfe26f95a9bba1332e041[m[33m ([m[1;31morigin/justin[m[33m)[m
+Author: jccho16 <jccho@calpoly.edu>
+Date:   Tue Nov 6 20:34:01 2018 -0800
+
+    Categories working?
+
+[33mcommit 8a8539f1f5903e75a40fa6f501486b57742053e7[m
+Author: jccho16 <jccho@calpoly.edu>
+Date:   Tue Nov 6 19:12:01 2018 -0800
+
+    More minor stuff
+
+[33mcommit 84c05443d00bf978f6910016bd3135f539ed58be[m[33m ([m[1;31morigin/SeanMendonca[m[33m, [m[1;32mSeanMendonca[m[33m, [m[1;32mKevinsFrontend[m[33m)[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Nov 6 19:05:21 2018 -0800
+
+    getter for login status
+
+[33mcommit 29d341588ccf97d4c677f809136b23646bf4c0bf[m
+Author: jccho16 <jccho@calpoly.edu>
+Date:   Tue Nov 6 18:54:46 2018 -0800
+
+    Minor changes
+
+[33mcommit b95b932748c4d92361b367e272ba0758f4779faf[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Tue Nov 6 18:47:48 2018 -0800
+
+    dynamic changes depending on logged in state
+
+[33mcommit 4aaf72d252f1226ed4a3effebf1e3085fd25db1a[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Fri Nov 2 16:14:10 2018 -0700
+
+    textbox backend ready for testing
+
+[33mcommit beac78e06a807a50125776d155d5df7c24bf16bc[m
+Merge: 6f32f88 b93e8be
+Author: kylechin01 <kylechin01@gmail.com>
+Date:   Thu Nov 1 21:06:42 2018 -0700
+
+    Merge pull request #24 from CSC307Fall2018/KyleChin
+    
+    Kyle chin
+
+[33mcommit b93e8be06db3df08e6d163986fcef435e4d9c4a6[m
+Merge: 9099540 aee5ef0
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 1 20:58:53 2018 -0700
+
+    Merge branch 'SeanMendonca' of github.com:CSC307Fall2018/One into KyleChin
+
+[33mcommit aee5ef07b844de31c67c2bc5f5888f85a6a2b303[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 1 20:59:52 2018 -0700
+
+    working login/register state saving and redirection
+
+[33mcommit 9099540f54adae9c2051f68d3a5927bed11e8dd4[m
+Merge: 5365ad1 6d0a90f
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 1 20:38:57 2018 -0700
+
+    Merge branch 'SeanMendonca' of github.com:CSC307Fall2018/One into KyleChin
+
+[33mcommit 5365ad11a4a46679cde6df3fa03d39d601893b06[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 1 20:23:40 2018 -0700
+
+    saving minor error fixes
+
+[33mcommit 6d0a90ff6c9a098f9d2a40d3a913ebddb0c618d4[m
+Merge: 6f3946c e38b9eb
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Nov 1 20:23:12 2018 -0700
+
+    very broken by kyle wants it anyways
+
+[33mcommit 5c7f03fc91300e67834017c880c3d396fda8d470[m
+Merge: 6f32f88 e38b9eb
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Nov 1 19:06:31 2018 -0700
+
+    Merge branch 'KevinsFrontend' of github.com:CSC307Fall2018/One into KyleChin
+
+[33mcommit 1bfbca1b216fb0a51194b5f0060f24dd9c011b2f[m
+Author: jccho16 <jccho@calpoly.edu>
+Date:   Thu Nov 1 18:37:38 2018 -0700
+
+    All tests pass now
+
+[33mcommit e38b9eb0319d11e4ee407d627c51a37bec4584f1[m[33m ([m[1;31morigin/KevinsFrontend[m[33m, [m[1;32mKylesFrontend[m[33m)[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Thu Nov 1 18:17:40 2018 -0700
+
+    Added slideshow Kevin
+
+[33mcommit 6f32f8881cc14cb0dea9c803c2587ac39982777b[m
+Merge: 584968b 6f3946c
+Author: scm2217 <smendonc@gmail.com>
+Date:   Tue Oct 30 20:45:21 2018 -0700
+
+    Merge pull request #22 from CSC307Fall2018/SeanMendonca
+    
+    Justin and my changes
+
+[33mcommit 6f3946c11a99e32aa80407dc43d8ea67d953533f[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 30 20:33:13 2018 -0700
+
+    Merge branch 'justin' into SeanMendonca
+
+[33mcommit 819955fe785408da58ed52107caf7f2e3a8ec834[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 30 20:29:23 2018 -0700
+
+    foxy db changes
+
+[33mcommit ad709c378b9eb3785bb7f2539364323193d45504[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Fri Oct 26 17:23:14 2018 -0700
+
+    foxy authentication
+    
+    -take from example branch
+
+[33mcommit 4cb69b12e7183663b01caaf98ed0534146dc92e3[m[33m ([m[1;31morigin/KylesFrontend[m[33m)[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Fri Oct 26 12:51:09 2018 -0700
+
+    Missing Field notification done, working on login retention
+
+[33mcommit 9ca1f8a6301bf81ed49ebcf448b660903b7d5e99[m
+Merge: 800e682 d2961a5
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Fri Oct 26 10:56:07 2018 -0700
+
+    Merge branch 'SeanMendonca' of github.com:CSC307Fall2018/One into KylesFrontend
+
+[33mcommit 800e682e4bc9fbd9f35518c4c7fe4cb4a12dd85e[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Fri Oct 26 10:55:38 2018 -0700
+
+    More template pages and minor ui fixes
+
+[33mcommit d2961a586447b56e0d0bd45fafcff4f8747a5e62[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Oct 25 19:42:12 2018 -0700
+
+    error codes for register/login
+
+[33mcommit 584968b6c0bdf4c0fec8223afc018eb7ef8062f9[m
+Merge: 53e19c3 8481eeb
+Author: scm2217 <smendonc@gmail.com>
+Date:   Thu Oct 25 18:14:16 2018 -0700
+
+    Merge pull request #14 from CSC307Fall2018/KylesFrontend
+    
+    Adding basic ui elements
+
+[33mcommit 8481eebdc3bdf90694633dc6369756e3687acdc7[m
+Merge: 02d6956 53e19c3
+Author: scm2217 <smendonc@gmail.com>
+Date:   Thu Oct 25 18:13:54 2018 -0700
+
+    Merge branch 'master' into KylesFrontend
+
+[33mcommit 02d695616b2367ae20c23a07f40743fc2bed6dff[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Thu Oct 25 14:24:46 2018 -0700
+
+    Adding basic ui elements
+
+[33mcommit 53e19c32e8e9934a78d9c795192aeae5eb84ba3f[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 20:59:05 2018 -0700
+
+    kyle likes semicolons
+
+[33mcommit 11a0d810ee75e27fa0d2510fdcb94291a5f5c1e4[m
+Merge: f75ddfb c677467
+Author: kylechin01 <kylechin01@gmail.com>
+Date:   Tue Oct 23 20:38:04 2018 -0700
+
+    Merge pull request #13 from CSC307Fall2018/SeanMendonca
+    
+    Sean mendonca
+
+[33mcommit c677467eae5b531439a881c493eefe7dde494973[m
+Merge: d3193a7 a7d3140
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 20:35:31 2018 -0700
+
+    WORKING BETA OF LOGIN AND REGISTER
+    
+    IT WORKS WITH DATABASE
+
+[33mcommit d3193a70de1522622de18ed6cde53c435cf9ec14[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 19:52:48 2018 -0700
+
+    premerge
+
+[33mcommit a7d3140a541becc4f0e5eaacfd28a8869b8dcc3e[m
+Author: Kyle Chin <kylechin01@gmail.com>
+Date:   Tue Oct 23 17:22:04 2018 -0700
+
+    Popup for logins
+
+[33mcommit 1cb886b89abb8fda54eea9e284fee1691fb27fa7[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 19:05:13 2018 -0700
+
+    early verison of register working!
+
+[33mcommit 38bcf0d3f6035579dc1c6673ba5c7e1cd5ca4bd8[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 18:00:11 2018 -0700
+
+    front end fixes
+
+[33mcommit d58e7c3f7d7388f735e89eec55d5ccaf80125706[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 16:53:29 2018 -0700
+
+    Properly merged kevn's branch
+
+[33mcommit c6848bfa2bda83b056af85256d1de5e4594e9064[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 16:33:21 2018 -0700
+
+    Revert "Merge branch 'KevinsFrontend' into SeanMendonca"
+    
+    This reverts commit 1cf20b59a34faeb747bb07405a63688834c821bb, reversing
+    changes made to f49233bdd8223ca2858f0f56b85c0c5a0a8c02d5.
+
+[33mcommit 1cf20b59a34faeb747bb07405a63688834c821bb[m
+Merge: f49233b c7cbbf8
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 16:32:12 2018 -0700
+
+    Merge branch 'KevinsFrontend' into SeanMendonca
+
+[33mcommit f49233bdd8223ca2858f0f56b85c0c5a0a8c02d5[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 23 16:30:38 2018 -0700
+
+    fixed server not running
+
+[33mcommit c7cbbf8debbda310ebe852294097fdf79111c8c4[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Tue Oct 23 16:17:41 2018 -0700
+
+    more changes, doesn't work fully, DONT MERGE TO MASTER
+
+[33mcommit aa50a1889392dc20c85da1a88f78af99c283d74a[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Tue Oct 23 15:59:09 2018 -0700
+
+    Added changes
+
+[33mcommit f75ddfb8edb5c545bf2273429a9538c90a63a338[m
+Merge: 09c0797 04cfc9d
+Author: kylechin01 <kylechin01@gmail.com>
+Date:   Mon Oct 22 22:33:52 2018 -0700
+
+    Merge pull request #12 from CSC307Fall2018/KevinsFrontend
+    
+    Kevins frontend
+
+[33mcommit 04cfc9d00ef3d5e7e52d3443f6ba9efd8b1d314b[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Mon Oct 22 22:32:42 2018 -0700
+
+    User Story 5
+
+[33mcommit 756aed70353207acee6eb81c3c9b5abb572a1270[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Mon Oct 22 20:07:24 2018 -0700
+
+    Update server/routes/users.js
+    
+    potentially working login system??? maybe???
+
+[33mcommit 4b0afde16ba3dea984b77e3239b3d7471875434b[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Mon Oct 22 19:28:06 2018 -0700
+
+    Kyle is pushing this
+
+[33mcommit aa3fb6369f9388c730336cd7887ddea300bea2f7[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Sun Oct 21 15:51:48 2018 -0700
+
+    user routes wip
+
+[33mcommit 2e354243c2e96acbc8c2ead9597b341f50fce991[m
+Author: KevinThe1st <klabel@calpoly.edu>
+Date:   Sun Oct 21 15:13:55 2018 -0700
+
+    Added frontend changes
+
+[33mcommit f668acc1f07738c34fa9d12fbe01cce288352262[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Wed Oct 17 19:51:57 2018 -0700
+
+    model change
+    
+    justin's suggested changes to user and address
+
+[33mcommit 09c07975f234a61de5809f4731191cd94cd3429b[m[33m ([m[1;32mmaster[m[33m)[m
+Merge: dced0c8 6aae581
+Author: kylechin01 <kylechin01@gmail.com>
+Date:   Tue Oct 16 18:10:41 2018 -0700
+
+    Merge pull request #4 from CSC307Fall2018/SeanMendonca
+    
+    Sean mendonca
+
+[33mcommit 6aae581d8c06a8ac45da42420e214afc5f8dab93[m
+Merge: d89b8a1 969d59d
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Tue Oct 16 14:34:40 2018 -0700
+
+    working associations
+
+[33mcommit d89b8a1413a656c7df2dfcc6b54bd0cfb736580e[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Sat Oct 13 13:48:51 2018 -0700
+
+    Update server/config/config.json
+
+[33mcommit 969d59de41faf19d727377edf51341b63f2712f4[m
+Author: jccho16 <jccho@calpoly.edu>
+Date:   Fri Oct 12 15:49:24 2018 -0700
+
+    Basic tables
+
+[33mcommit 8ceaf384102a18ed0eaa79c4763ad8e93543ed53[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Oct 11 21:22:59 2018 -0700
+
+    wip
+
+[33mcommit 093e09954ed878387b97c234b7ff59e4c4b98c45[m
+Author: Sean Mendonca <smendonc@gmail.com>
+Date:   Thu Oct 11 19:54:16 2018 -0700
+
+    models start

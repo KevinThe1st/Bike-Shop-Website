@@ -55,6 +55,11 @@ export default new Router({
       path: '/account',
       name: 'account',
       component: () => import(/* webpackChunkName: "account" */ './views/Account.vue'),
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('./views/Cart.vue'),
     }
   ],
 });

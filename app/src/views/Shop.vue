@@ -1,28 +1,42 @@
 <template>
   <div id="shop">
-    <div id="category-bar">
-      <div id="applied-categories">
-        <li v-for="(category, index) in appliedCategories">
-          {{ category.name }}
-        </li>
-      </div>
-      <ul>
-        <li v-for="(category, index) in categories">
-          <input type="button" v-on:click="getSubCategories(index)">{{category.name}}
-        </li>
-      </ul>
+    <div class = "container">
+        <div class = "row">
+          <div class = "col-sm-12">
+            <h1 id="ShopTopText">Shop</h1>
+          </div>
+        </div>
     </div>
-    <div id="item-panel">
-      <li v-for="item in items">
-        <Product
-          v-bind:id="item.id"
-          v-bind:price="item.price"
-          v-bind:stock="item.stock"
-          v-bind:name="item.name"
-          v-bind:descShort="item.descShort"
-          v-bind:descLong="item.descLong"
-        ></Product>
-      </li>
+    <div class = "container">
+      <div class = "row">
+            <div id="category-bar">
+              <p id="CategoriesTopText">Categories</p>
+              <div id="applied-categories">
+
+                <li v-for="(category, index) in appliedCategories">
+                  <input type="checkbox" v-on:click="getSuperCategories(index)" v-bind:checked="true">{{category.name}}
+                </li>
+              </div>
+              <ul>
+                <li v-for="(category, index) in categories">
+                  <input type="checkbox" v-on:click="getSubCategories(index)"  v-bind:checked="appliedCategories[category]">{{category.name}}
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div id="item-panel">
+          <p id="resultsFoundText">{{items.length}} total results found</p>
+          <li v-for="item in items">
+            <Product
+              v-bind:id="item.id"
+              v-bind:price="item.price"
+              v-bind:stock="item.stock"
+              v-bind:name="item.name"
+              v-bind:descShort="item.descShort"
+              v-bind:descLong="item.descLong"
+            ></Product>
+          </li>
+        </div>
     </div>
   </div>
 </template>
@@ -43,6 +57,7 @@ export default class Shop extends App {
   categories: CategoryItem[] = [];
   appliedCategories: CategoryItem[] = [];
   items: ShopItem[] = [];
+  topCategory: CategoryItem = null;
 
   getTopLevelCategories(){
     axios.get(`/api/categories/parents`)
@@ -53,11 +68,37 @@ export default class Shop extends App {
 
   getSubCategories(index){
     this.appliedCategories.push(this.categories[index]);
+    this.getSpecificCategoryItems(index);
     axios.get(`/api/categories/parent/` + this.categories[index].id)
     .then((res) => {
       this.categories = res.data.category;
     })
-    this.getSpecificCategoryItems(index);
+  }
+
+  getSuperCategories(index){
+    /*
+     * cut off a part of the applied categories
+     */
+    var temp = this.appliedCategories;
+    this.topCategory = this.categories[index];
+    this.appliedCategories = [];
+    for(var i = 0; i < index; i++){
+      this.appliedCategories.push(temp[i]);
+    }
+    // get the subcategories of the new last category
+    if(index > 0){
+      this.categories = this.appliedCategories;
+      this.getSpecificCategoryItems(index-1);
+      axios.get(`/api/categories/parent/` + this.appliedCategories[index-1].id)
+      .then((res) => {
+        this.categories = res.data.category;
+      })
+    }
+    // or all categories if all categories have removed
+    else{
+      this.getTopLevelCategories();
+      this.getAllItems();
+    }
   }
 
   beforeMount(){
@@ -73,10 +114,8 @@ export default class Shop extends App {
   }
 
   getSpecificCategoryItems(index){
-    console.log(this.categories[index].id)
     axios.get(`/api/items/byCat/` + this.categories[index].id)
     .then((res) => {
-      console.log(res.data.items)
       this.items = res.data.items;
     })
   }
@@ -85,16 +124,23 @@ export default class Shop extends App {
 
 <style lang="scss">
 #shop {
-  padding: 0px 0px;
+  padding: 80px 0px;
   text-align: center;
+}
+
+#resultsFoundText{
+  font-style: italic;
+  color: #808080;
+  text-align: left;
 }
 
 #category-bar{
   display: inline-block;
   float: left;
-  background: #ddd;
+  background: white;
   width: 25%;
-  height: 400px;
+  border-right: 1px black solid;
+  height: 100%;
 
   ul {
     list-style: none;
@@ -106,9 +152,20 @@ export default class Shop extends App {
 
 #item-panel{
   display: inline-block;
-  padding: 100px 60px;
-  width: 50%;
+  padding: 30px 20px;
+  width: 60%;
   height: 100%;
   background: #ddd;
 }
+
+#ShopTopText {
+  text-align: center;
+}
+
+#CategoriesTopText {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 </style>
