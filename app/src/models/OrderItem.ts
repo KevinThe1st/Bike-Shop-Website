@@ -1,4 +1,5 @@
 export class OrderItem {
+  id!: number;
   shippingStatus!: string;
   totalPrice!: number;
   storePickup!: boolean;

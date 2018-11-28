@@ -71,10 +71,11 @@ export default class Shop extends App {
     }
     // get the subcategories of the new last category
     if(index > 0){
+      this.categories = this.appliedCategories;
+      this.getSpecificCategoryItems(index-1);
       axios.get(`/api/categories/parent/` + this.appliedCategories[index-1].id)
       .then((res) => {
         this.categories = res.data.category;
-        this.getSpecificCategoryItems(index-1);
       })
     }
     // or all categories if all categories have removed
