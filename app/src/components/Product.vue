@@ -1,11 +1,15 @@
 <template>
   <div id="product">
-    <p>
-      {{name}}
-    </p>
-    <p>
-      {{price}}
-    </P>
+    <div id = "productStyle">
+      <p id = "boldText">
+        {{name}}
+      </p>
+      <p>
+        {{price}}
+      </p>
+    </div>
+
+
   </div>
 </template>
 
@@ -37,5 +41,22 @@ export default class Product extends Vue {
         color: #f79927;
         background-color: grey;
         border: solid 2px black;
+    }
+
+
+    #productStyle {
+      background-color: white;
+      width: 100%;
+      border: 1px black solid;
+      margin-top: 3px;
+      padding: 5px;
+    }
+
+    #productStyle:hover {
+      background-color: #EDEDED;
+    }
+
+    #boldText {
+      font-weight: bold;
     }
 </style>

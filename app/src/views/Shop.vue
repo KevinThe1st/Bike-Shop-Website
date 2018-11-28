@@ -7,36 +7,48 @@
           </div>
         </div>
     </div>
-    <div class = "container">
-      <div class = "row">
-            <div id="category-bar">
-              <p id="CategoriesTopText">Categories</p>
-              <div id="applied-categories">
+    <hr>
 
-                <li v-for="(category, index) in appliedCategories">
-                  <input type="checkbox" v-on:click="getSuperCategories(index)" v-bind:checked="true">{{category.name}}
-                </li>
-              </div>
-              <ul>
-                <li v-for="(category, index) in categories">
-                  <input type="checkbox" v-on:click="getSubCategories(index)"  v-bind:checked="appliedCategories[category]">{{category.name}}
-                </li>
-              </ul>
+    <div>
+      <div class = "row">
+          <div class = "col-sm-2">
+                <div id="category-bar">
+                  <p id="CategoriesTopText">Categories</p>
+                  <div id="applied-categories">
+                    <ul class ="noBullets">
+                      <li v-for="(category, index) in appliedCategories">
+                        <input type="checkbox" v-on:click="getSuperCategories(index)" v-bind:checked="true">{{category.name}}
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class ="noBullets">
+                    <li v-for="(category, index) in categories">
+                      <input type="checkbox" v-on:click="getSubCategories(index)"  v-bind:checked="appliedCategories[category]">{{category.name}}
+                    </li>
+                  </ul>
+                </div>
             </div>
+            <div class = "col-sm-9">
+
+                <div id="item-panel">
+                  <p id="resultsFoundText">{{items.length}} total results found</p>
+                  <ul class ="noBullets">
+                    <li v-for="item in items">
+                      <Product
+                        v-bind:id="item.id"
+                        v-bind:price="item.price"
+                        v-bind:stock="item.stock"
+                        v-bind:name="item.name"
+                        v-bind:descShort="item.descShort"
+                        v-bind:descLong="item.descLong"
+                      ></Product>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+            <div class = "col-sm-1"></div>
         </div>
-        <div id="item-panel">
-          <p id="resultsFoundText">{{items.length}} total results found</p>
-          <li v-for="item in items">
-            <Product
-              v-bind:id="item.id"
-              v-bind:price="item.price"
-              v-bind:stock="item.stock"
-              v-bind:name="item.name"
-              v-bind:descShort="item.descShort"
-              v-bind:descLong="item.descLong"
-            ></Product>
-          </li>
-        </div>
+
     </div>
   </div>
 </template>
@@ -125,7 +137,7 @@ export default class Shop extends App {
 <style lang="scss">
 #shop {
   padding: 80px 0px;
-  text-align: center;
+
 }
 
 #resultsFoundText{
@@ -135,12 +147,9 @@ export default class Shop extends App {
 }
 
 #category-bar{
-  display: inline-block;
-  float: left;
-  background: white;
-  width: 25%;
   border-right: 1px black solid;
   height: 100%;
+
 
   ul {
     list-style: none;
@@ -151,11 +160,8 @@ export default class Shop extends App {
 }
 
 #item-panel{
-  display: inline-block;
   padding: 30px 20px;
-  width: 60%;
   height: 100%;
-  background: #ddd;
 }
 
 #ShopTopText {
@@ -167,5 +173,24 @@ export default class Shop extends App {
   font-weight: bold;
   font-size: 20px;
 }
+
+.noBullets {
+  ul {
+    list-style-type: none;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+#topContainer {
+  border-bottom: 1px black solid;
+}
+
+hr {
+  padding: 0px;
+  margin: 0px;
+  background-color: black;
+}
+
 
 </style>
