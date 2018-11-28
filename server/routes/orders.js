@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Order } = require('../models');
+const { Order, User } = require('../models');
 
 router.get('/', function (req, res) {
   Order.findAll().then((orders) => {
@@ -10,6 +10,16 @@ router.get('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   Order.findById(req.params.id).then((order) => {
+    res.json({ order });
+  });
+});
+
+router.get('/user/:id', function (req, res) {
+  Order.findAll({
+    where: {
+      userId: req.param.id,
+    }
+  }).then((order) => {
     res.json({ order });
   });
 });
