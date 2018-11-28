@@ -6,7 +6,7 @@
           <input type="button" v-on:click="getSuperCategories(index)">{{category.name}}
         </li>
       </div>
-      <ul>
+      <ul id="category-selection">
         <li v-for="(category, index) in categories">
           <input type="button" v-on:click="getSubCategories(index)">{{category.name}}
         </li>
@@ -43,6 +43,17 @@ export default class Shop extends App {
   categories: CategoryItem[] = [];
   appliedCategories: CategoryItem[] = [];
   items: ShopItem[] = [];
+/*
+  createNewCategory(){
+    axios.put(`/api/categories`, {
+      username: this.UsernameMessage,
+      password: this.PasswordMessage,
+      lastName: this.LastNameMessage,
+      firstName: this.FirstNameMessage
+    }).then((res) => {
+    }
+  }
+  */
 
   getTopLevelCategories(){
     axios.get(`/api/categories/parents`)

@@ -10,6 +10,7 @@ const vuexLocal = new VuexPersistence({
 
 const state = {
   logged_in: false,
+  permission_level: "Customer",
   id: 0
 }
 
@@ -21,13 +22,17 @@ const getters = {
     else{
       return false;
     }
+  },
+  getLoginPermissionLevel(state){
+    return state.permission_level;
   }
 }
 
 const mutations = {
-  login(state, id){
+  login(state, id/*, permission_level*/){
     state.id = id,
-    state.logged_in = true
+    state.logged_in = true//,
+    //state.permission_level = permission_level
   },
   logout(state){
     state.logged_in = false
