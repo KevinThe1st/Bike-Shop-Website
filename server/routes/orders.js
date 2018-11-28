@@ -19,8 +19,8 @@ router.get('/user/:id', function (req, res) {
     where: {
       userId: req.param.id,
     }
-  }).then((order) => {
-    res.json({ order });
+  }).then((orders) => {
+    res.json({ orders });
   });
 });
 
