@@ -1,28 +1,55 @@
 <template>
   <div id="shop">
-    <div id="category-bar">
-      <div id="applied-categories">
-        <li v-for="(category, index) in appliedCategories">
-          <input type="button" v-on:click="getSuperCategories(index)">{{category.name}}
-        </li>
-      </div>
-      <ul id="category-selection">
-        <li v-for="(category, index) in categories">
-          <input type="button" v-on:click="getSubCategories(index)">{{category.name}}
-        </li>
-      </ul>
+    <div id="topContainer">
+        <div>
+          <div class = "col-sm-12">
+            <h1 id="ShopTopText">Shop</h1>
+          </div>
+        </div>
     </div>
-    <div id="item-panel">
-      <li v-for="item in items">
-        <Product
-          v-bind:id="item.id"
-          v-bind:price="item.price"
-          v-bind:stock="item.stock"
-          v-bind:name="item.name"
-          v-bind:descShort="item.descShort"
-          v-bind:descLong="item.descLong"
-        ></Product>
-      </li>
+
+
+    <div>
+      <div class = "row">
+          <div class = "col-sm-2">
+                <div id="category-bar">
+                  <p id="CategoriesTopText">Categories</p>
+                  <div id="applied-categories">
+                    <ul class ="noBullets">
+                      <li v-for="(category, index) in appliedCategories">
+                        <input type="checkbox" v-on:click="getSuperCategories(index)" v-bind:checked="true">{{category.name}}
+                      </li>
+                    </ul>
+                  </div>
+                  <ul class ="noBullets">
+                    <li v-for="(category, index) in categories">
+                      <input type="checkbox" v-on:click="getSubCategories(index)"  v-bind:checked="appliedCategories[category]">{{category.name}}
+                    </li>
+                  </ul>
+                </div>
+            </div>
+            <div class = "col-sm-9" id = "itemsContainer">
+
+                <div id="item-panel">
+                  <p id="resultsFoundText">{{items.length}} results found</p>
+                  <ul class ="noBullets">
+                    <li v-for="item in items">
+                      <Product
+                        v-bind:id="item.id"
+                        v-bind:price="item.price"
+                        v-bind:stock="item.stock"
+                        v-bind:name="item.name"
+                        v-bind:descShort="item.descShort"
+                        v-bind:descLong="item.descLong"
+                        v-bind:picName="item.picName"
+                      ></Product>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+            <div class = "col-sm-1"></div>
+        </div>
+
     </div>
   </div>
 </template>
@@ -76,6 +103,7 @@ export default class Shop extends App {
      * cut off a part of the applied categories
      */
     var temp = this.appliedCategories;
+    this.topCategory = this.categories[index];
     this.appliedCategories = [];
     for(var i = 0; i < index; i++){
       this.appliedCategories.push(temp[i]);
@@ -120,15 +148,19 @@ export default class Shop extends App {
 <style lang="scss">
 #shop {
   padding: 80px 0px;
-  text-align: center;
+
+}
+
+#resultsFoundText{
+  font-style: italic;
+  color: black;
+  text-align: left;
 }
 
 #category-bar{
-  display: inline-block;
-  float: left;
-  background: #ddd;
-  width: 25%;
-  height: 400px;
+  height: 100%;
+
+
 
   ul {
     list-style: none;
@@ -139,10 +171,42 @@ export default class Shop extends App {
 }
 
 #item-panel{
-  display: inline-block;
-  padding: 100px 60px;
-  width: 50%;
+  padding: 30px 20px;
   height: 100%;
-  background: #ddd;
 }
+
+#ShopTopText {
+  text-align: center;
+}
+
+#CategoriesTopText {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.noBullets {
+  ul {
+    list-style-type: none;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+#topContainer {
+  border-bottom: 2px #EDEDED solid;
+}
+
+hr {
+  padding: 0px;
+  margin: 0px;
+  background-color: #EDEDED;
+}
+
+#itemsContainer {
+
+  border-left: 2px #EDEDED solid;
+}
+
+
 </style>
