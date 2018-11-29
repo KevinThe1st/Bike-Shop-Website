@@ -1,13 +1,13 @@
 <template>
   <div id="shop">
-    <div class = "container">
-        <div class = "row">
+    <div id="topContainer">
+        <div>
           <div class = "col-sm-12">
             <h1 id="ShopTopText">Shop</h1>
           </div>
         </div>
     </div>
-    <hr>
+
 
     <div>
       <div class = "row">
@@ -28,10 +28,10 @@
                   </ul>
                 </div>
             </div>
-            <div class = "col-sm-9">
+            <div class = "col-sm-9" id = "itemsContainer">
 
                 <div id="item-panel">
-                  <p id="resultsFoundText">{{items.length}} total results found</p>
+                  <p id="resultsFoundText">{{items.length}} results found</p>
                   <ul class ="noBullets">
                     <li v-for="item in items">
                       <Product
@@ -41,6 +41,7 @@
                         v-bind:name="item.name"
                         v-bind:descShort="item.descShort"
                         v-bind:descLong="item.descLong"
+                        v-bind:picName="item.picName"
                       ></Product>
                     </li>
                   </ul>
@@ -142,13 +143,13 @@ export default class Shop extends App {
 
 #resultsFoundText{
   font-style: italic;
-  color: #808080;
+  color: black;
   text-align: left;
 }
 
 #category-bar{
-  border-right: 1px black solid;
   height: 100%;
+
 
 
   ul {
@@ -183,13 +184,18 @@ export default class Shop extends App {
   }
 }
 #topContainer {
-  border-bottom: 1px black solid;
+  border-bottom: 2px #EDEDED solid;
 }
 
 hr {
   padding: 0px;
   margin: 0px;
-  background-color: black;
+  background-color: #EDEDED;
+}
+
+#itemsContainer {
+
+  border-left: 2px #EDEDED solid;
 }
 
 
