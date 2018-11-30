@@ -34,17 +34,28 @@ describe('Order', function () {
     });
   });
 
-  /*
   describe('Create an order', function () {
     it('Return 200', function (done) {
-      request
-        .put('/orders')
-        .send(validOrder)
-        .expect(200)
-        .end(done);
+      createUser()
+        .then((user) => {
+          request
+            .put('/orders')
+            .send({
+              "shippingStatus": "verified",
+              "totalPrice": 399.99,
+              "storePickup": true,
+              "userId": user.id,
+            })
+            .expect(function (res, err) {
+              console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
     });
   });
 
+  /*
   describe('Delete an order', function () {
     it('Return 200', function (done) {
       createOrder.then(() => {

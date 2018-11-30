@@ -29,16 +29,36 @@ router.put('/', function (req, res) {
     shippingStatus,
     totalPrice,
     storePickup,
+    userId
   } = req.body;
+
+  User.findById(userId)
+    .then((user) => {
+      var order = Order.build({
+        shippingStatus,
+        totalPrice,
+        storePickup,
+      })
+      order.setUser(user);
+      return order.save();
+    })
+    .then((order) => {
+      res.json({ created: 'Success' })
+    }).catch(() => {
+      res.json({ created: 'Failure' });
+    });
+  /*
   Order.create({
     shippingStatus,
     totalPrice,
     storePickup,
+    //userId,
   }).then((order) => {
     res.json({ created: 'Success' });
   }).catch(() => {
     res.json({ created: 'Failure' });
   });
+  */
 });
 
 router.patch('/:id/:shippingStatus', function (req, res) {
