@@ -39,12 +39,12 @@ router.put('/', function (req, res) {
         totalPrice,
         storePickup,
       })
-      order.setUser(user);
-      return order.save();
+      order.setUser(user, {save: false});
+      order.save().then((order) => {
+        res.json({ created: 'Success' })
+      });
     })
-    .then((order) => {
-      res.json({ created: 'Success' })
-    }).catch(() => {
+    .catch(() => {
       res.json({ created: 'Failure' });
     });
   /*
