@@ -15,10 +15,13 @@
               <p>
                 Price: ${{price}}
               </p>
+              <p>
+                Stock: {{stock}}
+              </p>
               <p class ="inlineBlock">Quantity: </p>
               <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" placeholder="0">
               <br>
-              <button class="btn btn-success" id = "buttonClass">Add to Cart</button>
+              <button class="btn btn-success" id = "buttonClass" v-on:click="addToCart()">Add to Cart</button>
             </div>
           </div>
       </div>
@@ -30,6 +33,7 @@
 </template>
 
 <script lang="ts">
+import axios from 'axios';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component({
@@ -44,7 +48,15 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Product extends Vue {
-
+  addToCart(){
+    axios.put('/api/orderItems/cart', {
+      userId: this.$store.getters.getLoginStatus,
+      itemId: this.$props.id,
+      quantity: 1,
+    }).then((res) => {
+      console.log("Login response:" + res.data.updated);
+    })
+  }
 }
 </script>
 

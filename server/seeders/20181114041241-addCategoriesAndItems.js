@@ -65,7 +65,7 @@ module.exports = {
 
     await queryInterface.bulkInsert('Items', [
       {
-        name: 'Of Category 1 and Subcategory 1 - 1',
+        name: 'Trek Domane 4.0 Disc',
         price: 100.00,
         stock: 5,
         descShort: 'foo',
@@ -75,9 +75,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 1 and Category 2',
+        name: 'Domane AL 3',
         price: 100.00,
-        stock: 5,
+        stock: 3,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
@@ -85,9 +85,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 1 and Category 2 and Category 3',
+        name: 'Emonda SLR 6 H2',
         price: 100.00,
-        stock: 5,
+        stock: 2,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
@@ -95,9 +95,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 1 and Subcategory 1 - 2 ',
+        name: 'Speed Concept',
         price: 100.00,
-        stock: 5,
+        stock: 1,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
@@ -105,9 +105,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 2 and Subcategory 2 - 1',
+        name: 'Emonda SL 5',
         price: 100.00,
-        stock: 5,
+        stock: 50,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
@@ -115,9 +115,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 2',
+        name: 'Emonda SL 5 WSD',
         price: 100.00,
-        stock: 5,
+        stock: 10,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
@@ -125,9 +125,9 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name: 'Of Category 3',
+        name: 'Domane SLR F/S',
         price: 100.00,
-        stock: 5,
+        stock: 99,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',

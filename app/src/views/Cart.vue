@@ -128,7 +128,7 @@ export default class Cart extends App {
 
   getCurrentOrder(){
     for(var i = 0; i < this.orders.length; i++){
-      if(this.orders[i].shippingStatus == "InProgress"){
+      if(this.orders[i].shippingStatus == "Cart"){
         this.currentOrder = this.orders[i];
         i = this.orders.length;
         this.getAllOrderItemsFromCurrentOrder();
