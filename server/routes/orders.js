@@ -70,9 +70,8 @@ router.patch('/:id/:shippingStatus', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-  const idToDelete = req.params.id;
-  Order.findById(idToDelete).then((order) => {
-    Order.destroy().then(() => {
+  Order.findById(req.params.id).then((order) => {
+    order.destroy().then(() => {
       res.json({ delete: true });
     });
   }).catch(() => {

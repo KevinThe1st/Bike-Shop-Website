@@ -8,7 +8,6 @@ const createUser = () => User.create({
 })
 
 const createOrder = () => createUser().then((user) => {
-  console.log(user.id);
   var order = Order.build({
     "shippingStatus": "verified",
     "totalPrice": 399.99,
@@ -54,20 +53,21 @@ describe('Order', function () {
         });
     });
   });
-
   /*
   describe('Delete an order', function () {
     it('Return 200', function (done) {
-      createOrder.then(() => {
-        request
-          .delete('/orders/' + order.id)
-          .expect(200)
-          .expect(function (res) {
-            assert.equal(Object.keys(res.body).length, 1);
-            assert.equal(res.body.delete, true);
-          })
-          .end(done);
-      });
+      createOrder()
+        .then(() => {
+          request
+            .delete('/orders/' + order.id)
+            .expect(function (res, err) {
+              console.log(res.body);
+              //assert.equal(Object.keys(res.body).length, 1);
+              //assert.equal(res.body.delete, true);
+            })
+            .expect(200)
+            .end(done);
+        });
     });
   });
   */
