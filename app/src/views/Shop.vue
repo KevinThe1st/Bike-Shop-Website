@@ -8,32 +8,35 @@
         </div>
     </div>
 
-
     <div>
       <div class = "row">
           <div class = "col-sm-2">
                 <div id="category-bar">
+                  {{this.$store.getters.getLoginPermissionLevel}}
+                  <input v-model="message" placeholder="category name">
+                  <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Customer'">Add New Category</button>
                   <p id="CategoriesTopText">Categories</p>
-                  <div id="applied-categories">
+                  <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
                     <ul class ="noBullets">
-                      <li v-for="(category, index) in appliedCategories">
-                        <input type="checkbox" v-on:click="getSuperCategories(index)" v-bind:checked="true">{{category.name}}
+                      <li v-for="(category, categoryIndex) in topLevelCategories">
+                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Customer'">Add New Subcategory</button>
+                        {{category.name}}
+                        <ul class ="noBullets">
+                          <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
+                            <input type="checkbox" v-on:click="getItemsRefinedByCategories(categoryIndex, subcategoryIndex)">
+                            {{subcategory.name}}
+                          </li>
+                        </ul>
                       </li>
                     </ul>
                   </div>
-                  <ul class ="noBullets">
-                    <li v-for="(category, index) in categories">
-                      <input type="checkbox" v-on:click="getSubCategories(index)"  v-bind:checked="appliedCategories[category]">{{category.name}}
-                    </li>
-                  </ul>
                 </div>
             </div>
             <div class = "col-sm-9" id = "itemsContainer">
-
                 <div id="item-panel">
-                  <p id="resultsFoundText">{{items.length}} results found</p>
+                  <p id="resultsFoundText">{{displayedItems.length}} results found</p>
                   <ul class ="noBullets">
-                    <li v-for="item in items">
+                    <li v-for="item in displayedItems">
                       <Product
                         v-bind:id="item.id"
                         v-bind:price="item.price"
@@ -64,73 +67,104 @@ import Product from '@/components/Product.vue';
 @Component({
   components: {
     Product
+  },
+  data() {
+    return {
+      message: ''
+    }
   }
 })
 export default class Shop extends App {
-  categories: CategoryItem[] = [];
-  appliedCategories: CategoryItem[] = [];
-  items: ShopItem[] = [];
-  topCategory: CategoryItem = null;
+  topLevelCategories: CategoryItem[] = [];
+  idsOfAppliedCategories: [number, number][] = [];
+  displayedItems: ShopItem[] = [];
+  loadedTopLevelCategoryCount: number = 0;
 
-  getTopLevelCategories(){
+  getAllTopLevelCategories(){
+    this.topLevelCategories = [];
+    this.loadedTopLevelCategoryCount = 0;
     axios.get(`/api/categories/parents`)
     .then((res) => {
-      this.categories = res.data.categories;
+      this.topLevelCategories = res.data.categories;
+      for(var i = 0; i < this.topLevelCategories.length; i++){
+        this.getSubLevelCategories(i);
+      }
     })
   }
 
-  getSubCategories(index){
-    this.appliedCategories.push(this.categories[index]);
-    this.getSpecificCategoryItems(index);
-    axios.get(`/api/categories/parent/` + this.categories[index].id)
+  getSubLevelCategories(index){
+    this.topLevelCategories[index].subcategories = [];
+    axios.get(`/api/categories/parent/` + this.topLevelCategories[index].id)
     .then((res) => {
-      this.categories = res.data.category;
+      this.topLevelCategories[index].subcategories = res.data.category;
+      this.loadedTopLevelCategoryCount++; // only render when all responses have got back
     })
-  }
-
-  getSuperCategories(index){
-    /*
-     * cut off a part of the applied categories
-     */
-    var temp = this.appliedCategories;
-    this.topCategory = this.categories[index];
-    this.appliedCategories = [];
-    for(var i = 0; i < index; i++){
-      this.appliedCategories.push(temp[i]);
-    }
-    // get the subcategories of the new last category
-    if(index > 0){
-      this.categories = this.appliedCategories;
-      this.getSpecificCategoryItems(index-1);
-      axios.get(`/api/categories/parent/` + this.appliedCategories[index-1].id)
-      .then((res) => {
-        this.categories = res.data.category;
-      })
-    }
-    // or all categories if all categories have removed
-    else{
-      this.getTopLevelCategories();
-      this.getAllItems();
-    }
-  }
-
-  beforeMount(){
-    this.getTopLevelCategories()
-    this.getAllItems()
   }
 
   getAllItems(){
-    axios.get(`/api/items`)
-    .then((res) => {
-      this.items = res.data.items;
+   axios.get(`/api/items`)
+   .then((res) => {
+     this.displayedItems = res.data.items;
+   })
+ }
+
+ getItemsRefinedByCategories(categoryIndex, subcategoryIndex){
+   this.categoryChanged(categoryIndex, subcategoryIndex);
+   this.displayedItems = [];
+   if(this.idsOfAppliedCategories.length == 0){
+     this.getAllItems();
+     return;
+   }
+   for(var i = 0; i < this.idsOfAppliedCategories.length; i++){
+     var idTuple = this.idsOfAppliedCategories[i];
+     axios.get(`/api/items/byCat/` + this.topLevelCategories[idTuple[0]].subcategories[idTuple[1]].id)
+     .then((res) => {
+       for(var j = 0; j < res.data.items.length; j++){
+         this.displayedItems.push(res.data.items[j]);
+       }
+     })
+   }
+ }
+
+  categoryChanged(index1, index2){
+    for(var i = 0; i < this.idsOfAppliedCategories.length; i++){
+      if(this.idsOfAppliedCategories[i][0] == index1 && this.idsOfAppliedCategories[i][1] == index2){
+        this.idsOfAppliedCategories.splice(i, 1);
+        return;
+      }
+    }
+    this.idsOfAppliedCategories.push([index1, index2]);
+  }
+
+  beforeMount(){
+    this.getAllTopLevelCategories();
+    this.getAllItems();
+  }
+
+  addNewTopLevelCategory(categoryName){
+    this.printer("top" + categoryName);
+    axios.put(`/api/categories`, {
+      name: categoryName,
+      type: null,
+      parentId: null
+    }).then((res) => {
+      this.getAllTopLevelCategories();
     })
   }
 
-  getSpecificCategoryItems(index){
-    axios.get(`/api/items/byCat/` + this.categories[index].id)
-    .then((res) => {
-      this.items = res.data.items;
+  addNewSubCategory(categoryName, categoryIndex){
+    this.printer("sub" + categoryName);
+    axios.put(`/api/categories`, {
+      name: categoryName,
+      type: null,
+      parentId: this.topLevelCategories[categoryIndex].id
+    }).then((res) => {
+      this.getAllTopLevelCategories();
     })
+  }
+
+  printer(input){
+    console.log(input);
   }
 }
 </script>
@@ -149,8 +183,6 @@ export default class Shop extends App {
 
 #category-bar{
   height: 100%;
-
-
 
   ul {
     list-style: none;
