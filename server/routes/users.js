@@ -39,7 +39,7 @@ router.put('/login', function(req, res) {
     session => {
       if (session) {
         session.getUser().then(user => {
-          res.json({ user_id: user.id });
+          res.json({ user_id: user.id, type: user.type });
         });
       } else {
         res.status(403).json({ error: 'you are not logged in' });
