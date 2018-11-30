@@ -19,8 +19,8 @@ router.get('/user/:id', function (req, res) {
     where: {
       userId: req.param.id,
     }
-  }).then((order) => {
-    res.json({ order });
+  }).then((orders) => {
+    res.json({ orders });
   });
 });
 
@@ -29,22 +29,49 @@ router.put('/', function (req, res) {
     shippingStatus,
     totalPrice,
     storePickup,
+    userId
   } = req.body;
+
+  User.findById(userId)
+    .then((user) => {
+      var order = Order.build({
+        shippingStatus,
+        totalPrice,
+        storePickup,
+      })
+      order.setUser(user);
+      return order.save();
+    })
+    .then((order) => {
+      res.json({ created: 'Success' })
+    }).catch(() => {
+      res.json({ created: 'Failure' });
+    });
+  /*
   Order.create({
     shippingStatus,
     totalPrice,
     storePickup,
+    //userId,
   }).then((order) => {
     res.json({ created: 'Success' });
   }).catch(() => {
     res.json({ created: 'Failure' });
   });
+  */
+});
+
+router.patch('/:id/:shippingStatus', function (req, res) {
+  Order.findById(req.params.id).then((order) => {
+    order.updateAttributes({
+      shippingStatus: req.params.shippingStatus,
+    });
+  });
 });
 
 router.delete('/:id', function (req, res) {
-  const idToDelete = req.params.id;
-  Order.findById(idToDelete).then((order) => {
-    Order.destroy().then(() => {
+  Order.findById(req.params.id).then((order) => {
+    order.destroy().then(() => {
       res.json({ delete: true });
     });
   }).catch(() => {

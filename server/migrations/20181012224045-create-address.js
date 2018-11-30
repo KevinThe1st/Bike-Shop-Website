@@ -40,7 +40,8 @@ module.exports = {
           model: 'Users',
           key: 'id'
         },
-        allowNull: false
+        allowNull: false, 
+        onDelete: 'cascade'
       },
     });
   },

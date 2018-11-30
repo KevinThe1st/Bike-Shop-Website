@@ -23,7 +23,8 @@ module.exports = {
           model: 'Categories',
           key: 'id'
         },
-        allowNull: true
+        allowNull: true,
+        onDelete: 'cascade'
       },
       itemId: {
         type: Sequelize.INTEGER,
@@ -31,7 +32,8 @@ module.exports = {
           model: 'Items',
           key: 'id'
         },
-        allowNull: true
+        allowNull: true,
+        onDelete: 'cascade'
       },
     });
   },

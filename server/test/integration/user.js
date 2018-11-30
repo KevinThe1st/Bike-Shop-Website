@@ -7,20 +7,20 @@ const validUser = {
   "firstName": "Justin",
 };
 
-describe('User', function () {
+describe('User', function () { 
   describe('Register a user', function () {
     it('Valid body returns 200', function (done) {
       request
         .put('/register')
         .send(validUser)
         .expect(function (res) {
-          console.log(res.body);
+          //console.log(res.body);
         })
         .expect(200)
         .end(done);
     });
   });
-
+  
   describe('Get all users', function () {
     it('Returns 200', function (done) {
       User.create(validUser)
@@ -29,7 +29,7 @@ describe('User', function () {
             .get('/users')
             .expect(200)
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .end(done);
         });
@@ -44,7 +44,7 @@ describe('User', function () {
             .get('/users/' + user.id)
             .expect(200)
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .end(done);
         });
@@ -59,7 +59,7 @@ describe('User', function () {
             .delete('/users/' + user.id)
             .expect(200)
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
               assert.equal(Object.keys(res.body).length, 1);
               assert.equal(res.body.delete, true);
             })
