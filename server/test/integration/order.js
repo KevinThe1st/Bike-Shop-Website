@@ -27,7 +27,7 @@ describe('Order', function () {
             .get('/orders')
             .expect(200)
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .end(done);
         });
@@ -47,7 +47,7 @@ describe('Order', function () {
               "userId": user.id,
             })
             .expect(function (res, err) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .expect(200)
             .end(done);
