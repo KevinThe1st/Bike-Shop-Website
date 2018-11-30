@@ -29,13 +29,16 @@ const getters = {
 }
 
 const mutations = {
-  login(state, id/*, permission_level*/){
+  login(state, id){
     state.id = id,
-    state.logged_in = true//,
-    //state.permission_level = permission_level
+    state.logged_in = true
+  },
+  permission(state, permission_level){
+    state.permission_level = permission_level
   },
   logout(state){
-    state.logged_in = false
+    state.logged_in = false,
+    state.permission_level = "Customer"
   }
 }
 

@@ -9,5 +9,10 @@ export default class Checkout extends Vue {
     price: "Number",
     quantity: "Number",
   }];
+  shippingType: "";
+
+  getOrder(){
+    
+  }
 }
 </script>
