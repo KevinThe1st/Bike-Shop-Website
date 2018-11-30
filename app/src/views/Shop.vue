@@ -143,6 +143,9 @@ export default class Shop extends App {
 
   addNewTopLevelCategory(categoryName){
     this.printer("top" + categoryName);
+    if(categoryName.length == 0){
+      return;
+    }
     axios.put(`/api/categories`, {
       name: categoryName,
       type: null,
@@ -154,6 +157,9 @@ export default class Shop extends App {
 
   addNewSubCategory(categoryName, categoryIndex){
     this.printer("sub" + categoryName);
+    if(categoryName.length == 0){
+      return;
+    }
     axios.put(`/api/categories`, {
       name: categoryName,
       type: null,
