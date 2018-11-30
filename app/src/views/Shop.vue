@@ -12,10 +12,14 @@
       <div class = "row">
           <div class = "col-sm-2">
                 <div id="category-bar">
+                  {{this.$store.getters.getLoginPermissionLevel}}
+                  <input v-model="message" placeholder="category name">
+                  <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Customer'">Add New Category</button>
                   <p id="CategoriesTopText">Categories</p>
                   <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
                     <ul class ="noBullets">
                       <li v-for="(category, categoryIndex) in topLevelCategories">
+                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Customer'">Add New Subcategory</button>
                         {{category.name}}
                         <ul class ="noBullets">
                           <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
@@ -63,6 +67,11 @@ import Product from '@/components/Product.vue';
 @Component({
   components: {
     Product
+  },
+  data() {
+    return {
+      message: ''
+    }
   }
 })
 export default class Shop extends App {
@@ -72,6 +81,8 @@ export default class Shop extends App {
   loadedTopLevelCategoryCount: number = 0;
 
   getAllTopLevelCategories(){
+    this.topLevelCategories = [];
+    this.loadedTopLevelCategoryCount = 0;
     axios.get(`/api/categories/parents`)
     .then((res) => {
       this.topLevelCategories = res.data.categories;
@@ -126,6 +137,32 @@ export default class Shop extends App {
   beforeMount(){
     this.getAllTopLevelCategories();
     this.getAllItems();
+  }
+
+  addNewTopLevelCategory(categoryName){
+    this.printer("top" + categoryName);
+    axios.put(`/api/categories`, {
+      name: categoryName,
+      type: null,
+      parentId: null
+    }).then((res) => {
+      this.getAllTopLevelCategories();
+    })
+  }
+
+  addNewSubCategory(categoryName, categoryIndex){
+    this.printer("sub" + categoryName);
+    axios.put(`/api/categories`, {
+      name: categoryName,
+      type: null,
+      parentId: this.topLevelCategories[categoryIndex].id
+    }).then((res) => {
+      this.getAllTopLevelCategories();
+    })
+  }
+
+  printer(input){
+    console.log(input);
   }
 }
 </script>

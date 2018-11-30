@@ -30,12 +30,12 @@ router.put('/', function (req, res) {
   const {
     name,
     type,
-    parId,
+    parentId,
   } = req.body;
   Category.create({
     name,
     type,
-    parId,
+    parentId,
   }).then((category) => {
     res.json({ created: 'Success' });
   }).catch(() => {
