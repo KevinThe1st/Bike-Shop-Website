@@ -29,12 +29,12 @@ function updateCartOrder(order, itemId, quantity, res) {
         });
       }
       else {
-        orderItemT = OrderItem.build({
+        var orderItemT = OrderItem.build({
           quantity,
           price: item.price * quantity
         });
-        orderItemT.setOrder(order)
-        orderItemT.setItem(item)
+        orderItemT.setOrder(order, {save: false});
+        orderItemT.setItem(item, {save: false});
         orderItemT.save().then((orderItemNew) => {
           updateOrderTotal(order, orderItemNew, res);
         });
@@ -66,15 +66,15 @@ router.put('/cart', function (req, res) {
     }
     else{
       User.findById(userId).then((user) => {
-        var order = Order.build({
+        var orderT = Order.build({
           shippingStatus: "Cart",
           totalPrice: 0.0,
           storePickup: false
-        })
-        order.setUser(user);
-        order.save().then((orderNew) => {
+        });
+        orderT.setUser(user, {save: false});
+        orderT.save().then((orderNew) => {
           updateCartOrder(orderNew, itemId, quantity, res)
-        })
+        });
       });
     }
   }).catch(() => {

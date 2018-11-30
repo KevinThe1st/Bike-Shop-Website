@@ -55,7 +55,7 @@ export default class Product extends Vue {
       itemId: this.$props.id,
       quantity: this.qty,
     }).then((res) => {
-      console.log("Login response:" + res.data.updated);
+      console.log("Item(s) added:" + res.data.updated);
     })
   }
 }
