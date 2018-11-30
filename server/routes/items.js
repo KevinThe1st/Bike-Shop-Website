@@ -63,7 +63,7 @@ router.put('/', function (req, res) {
     descShort,
     descLong,
     picName,
-    categoryId,
+    categories,
   } = req.body;
   Item.create({
     name,
@@ -73,10 +73,15 @@ router.put('/', function (req, res) {
     descLong,
     picName,
   }).then((item) => {
-    ItemCategory.create({
-      itemId: item.id,
-      categoryId
-    }).then((ic) => {
+    if (!categories) {
+      return res.json({ created: 'Success' });
+    };
+    categories.forEach(categoryId => {
+      ItemCategory.create({
+        itemId: item.id,
+        categoryId
+      });
+    }).then(() => {
       return res.json({ created: 'Success' });
     });
   }).catch(() => {
