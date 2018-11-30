@@ -5,12 +5,14 @@ const { Order } = require('../models');
 const { Item } = require('../models');
 const { OrderItem } = require('../models');
 
-function updateOrderTotal(order, orderItem){
+function updateOrderTotal(order, orderItem, res){
   order.totalPrice += orderItem.price;
-  order.save();
+  order.save().then((order) => {
+    return res.json({ updated: 'Success' });
+  });
 }
 
-function updateCartOrder(order, itemId, quantity) {
+function updateCartOrder(order, itemId, quantity, res) {
   Item.findOne({ where: {
     id: itemId
   }}).then((item) => {
@@ -23,18 +25,18 @@ function updateCartOrder(order, itemId, quantity) {
         orderItem.quantity = quantity;
         orderItem.price = item.price * quantity;
         orderItem.save().then((orderItem) => {
-          updateOrderTotal(order, orderItem)
+          updateOrderTotal(order, orderItem, res)
         });
       }
       else {
-        orderItem = OrderItem.build({
+        orderItemT = OrderItem.build({
           quantity,
           price: item.price * quantity
         });
-        orderItem.setOrder(order)
-        orderItem.setItem(item)
-        orderItem.save().then((orderItemNew) => {
-          updateOrderTotal(order, orderItemNew);
+        orderItemT.setOrder(order)
+        orderItemT.setItem(item)
+        orderItemT.save().then((orderItemNew) => {
+          updateOrderTotal(order, orderItemNew, res);
         });
       }
     });
@@ -60,7 +62,7 @@ router.put('/cart', function (req, res) {
     }
   }).then((order) => {
     if (order){
-      updateCartOrder(order, itemId, quantity)
+      updateCartOrder(order, itemId, quantity, res)
     }
     else{
       User.findById(userId).then((user) => {
@@ -71,7 +73,7 @@ router.put('/cart', function (req, res) {
         })
         order.setUser(user);
         order.save().then((orderNew) => {
-          updateCartOrder(orderNew, itemId, quantity)
+          updateCartOrder(orderNew, itemId, quantity, res)
         })
       });
     }
