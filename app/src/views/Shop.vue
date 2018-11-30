@@ -117,9 +117,11 @@ export default class Shop extends App {
    }
    for(var i = 0; i < this.idsOfAppliedCategories.length; i++){
      var idTuple = this.idsOfAppliedCategories[i];
-     axios.get(`/api/items/byCat/` + this.topLevelCategories[idTuple[0]].subcategories[idTuple[1]])
+     axios.get(`/api/items/byCat/` + this.topLevelCategories[idTuple[0]].subcategories[idTuple[1]].id)
      .then((res) => {
-        this.displayedItems.push(res.data.items);
+       for(var j = 0; j < res.data.items.length; j++){
+         this.displayedItems.push(res.data.items[j]);
+       }
      })
    }
  }
