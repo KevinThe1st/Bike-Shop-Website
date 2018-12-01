@@ -53,6 +53,7 @@
         </div>
 
     </div>
+    <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
   </div>
 </template>
 
@@ -78,6 +79,7 @@ export default class Shop extends App {
   idsOfAppliedCategories: [number, number][] = [];
   displayedItems: ShopItem[] = [];
   loadedTopLevelCategoryCount: number = 0;
+  bottomTxt = "Placeholder";
 
   getAllTopLevelCategories(){
     this.topLevelCategories = [];
@@ -138,6 +140,11 @@ export default class Shop extends App {
   beforeMount(){
     this.getAllTopLevelCategories();
     this.getAllItems();
+    axios
+      .get('/api/textbox/location')
+      .then((res) => {
+        this.bottomTxt = res.data.item.text;
+      })
   }
 
   addNewTopLevelCategory(categoryName){
@@ -233,6 +240,10 @@ hr {
 #itemsContainer {
 
   border-left: 2px #EDEDED solid;
+}
+
+#bottomTxt {
+  text-align: center;
 }
 
 
