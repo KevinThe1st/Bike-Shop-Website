@@ -63,7 +63,7 @@ router.put('/', function (req, res) {
     descShort,
     descLong,
     picName,
-    categoryId,
+    categories,
   } = req.body;
   Item.create({
     name,
@@ -73,14 +73,19 @@ router.put('/', function (req, res) {
     descLong,
     picName,
   }).then((item) => {
-    ItemCategory.create({
-      itemId: item.id,
-      categoryId
-    }).then((ic) => {
-      return res.json({ created: 'Success' });
+    if (categories.length == 0) {
+      return res.status(403).json({ created: 'Failure', id: item.id });
+    };
+    categories.forEach(catId => {
+      var newItemCategory = ItemCategory.create({
+        ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
+        CategoryId: catId
+      });
     });
+    // console.log("adding: " + Object.keys(ItemCategory.rawAttributes));
+    return res.json({ created: 'Success' });
   }).catch(() => {
-    return res.status(403).json({ created: 'Failure' });
+    return res.status(403).json({ created: 'Failure', id: item.id });
   });
 });
 

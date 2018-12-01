@@ -12,14 +12,13 @@
       <div class = "row">
           <div class = "col-sm-2">
                 <div id="category-bar">
-                  {{this.$store.getters.getLoginPermissionLevel}}
-                  <input v-model="message" placeholder="category name">
-                  <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Customer'">Add New Category</button>
+                  <input v-model="message" placeholder="category name" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">
+                  <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Add New Category</button>
                   <p id="CategoriesTopText">Categories</p>
                   <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
                     <ul class ="noBullets">
                       <li v-for="(category, categoryIndex) in topLevelCategories">
-                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Customer'">Add New Subcategory</button>
+                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Admin'">Add New Subcategory</button>
                         {{category.name}}
                         <ul class ="noBullets">
                           <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
