@@ -13,14 +13,14 @@
           <div class = "col-sm-2">
                 <div id="category-bar">
                   {{this.$store.getters.getLoginPermissionLevel}}
-                  <input v-model="message" placeholder="category name">
-                  <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Customer'">Add New Category</button>
                   <p id="CategoriesTopText">Categories</p>
+                  <input v-model="message" placeholder="category name" class = "centerCategories">
+                  <button type="submit" class = "centerCategories" id="categoryBottomButton" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Customer'">Add New Category Level</button>
                   <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
                     <ul class ="noBullets">
                       <li v-for="(category, categoryIndex) in topLevelCategories">
-                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Customer'">Add New Subcategory</button>
                         {{category.name}}
+                        <button type="submit" v-on:click="addNewSubCategory(message, categoryIndex)" v-if="$store.getters.getLoginPermissionLevel == 'Customer'">Add New Subcategory</button>
                         <ul class ="noBullets">
                           <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
                             <input type="checkbox" v-on:click="getItemsRefinedByCategories(categoryIndex, subcategoryIndex)">
@@ -183,6 +183,7 @@ export default class Shop extends App {
 
 #category-bar{
   height: 100%;
+  overflow: auto;
 
   ul {
     list-style: none;
@@ -230,5 +231,12 @@ hr {
   border-left: 2px #EDEDED solid;
 }
 
+.centerCategories {
+  margin-left: 15px;
+}
+
+#categoryBottomButton {
+  margin-bottom: 20px;
+}
 
 </style>
