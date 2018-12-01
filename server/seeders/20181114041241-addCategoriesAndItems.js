@@ -5,21 +5,28 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Categories', [
       {
-        name: 'Category 1',
+        name: 'Bike',
         type: null,
         parentId: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Category 2',
+        name: 'Brand',
         type: null,
         parentId: null,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Category 3',
+        name: 'Gear',
+        type: null,
+        parentId: null,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Misc.',
         type: null,
         parentId: null,
         createdAt: new Date(),
@@ -34,28 +41,28 @@ module.exports = {
 
     await queryInterface.bulkInsert('Categories', [
       {
-        name: 'Subcategory of category 1 - 1',
+        name: 'Mountain Bike',
         type: null,
         parentId: categoryRows[0].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Subcategory of category 1 - 2',
+        name: 'Road Bike',
         type: null,
         parentId: categoryRows[0].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Subcategory of category 2 - 1',
+        name: 'Shirts',
         type: null,
         parentId: categoryRows[1].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Subcategory of category 3 - 1',
+        name: 'Tools',
         type: null,
         parentId: categoryRows[2].id,
         createdAt: new Date(),

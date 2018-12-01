@@ -15,6 +15,7 @@
                   <input v-model="message" placeholder="category name" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">
                   <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Add New Category</button>
                   <p id="CategoriesTopText">Categories</p>
+
                   <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
                     <ul class ="noBullets">
                       <li v-for="(category, categoryIndex) in topLevelCategories">
@@ -53,6 +54,7 @@
         </div>
 
     </div>
+    <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
   </div>
 </template>
 
@@ -78,6 +80,7 @@ export default class Shop extends App {
   idsOfAppliedCategories: [number, number][] = [];
   displayedItems: ShopItem[] = [];
   loadedTopLevelCategoryCount: number = 0;
+  bottomTxt = "Placeholder";
 
   getAllTopLevelCategories(){
     this.topLevelCategories = [];
@@ -138,6 +141,11 @@ export default class Shop extends App {
   beforeMount(){
     this.getAllTopLevelCategories();
     this.getAllItems();
+    axios
+      .get('/api/textbox/location')
+      .then((res) => {
+        this.bottomTxt = res.data.item.text;
+      })
   }
 
   addNewTopLevelCategory(categoryName){
@@ -188,6 +196,7 @@ export default class Shop extends App {
 
 #category-bar{
   height: 100%;
+  overflow: auto;
 
   ul {
     list-style: none;
@@ -235,5 +244,16 @@ hr {
   border-left: 2px #EDEDED solid;
 }
 
+#bottomTxt {
+  text-align: center;
+}
+
+.centerCategories {
+  margin-left: 15px;
+}
+
+#categoryBottomButton {
+  margin-bottom: 20px;
+}
 
 </style>

@@ -24,13 +24,11 @@
         <br>
 
         <div class = "row">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Orci eu lobortis elementum nibh tellus molestie. Luctus venenatis lectus magna fringilla urna. Mattis enim ut tellus elementum sagittis vitae et leo duis. Quis commodo odio aenean sed. Cras sed felis eget velit aliquet. Aliquam sem et tortor consequat id porta nibh venenatis. Volutpat diam ut venenatis tellus in metus vulputate eu scelerisque. Euismod lacinia at quis risus. Facilisis leo vel fringilla est. Neque viverra justo nec ultrices dui sapien eget mi proin.</p>
-          <br>
-        </div>
-
-        <div class = "row">
           <div class = "col-sm-12">
             <img src = "../assets/tools.png" width = 100% height = "500px">
+            <br>
+            <br>
+            <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
           </div>
         </div>
       </div>
@@ -55,6 +53,7 @@ import axios from 'axios';
 
 })
 export default class Services extends Vue {
+  bottomTxt = "Placeholder";
 
   services: any[] = [{
     name: "Placeholder",
@@ -66,7 +65,12 @@ export default class Services extends Vue {
     axios
       .get('/api/services/')
       .then((res) => {
-        this.services = res.data.items
+        this.services = res.data.items;
+      })
+    axios
+      .get('/api/textbox/location')
+      .then((res) => {
+        this.bottomTxt = res.data.item.text;
       })
   }
 }
@@ -78,6 +82,10 @@ export default class Services extends Vue {
   padding: 5px;
   margin: 5px;
   width: 100%;
+}
+
+#bottomTxt {
+  text-align: center;
 }
 
 #services {

@@ -39,7 +39,7 @@ describe('Item', function () {
                   request
                     .get('/items')
                     .expect(function (res) {
-                      console.log(res.body);
+                      //console.log(res.body);
                     })
                     .expect(200)
                     .end(done);
@@ -60,7 +60,7 @@ describe('Item', function () {
                   request
                     .get('/items?search=c')
                     .expect(function (res) {
-                      console.log(res.body);
+                      //console.log(res.body);
                     })
                     .expect(200)
                     .end(done);
@@ -81,7 +81,7 @@ describe('Item', function () {
                   request
                     .get('/items/new')
                     .expect(function (res) {
-                      console.log(res.body);
+                      //console.log(res.body);
                     })
                     .expect(200)
                     .end(done);
@@ -102,7 +102,7 @@ describe('Item', function () {
                   request
                     .get('/items/pricesLow')
                     .expect(function (res) {
-                      console.log(res.body);
+                      //console.log(res.body);
                     })
                     .expect(200)
                     .end(done);
@@ -123,7 +123,7 @@ describe('Item', function () {
                   request
                     .get('/items/pricesHigh')
                     .expect(function (res) {
-                      console.log(res.body);
+                      //console.log(res.body);
                     })
                     .expect(200)
                     .end(done);
@@ -139,7 +139,7 @@ describe('Item', function () {
         .put('/items')
         .send(validItem)
         .expect(function (res) {
-          console.log(res.body);
+          //console.log(res.body);
         })
         .expect(200)
         .end(done);
@@ -153,7 +153,7 @@ describe('Item', function () {
           request
             .delete('/items/' + item.id)
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .expect(200)
             .expect(function (res) {
