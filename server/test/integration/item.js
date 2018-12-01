@@ -1,4 +1,4 @@
-const { assert, expect, request, Item } = require('../common');
+const { assert, expect, request, Category, Item } = require('../common');
 
 const validItem = {
   "name": "chair",
@@ -25,6 +25,11 @@ const validItemCheap = {
   "descShort": "short description",
   "descLong": "long description",
   "picName": "pic",
+};
+
+const validCategory = {
+  "name": "Overpriced",
+  "type": null,
 };
 
 describe('Item', function () {
@@ -143,6 +148,30 @@ describe('Item', function () {
         })
         .expect(200)
         .end(done);
+    });
+  });
+
+  describe('Create an item with categories', function () {
+    it('Return 200', function (done) {
+      Category.create(validCategory)
+        .then((category) => {
+          request
+            .put('/items')
+            .send({
+              "name": "chair",
+              "price": 399.99,
+              "stock": 10,
+              "descShort": "short description",
+              "descLong": "long description",
+              "picName": "pic",
+              "categories": [category.id]
+            })
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
     });
   });
 

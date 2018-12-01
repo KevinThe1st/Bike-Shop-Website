@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../models');
-const { ItemCategory } = require('../models');
+const { Item, ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
   if (req.query.search == undefined) {
@@ -76,15 +75,20 @@ router.put('/', function (req, res) {
     if (!categories) {
       return res.json({ created: 'Success' });
     };
-    categories.forEach(categoryId => {
-      ItemCategory.create({
-        itemId: item.id,
-        categoryId
+    new Promise((resolve) => {
+      categories.forEach(categoryId => {
+        ItemCategory.create({
+          itemId: item.id,
+          categoryId
+        });
       });
-    }).then(() => {
+      resolve();
+    })
+    .then(() => {
       return res.json({ created: 'Success' });
     });
-  }).catch(() => {
+  }).catch((err) => {
+    console.log(err);
     return res.status(403).json({ created: 'Failure' });
   });
 });
