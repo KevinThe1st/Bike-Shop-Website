@@ -41,6 +41,12 @@
     <b-alert variant="danger" dismissible :show="failed" @dismissed="failed=false">
       Item failed to create
     </b-alert>
+    <div id="existing-items">
+      <li v-for="(item, index) in allItems">
+        {{item}}
+        <button type="submit" v-on:click="">Edit Item</button>
+      </li>
+    </div>
   </div>
 </template>
 
@@ -48,7 +54,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import App from '../App.vue';
-import { CategoryItem } from '@/models';
+import { CategoryItem, ShopItem } from '@/models';
 
 @Component({
   data() {
@@ -68,6 +74,7 @@ export default class AdminItemManagement extends App {
   categoryIds: number[] = [];
   successful: boolean = false;
   failed: boolean = false;
+  allItems: ShopItem[] = [];
 
   /*
    * TODO: need to add file upload stuff
@@ -106,6 +113,13 @@ export default class AdminItemManagement extends App {
     });
   }
 
+  getAllItems(){
+    axios.get(`/api/items`)
+    .then((res) => {
+      this.allItems = res.data.items;
+    });
+  }
+
   getAllTopLevelCategories(){
     this.topLevelCategories = [];
     this.loadedTopLevelCategoryCount = 0;
@@ -140,6 +154,7 @@ export default class AdminItemManagement extends App {
 
   beforeMount(){
     this.getAllTopLevelCategories();
+    this.getAllItems();
   }
 }
 </script>
