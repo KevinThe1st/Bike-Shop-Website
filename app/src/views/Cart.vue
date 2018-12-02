@@ -141,7 +141,7 @@
 
         <div class = "col-sm-12" id = "centeredDiv">
 
-              <p id = "SubtotalPrice">Subtotal price ({{orderItemsInCurrentOrderWithItemData.length}} items): ${{totalPrice}}</p>
+              <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
               <br>
               <button class="btn btn-success">Proceed to Checkout</button>
 
@@ -171,6 +171,7 @@ export default class Cart extends App {
   itemsInCurrentOrder: ShopItem[] = [];
   orderItemsInCurrentOrderWithItemData: CurrentOrderItem[] = [];
   totalPrice: number = 0;
+  totalQuantity = 0
 
   beforeMount(){
     axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
@@ -208,6 +209,7 @@ export default class Cart extends App {
       temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
       this.orderItemsInCurrentOrderWithItemData.push(temp);
       this.totalPrice += temp.price;
+      this.totalQuantity += temp.quantity;
     }
     console.log(this.orderItemsInCurrentOrderWithItemData);
   }
