@@ -27,7 +27,7 @@ import axios from 'axios';
 import { OrderItem, ShopItem } from '@/models';
 
 @Component
-export default class Home extends Vue {
+export default class AdminOrderManagement extends Vue {
   allOrders: OrderItem[] = [];
   shippingOrders: OrderItem[] = [];
   itemsAssociatedWithShippingOrders: [ShopItem[]] = [[]];
@@ -40,6 +40,7 @@ export default class Home extends Vue {
     // client side front end change
     this.$set(this.shippingOrders[indexIntoShippingOrders], "shippingStatus", "Cancelled");
     var transferredOrder = this.shippingOrders.splice(indexIntoShippingOrders, 1);
+    this.numberOfLoadedItemSets--;
     this.cancelledOrders.push(transferredOrder[0]);
   }
 
