@@ -40,6 +40,7 @@ export default class AdminOrderManagement extends Vue {
     // client side front end change
     this.$set(this.shippingOrders[indexIntoShippingOrders], "shippingStatus", "Cancelled");
     var transferredOrder = this.shippingOrders.splice(indexIntoShippingOrders, 1);
+    this.numberOfLoadedItemSets--;
     this.cancelledOrders.push(transferredOrder[0]);
   }
 
