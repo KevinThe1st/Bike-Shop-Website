@@ -96,6 +96,55 @@ router.put('/', function (req, res) {
   });
 });
 
+router.put('/modifyItem', function (req, res) {
+  const {
+    id,
+    name,
+    price,
+    stock,
+    descShort,
+    descLong,
+    picName,
+    categories,
+  } = req.body;
+  Item.findById(id).then((item) => {
+    if (categories.length == 0) {
+      return res.status(403).json({ modified: false, id: item.id });
+    };
+
+    item.name = name;
+    item.price = price;
+    item.stock = stock;
+    item.descShort = descShort;
+    item.descLong = descLong;
+    item.picName = picName;
+
+    item.save().then((item1) => {
+      ItemCategory.findAll({ where: { itemId: id } }).then((itemCat) => {
+        var ids = []
+        for (var i = 0; i < itemCat.length; i++) {
+          ids.push(itemCat[i].id)
+        }
+        ItemCategory.destroy({
+          where: {
+            id: ids
+          }
+        }).then((empty) => {
+          categories.forEach(catId => {
+            var newItemCategory = ItemCategory.create({
+              ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
+              CategoryId: catId
+            });
+          });
+        });
+      });
+    });
+    return res.json({ modified: true });
+  }).catch(() => {
+    return res.status(403).json({ modified: false, id: item.id });
+  });
+});
+
 router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Item.findById(idToDelete).then((item) => {
