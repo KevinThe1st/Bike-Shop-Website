@@ -1,16 +1,21 @@
 <template>
   <div id="admin-order-management">
     Shipping
-    <li v-for="(order, index) in shippingOrders">
+    <li v-for="(order, orderIndex) in shippingOrders" v-if="numberOfLoadedItemSets == shippingOrders.length">
       {{order}}
-      <button type="submit" v-on:click="cancelOrder(index)">Cancel Order</button>
+      <button type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
+      <ul>
+        <li v-for="(item, itemIndex) in itemsAssociatedWithShippingOrders[orderIndex]">
+          {{item}}
+        </li>
+      </ul>
     </li>
     Completed
     <li v-for="(order, index) in completedOrders">
       {{order}}
     </li>
     Cancelled
-    <li v-for="(order, index) in canceledOrders">
+    <li v-for="(order, index) in cancelledOrders">
       {{order}}
     </li>
   </div>
@@ -19,17 +24,23 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
-import { OrderItem } from '@/models';
+import { OrderItem, ShopItem } from '@/models';
 
 @Component
 export default class Home extends Vue {
   allOrders: OrderItem[] = [];
   shippingOrders: OrderItem[] = [];
+  itemsAssociatedWithShippingOrders: [ShopItem[]] = [[]];
   completedOrders: OrderItem[] = [];
-  canceledOrders: OrderItem[] = [];
+  cancelledOrders: OrderItem[] = [];
+  numberOfLoadedItemSets: number = 0;
 
   cancelOrder(indexIntoShippingOrders){
-
+    axios.patch(`/api/orders/` + this.shippingOrders[indexIntoShippingOrders].id + `/Cancelled`);
+    // client side front end change
+    this.$set(this.shippingOrders[indexIntoShippingOrders], "shippingStatus", "Cancelled");
+    var transferredOrder = this.shippingOrders.splice(indexIntoShippingOrders, 1);
+    this.cancelledOrders.push(transferredOrder[0]);
   }
 
   getAllOrders(){
@@ -43,7 +54,8 @@ export default class Home extends Vue {
   organizeOrders(){
     this.shippingOrders = [];
     this.completedOrders = [];
-    this.canceledOrders = [];
+    this.cancelledOrders = [];
+    this.numberOfLoadedItemSets = 0;
     for(var i = 0; i < this.allOrders.length; i++){
       if(this.allOrders[i].shippingStatus == "Shipping"){
         this.shippingOrders.push(this.allOrders[i]);
@@ -52,9 +64,22 @@ export default class Home extends Vue {
         this.completedOrders.push(this.allOrders[i]);
       }
       else if(this.allOrders[i].shippingStatus == "Cancelled"){
-        this.canceledOrders.push(this.allOrders[i]);
+        this.cancelledOrders.push(this.allOrders[i]);
       }
     }
+    this.itemsAssociatedWithOrders = new Array(this.shippingOrders.length);
+    for(var i = 0; i < this.shippingOrders.length; i++){
+      this.getItemsAssociatedWithShippingOrder(i);
+    }
+  }
+
+  getItemsAssociatedWithShippingOrder(orderIndex){
+    axios.get(`/api/orderItems/` + this.shippingOrders[orderIndex].id)
+    .then((res) => {
+      var listOfItemsAssociatedWithOrder = res.data.items;
+      this.itemsAssociatedWithShippingOrders[orderIndex] = listOfItemsAssociatedWithOrder;
+      this.numberOfLoadedItemSets++;
+    });
   }
 
   beforeMount(){
