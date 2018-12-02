@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Order, User } = require('../models');
+const { Item, OrderItem, Order, User } = require('../models');
 
 router.get('/', function (req, res) {
   Order.findAll().then((orders) => {
@@ -8,25 +8,43 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/cart/:userId', function (req, res) {
-  Order.findOne({ where: { userId: req.params.userId, shippingStatus: 'Cart' } }).then((order) => {
-    if (order) {
-      return res.json({ order });
-    }
-    else{
-      User.findById(req.params.userId).then((user) => {
-        var orderT = Order.build({
-          shippingStatus: "Cart",
-          totalPrice: 0.0,
-          storePickup: false
-        });
-        orderT.setUser(user, {save: false});
-        orderT.save().then((orderNew) => {
-          return res.json({ orderT });
+router.get('/items/:id', function (req, res) {
+  let itemList = [];
+  Order.findById(req.param.id)
+  .then((order) => {
+    OrderItem.findAll({where: {orderId: order.id}})
+    .then((orderItems) => {
+      orderItems.forEach(orderItem => {
+        Item.findById(orderItem.itemId)
+        .then((item) => {
+          itemList.push(item);
         });
       });
-    }
+      res.json(itemList);
+    });
   });
+});
+
+router.get('/cart/:userId', function (req, res) {
+  Order.findOne({ where: { userId: req.params.userId, shippingStatus: 'Cart' } })
+    .then((order) => {
+      if (order) {
+        return res.json({ order });
+      }
+      else {
+        User.findById(req.params.userId).then((user) => {
+          var orderT = Order.build({
+            shippingStatus: "Cart",
+            totalPrice: 0.0,
+            storePickup: false
+          });
+          orderT.setUser(user, { save: false });
+          orderT.save().then((orderNew) => {
+            return res.json({ orderT });
+          });
+        });
+      }
+    });
 });
 
 router.get('/:userId', function (req, res) {
@@ -60,7 +78,7 @@ router.put('/', function (req, res) {
         totalPrice,
         storePickup,
       })
-      order.setUser(user, {save: false});
+      order.setUser(user, { save: false });
       order.save().then((order) => {
         res.json({ created: 'Success' })
       });
