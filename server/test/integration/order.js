@@ -13,7 +13,7 @@ const createOrder = () => createUser().then((user) => {
     "totalPrice": 399.99,
     "storePickup": true,
   })
-  order.setUser(user, {save: false});
+  order.setUser(user, { save: false });
   return order.save();
 });
 
@@ -53,6 +53,24 @@ describe('Order', function () {
         });
     });
   });
+
+  describe('Order', function () {
+    describe('Change order status', function () {
+      it('Return 200', function (done) {
+        createOrder()
+          .then((order) => {
+            request
+              .patch('/orders/' + order.id + '/Completed')
+              .expect(function (res) {
+                console.log(res.body);
+              })
+              .expect(200)
+              .end(done);
+          });
+      });
+    });
+  });
+
   /*
   describe('Delete an order', function () {
     it('Return 200', function (done) {

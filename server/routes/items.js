@@ -48,7 +48,7 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
-router.put('/list/', function (req, res) {
+router.put('/list', function (req, res) {
   const { ids } = req.body;
   Item.findAll({ where: { id: ids }}).then((items) => {
     return res.json({ items });
@@ -58,6 +58,8 @@ router.put('/list/', function (req, res) {
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
     return res.json({ item });
+  }).catch(() => {
+    res.status(404).json({error: "Not Found"});
   });
 });
 
@@ -102,7 +104,7 @@ router.delete('/:id', function (req, res) {
       return res.json({ delete: true });
     });
   }).catch(() => {
-    return res.json({ delete: false });
+    return res.status(404).json({ delete: false });
   });
 });
 

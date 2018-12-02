@@ -57,12 +57,12 @@ describe('User', function () {
         .then((user) => {
           request
             .delete('/users/' + user.id)
-            .expect(200)
             .expect(function (res) {
               //console.log(res.body);
               assert.equal(Object.keys(res.body).length, 1);
-              assert.equal(res.body.delete, true);
+              assert.equal(res.body.deleted, true);
             })
+            .expect(200)
             .end(done);
         });
     });

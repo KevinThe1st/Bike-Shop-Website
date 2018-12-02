@@ -11,22 +11,24 @@ router.get('/', function (req, res) {
 router.get('/items/:id', function (req, res) {
   let itemList = [];
   Order.findById(req.params.id)
-  .then((order) => {
-    OrderItem.findAll({where: {orderId: order.id}})
-    .then((orderItems) => {
-      let numberOfAsyncReturns = 0;
-      orderItems.forEach(orderItem => {
-        Item.findById(orderItem.ItemId)
-        .then((item) => {
-          itemList.push(item);
-          numberOfAsyncReturns++;
-          if(numberOfAsyncReturns == orderItems.length){
-            res.json(itemList);
-          };
+    .then((order) => {
+      OrderItem.findAll({ where: { orderId: order.id } })
+        .then((orderItems) => {
+          let numberOfAsyncReturns = 0;
+          orderItems.forEach(orderItem => {
+            Item.findById(orderItem.ItemId)
+              .then((item) => {
+                itemList.push(item);
+                numberOfAsyncReturns++;
+                if (numberOfAsyncReturns == orderItems.length) {
+                  res.json(itemList);
+                };
+              });
+          });
         });
-      });
+    }).catch(() => {
+      res.status(404).json({ error: "Not Found" });
     });
-  });
 });
 
 router.get('/cart/:userId', function (req, res) {
@@ -51,16 +53,16 @@ router.get('/cart/:userId', function (req, res) {
     });
 });
 
-router.get('/:userId', function (req, res) {
-  Order.findAll({ where: { userId: req.params.userId } }).then((orders) => {
-    return res.json({ orders });
+router.get('/:id', function (req, res) {
+  Order.findById(req.params.id).then((order) => {
+    return res.json({ order });
   });
 });
 
-router.get('/user/:id', function (req, res) {
+router.get('/user/:userId', function (req, res) {
   Order.findAll({
     where: {
-      userId: req.param.id,
+      userId: req.param.userId,
     }
   }).then((orders) => {
     res.json({ orders });
@@ -84,11 +86,11 @@ router.put('/', function (req, res) {
       })
       order.setUser(user, { save: false });
       order.save().then((order) => {
-        res.json({ created: 'Success' })
+        res.json({ created: true })
       });
     })
     .catch(() => {
-      res.json({ created: 'Failure' });
+      res.json({ created: false });
     });
 });
 
@@ -96,17 +98,23 @@ router.patch('/:id/:shippingStatus', function (req, res) {
   Order.findById(req.params.id).then((order) => {
     order.updateAttributes({
       shippingStatus: req.params.shippingStatus,
+    }).then(() => {
+      res.json({ updated: true });
+    }).catch(() => {
+      res.status(404).json({ updated: false });
     });
-  });
+  }).catch(() => {
+    res.status(403).json({ updated: false })
+  })
 });
 
 router.delete('/:id', function (req, res) {
   Order.findById(req.params.id).then((order) => {
     order.destroy().then(() => {
-      res.json({ delete: true });
+      res.json({ deleted: true });
     });
   }).catch(() => {
-    res.json({ delete: falseitem });
+    res.status(404).json({ deleted: false });
   });
 });
 

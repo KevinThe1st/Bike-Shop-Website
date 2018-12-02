@@ -8,15 +8,19 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/:addressId', function (req, res) {
-  Address.findById(req.params.addressId).then((address) => {
+router.get('/:id', function (req, res) {
+  Address.findById(req.params.id).then((address) => {
     res.json({ address });
+  }).catch(() => {
+    res.status(404).json({ error: "Not Found" });
   });
 });
 
 router.get('/user/:userId', function (req, res) {
   Address.findAll({ where: { userId: req.params.userId } }).then((addresses) => {
     return res.json({ addresses });
+  }).catch(() => {
+    res.status(404).json({ error: "Not Found" });
   });
 });
 
@@ -43,21 +47,21 @@ router.put('/', function (req, res) {
       })
       address.setUser(user, { save: false });
       address.save().then((address) => {
-        res.json({ created: 'Success' })
+        res.json({ created: true })
       });
     })
     .catch(() => {
-      res.json({ created: 'Failure' });
+      res.json({ created: false });
     });
 });
 
 router.delete('/:id', function (req, res) {
   Address.findById(req.params.id).then((address) => {
     address.destroy().then(() => {
-      res.json({ deleted: 'Success' });
+      res.json({ deleted: true });
     });
   }).catch(() => {
-    res.json({ deleted: 'Failure' });
+    res.status(404).json({ deleted: false });
   });
 });
 
