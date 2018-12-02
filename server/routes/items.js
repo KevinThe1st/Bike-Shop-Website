@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../models');
-const { ItemCategory } = require('../models');
+const { Item, ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
   if (req.query.search == undefined) {
@@ -46,6 +45,12 @@ router.get('/byCat/:categoryId', function (req, res) {
     Item.findAll({ where: { id: ids } }).then((items) => {
       return res.json({ items });
     });
+  });
+});
+
+router.get('/list/:id', function (req, res) {
+  Item.findAll({ id: req.params.id }).then((items) => {
+    return res.json({ items });
   });
 });
 

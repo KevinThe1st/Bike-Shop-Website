@@ -8,6 +8,27 @@ router.get('/', function (req, res) {
   });
 });
 
+router.get('/cart/:userId', function (req, res) {
+  Order.findOne({ where: { userId: req.params.userId, shippingStatus: 'Cart' } }).then((order) => {
+    if (order) {
+      return res.json({ order });
+    }
+    else{
+      User.findById(req.params.userId).then((user) => {
+        var orderT = Order.build({
+          shippingStatus: "Cart",
+          totalPrice: 0.0,
+          storePickup: false
+        });
+        orderT.setUser(user, {save: false});
+        orderT.save().then((orderNew) => {
+          return res.json({ orderT });
+        });
+      });
+    }
+  });
+});
+
 router.get('/:userId', function (req, res) {
   Order.findAll({ where: { userId: req.params.userId } }).then((orders) => {
     return res.json({ orders });
@@ -47,18 +68,6 @@ router.put('/', function (req, res) {
     .catch(() => {
       res.json({ created: 'Failure' });
     });
-  /*
-  Order.create({
-    shippingStatus,
-    totalPrice,
-    storePickup,
-    //userId,
-  }).then((order) => {
-    res.json({ created: 'Success' });
-  }).catch(() => {
-    res.json({ created: 'Failure' });
-  });
-  */
 });
 
 router.patch('/:id/:shippingStatus', function (req, res) {

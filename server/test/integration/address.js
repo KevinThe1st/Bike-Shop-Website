@@ -1,60 +1,42 @@
-const { assert, expect, request, Category, Item } = require('../common');
+const { assert, expect, request, Address, User } = require('../common');
 
-const validItem = {
-  "name": "chair",
-  "price": 399.99,
-  "stock": 10,
-  "descShort": "short description",
-  "descLong": "long description",
-  "picName": "pic",
-};
+const createUser = () => User.create({
+  "username": `username${new Date().getTime()}`,
+  "password": "password",
+  "lastName": "Cho",
+  "firstName": "Justin",
+})
 
-const validItemExpensive = {
-  "name": "car",
-  "price": 399999.99,
-  "stock": 10,
-  "descShort": "short description",
-  "descLong": "long description",
-  "picName": "pic",
-};
+const createAddress = () => createUser().then((user) => {
+  var address = Address.build({
+    "type": "Billing",
+    "street1": "123 Sesame Street",
+    "street2": "AAAAAAAAAAAA",
+    "city": "New York",
+    "state": "NY",
+    "zip": "45678",
+  })
+  address.setUser(user, {save: false});
+  return address.save();
+});
 
-const validItemCheap = {
-  "name": "bag",
-  "price": 3.99,
-  "stock": 10,
-  "descShort": "short description",
-  "descLong": "long description",
-  "picName": "pic",
-};
-
-const validCategory = {
-  "name": "Overpriced",
-  "type": null,
-};
-
-describe('Item', function () {
-  describe('Get all items', function () {
+describe('Address', function () {
+  describe('Get all addresses', function () {
     it('Return 200', function (done) {
-      Item.create(validItem)
+      createAddress()
         .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items')
-                    .expect(function (res) {
-                      //console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
+          request
+            .get('/addresses')
+            .expect(function (res) {
+              console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
         });
     });
   });
-
-  describe('Get items with prefix \'c\'', function () {
+  /*
+  describe('Get, function () {
     it('Return 200', function (done) {
       Item.create(validItem)
         .then(() => {
@@ -74,7 +56,7 @@ describe('Item', function () {
         });
     });
   });
-
+  /*
   describe('Get all items by updatedAt', function () {
     it('Return 200', function (done) {
       Item.create(validItem)
@@ -180,4 +162,5 @@ describe('Item', function () {
         });
     });
   });
+  */
 });
