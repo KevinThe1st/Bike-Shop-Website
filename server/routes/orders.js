@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 
 router.get('/items/:id', function (req, res) {
   let itemList = [];
-  Order.findById(req.param.id)
+  Order.findById(req.params.id)
   .then((order) => {
     OrderItem.findAll({where: {orderId: order.id}})
     .then((orderItems) => {
