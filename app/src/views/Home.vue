@@ -130,6 +130,8 @@
           </div>
       </div>
 
+      <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
+
       <br>
       <br>
 
@@ -153,6 +155,8 @@ export default class Home extends Vue {
   home3: string = "Hi";
   slide: number = 0;
   sliding: boolean = false;
+  bottomTxt = "Placeholder";
+
 
   onSlideStart (slide) {
       this.sliding = true
@@ -177,6 +181,11 @@ export default class Home extends Vue {
       .get('/api/textbox/home3')
       .then((res) => {
         this.home3 = res.data.item.text;
+      })
+    axios
+      .get('/api/textbox/location')
+      .then((res) => {
+        this.bottomTxt = res.data.item.text;
       })
   }
 }
@@ -211,6 +220,11 @@ export default class Home extends Vue {
   font-size: 100px;
 
 
+}
+
+#bottomTxt {
+  padding: 30px;
+  text-align: center;
 }
 
 .logoClassHome {

@@ -138,19 +138,6 @@ describe('Item', function () {
     });
   });
 
-  describe('Create an item', function () {
-    it('Return 200', function (done) {
-      request
-        .put('/items')
-        .send(validItem)
-        .expect(function (res) {
-          //console.log(res.body);
-        })
-        .expect(200)
-        .end(done);
-    });
-  });
-
   describe('Create an item with categories', function () {
     it('Return 200', function (done) {
       Category.create(validCategory)

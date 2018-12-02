@@ -48,6 +48,12 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
+router.get('/list/:id', function (req, res) {
+  Item.findAll({ id: req.params.id }).then((items) => {
+    return res.json({ items });
+  });
+});
+
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
     return res.json({ item });
@@ -72,24 +78,19 @@ router.put('/', function (req, res) {
     descLong,
     picName,
   }).then((item) => {
-    if (!categories) {
-      return res.json({ created: 'Success' });
+    if (categories.length == 0) {
+      return res.status(403).json({ created: 'Failure', id: item.id });
     };
-    new Promise((resolve) => {
-      categories.forEach(categoryId => {
-        ItemCategory.create({
-          itemId: item.id,
-          categoryId
-        });
+    categories.forEach(catId => {
+      var newItemCategory = ItemCategory.create({
+        ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
+        CategoryId: catId
       });
-      resolve();
-    })
-    .then(() => {
-      return res.json({ created: 'Success' });
     });
-  }).catch((err) => {
-    console.log(err);
-    return res.status(403).json({ created: 'Failure' });
+    // console.log("adding: " + Object.keys(ItemCategory.rawAttributes));
+    return res.json({ created: 'Success' });
+  }).catch(() => {
+    return res.status(403).json({ created: 'Failure', id: item.id });
   });
 });
 

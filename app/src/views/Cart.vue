@@ -22,6 +22,7 @@
                 <div id="FoxcycleLogoCart">
                     Foxcycle
                 </div>
+
               </div>
               <div class = "row">
                 <div>
@@ -48,56 +49,108 @@
 
             </div>
           </div>
-          <div class = "col-sm-3"></div>
+          <div class = "col-sm-1"></div>
+          <div class = "col-sm-2">
 
-      </div>
-      <div class = "row">
-        <ul class ="noCartBullets">
-          <li id="item-names" v-for="(item, index) in orderItemsInCurrentOrderWithItemData">
-            <div class = "cartItem">
-                <div class = "container">
-                    <div class = "row cartItemName">
+              <div id = "backToShopSidebox">
+                <div id = "container">
+                    <div id = "row">
+                        <div id = "col-sm-2"></div>
+                        <div id = "col-sm-8">
+                          <p></p>
+                          <p class = "centerText boldText">Thank you for shopping with us!</p>
 
-                        <div class = "col-sm-7">
-                          {{item.name}}
-                        </div>
-                        <div class = "col-sm-5"></div>
-                    </div>
-                    <div class = "row">
-                        <div class = "col-sm-12 itemIndex">
-                          item id: {{index}}
-                        </div>
-                    </div>
-                    <div class = "row">
+                          <img alt="Vue logo" id="bikeLogoImg" src="../assets/bikeLogo2.png">
 
-                        <div class = "col-sm-4">
-                            <img v-bind:src="item.picName" width=100%>
+                          <p class = "centerText">Find everything you were looking for?</p>
+
+                          <router-link :to="{name: 'shop'}">
+                            <button class="btn btn-primary" id="toShopButton">Back to Shop</button>
+                          </router-link>
                         </div>
-                        <div class = "col-sm-2"></div>
-                        <div class = "col-sm-2 priceStyle">
-                            ${{item.price}}
-                        </div>
-                        <div class = "col-sm-2"></div>
-                        <div class = "col-sm-2 quantityStyle">
-                            {{item.quantity}}
-                        </div>
+                        <div id = "col-sm-2"></div>
+
                     </div>
 
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
+
+          </div>
 
       </div>
+
+      <div class = "row">
+        <div class = "row">
+            <ul class ="noCartBullets">
+              <li id="item-names" v-for="(item, index) in orderItemsInCurrentOrderWithItemData">
+                <div class = "cartItem">
+                    <div class = "container">
+                        <div class = "row cartItemName">
+
+                            <div class = "col-sm-7">
+                              {{item.name}}
+                            </div>
+                            <div class = "col-sm-5"></div>
+                        </div>
+                        <div class = "row">
+                            <div class = "col-sm-12 itemIndex">
+                              item id: {{index}}
+                            </div>
+                        </div>
+                        <div class = "row">
+
+                            <div class = "col-sm-4">
+                                <img v-bind:src="item.picName" width=70%>
+                            </div>
+                            <div class = "col-sm-2">
+
+                                <br><br><br><br><br>
+
+                                <button class="btn btn-danger" id="removeButton">Remove</button>
+                            </div>
+                            <div class = "col-sm-2 priceStyle">
+                                ${{item.price}}
+                            </div>
+                            <div class = "col-sm-2"></div>
+                            <div class = "col-sm-2 quantityStyle">
+                            {{item.quantity}}
+
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+
+                  </div>
+
+                </div>
+                <hr>
+              </li>
+            </ul>
+
+
+
+        </div>
+      </div>
+
 
     </div>
 
+    <div class = "container">
+
+      <div class = "row">
+
+        <div class = "col-sm-12" id = "centeredDiv">
+
+              <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
+              <br>
+              <button class="btn btn-success">Proceed to Checkout</button>
+
+        </div>
+
+      </div>
 
 
-
-
-    <input type="button" v-on:click="getUserOrder()">
-    <input type="button" v-on:click="getCombinedData()">
+    </div>
 
 
 
@@ -117,47 +170,37 @@ export default class Cart extends App {
   orderItemsInCurrentOrder: OrderItemItem[] = [];
   itemsInCurrentOrder: ShopItem[] = [];
   orderItemsInCurrentOrderWithItemData: CurrentOrderItem[] = [];
+  totalPrice: number = 0;
+  totalQuantity = 0
 
-  getUserOrder(){
-    axios.get(`/api/orders/` + this.$store.getters.getLoginStatus)
+  beforeMount(){
+    axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
     .then((res) => {
-      this.orders = res.data.orders;
-      this.getCurrentOrder();
-    })
-  }
+      this.currentOrder = res.data.order;
 
-  getCurrentOrder(){
-    for(var i = 0; i < this.orders.length; i++){
-      if(this.orders[i].shippingStatus == "Cart"){
-        this.currentOrder = this.orders[i];
-        i = this.orders.length;
-        this.getAllOrderItemsFromCurrentOrder();
-      }
-    }
-  }
-
-  getAllOrderItemsFromCurrentOrder(){
-    axios.get(`/api/orderItems/` + this.currentOrder.id)
-    .then((res) => {
-      this.orderItemsInCurrentOrder = res.data.items;
-      this.getAllItemsFromCurrentOrderItems();
-    })
-  }
-
-  getAllItemsFromCurrentOrderItems(){
-    this.itemsInCurrentOrder = [];
-    for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
-      console.log(this.orderItemsInCurrentOrder[i].ItemId)
-      // no idea why this has to be capital Item but it only works like this, changing the front end model to compensate
-      axios.get(`/api/items/` + this.orderItemsInCurrentOrder[i].ItemId)
+      axios.get(`/api/orderItems/` + this.currentOrder.id)
       .then((res) => {
-        this.itemsInCurrentOrder.push(res.data.item);
-      })
-    }
+        this.orderItemsInCurrentOrder = res.data.items;
+
+        this.itemsInCurrentOrder = [];
+        var ids = []
+        for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
+          console.log(this.orderItemsInCurrentOrder[i].ItemId)
+          ids.push(this.orderItemsInCurrentOrder[i].ItemId)
+        }
+
+        axios.get(`/api/items/list/` + ids)
+        .then((res) => {
+          this.itemsInCurrentOrder = res.data.items;
+          this.updateCombinedData()
+        })
+      });
+    });
   }
 
-  getCombinedData(){
+  updateCombinedData(){
     this.orderItemsInCurrentOrderWithItemData = [];
+    this.totalPrice = 0;
     for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
       var temp = new CurrentOrderItem;
       temp.picName = this.itemsInCurrentOrder[i].picName;
@@ -165,6 +208,8 @@ export default class Cart extends App {
       temp.price = this.orderItemsInCurrentOrder[i].price;
       temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
       this.orderItemsInCurrentOrderWithItemData.push(temp);
+      this.totalPrice += temp.price;
+      this.totalQuantity += temp.quantity;
     }
     console.log(this.orderItemsInCurrentOrderWithItemData);
   }
@@ -197,10 +242,11 @@ export default class Cart extends App {
 
 .cartItem {
   background-color: white;
-  border: 1px black solid;
+
   padding: 5px;
-  margin: 4px;
+  margin: 1px;
   width: 100%;
+
 }
 
 .cartItem:hover {
@@ -208,9 +254,8 @@ export default class Cart extends App {
 }
 
 .cartItemName {
-  font-weight: bold;
   font-size: 25px;
-  color: blue;
+  color: #0AA1FF;
 }
 
 .itemIndex {
@@ -235,6 +280,57 @@ export default class Cart extends App {
   font-family: "Cambria", "Courier New", "Times New Roman", serif;
   font-style: italic;
   font-size: 30px;
+}
+
+#backToShopSidebox {
+  background-color: #D3D3D3;
+  height: 300px;
+  width: 200px;
+  position: absolute;
+  top: 200px;
+  border-radius: 10px;
+  margin-left: 40px;
+
+}
+
+#bikeLogoImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+#toShopButton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#removeButton {
+  position: absolute;
+}
+
+#SubtotalPrice {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#centeredDiv {
+  margin: 0 auto;
+  text-align: center;
+}
+
+body {
+  background-color: #F9F9F9;
 }
 
 
