@@ -27,7 +27,7 @@ import axios from 'axios';
 import { OrderItem, ShopItem } from '@/models';
 
 @Component
-export default class Home extends Vue {
+export default class AdminOrderManagement extends Vue {
   allOrders: OrderItem[] = [];
   shippingOrders: OrderItem[] = [];
   itemsAssociatedWithShippingOrders: [ShopItem[]] = [[]];
