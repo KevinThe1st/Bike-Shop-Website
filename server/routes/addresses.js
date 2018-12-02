@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Address } = require('../models');
+const { Address, User } = require('../models');
 
 router.get('/', function (req, res) {
   Address.findAll().then((addresses) => {
@@ -30,7 +30,7 @@ router.put('/', function (req, res) {
     zip,
     userId
   } = req.body;
-  
+
   User.findById(userId)
     .then((user) => {
       var address = Address.build({
