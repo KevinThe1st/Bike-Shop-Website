@@ -216,7 +216,7 @@ export default class Cart extends App {
   }
 
   removeItems(itemId) {
-    axios.put('/api/orderItems/deleteItems', {
+    axios.put('/api/orderItems/deleteItemFromCart', {
       itemId: itemId,
       orderId: this.currentOrder.id
     }).then((res) => {

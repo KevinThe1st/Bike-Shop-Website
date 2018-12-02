@@ -82,7 +82,7 @@ router.put('/cart', function (req, res) {
   });
 });
 
-router.put('/deleteItems', function (req, res) {
+router.put('/deleteItemFromCart', function (req, res) {
   const {
     itemId,
     orderId,
@@ -94,9 +94,9 @@ router.put('/deleteItems', function (req, res) {
     },
     truncate: false
   }).then((orderItem) => {
-    res.json({deleted: 'True'})
+    res.json({deleted: true})
   }).catch(() => {
-    res.status(403).json({ deleted: 'Failure' });
+    res.status(403).json({ deleted: false });
   });
 });
 
