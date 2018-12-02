@@ -22,7 +22,7 @@ const createAddress = () => createUser().then((user) => {
 
 describe('Address', function () {
   describe('Get all addresses', function () {
-    it('Return 200', function (done) {
+    it.only('Return 200', function (done) {
       createAddress()
         .then(() => {
           request
