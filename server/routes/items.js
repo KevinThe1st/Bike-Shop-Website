@@ -49,6 +49,12 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
+router.get('/list/:id', function (req, res) {
+  Item.findAll({ id: req.params.id }).then((items) => {
+    return res.json({ items });
+  });
+});
+
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
     return res.json({ item });

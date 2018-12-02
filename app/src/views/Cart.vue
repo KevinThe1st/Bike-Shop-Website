@@ -154,13 +154,6 @@
 
 
 
-
-
-    <input type="button" v-on:click="getUserOrder()">
-    <input type="button" v-on:click="getCombinedData()">
-
-
-
   </div>
 </template>
 
@@ -179,45 +172,32 @@ export default class Cart extends App {
   orderItemsInCurrentOrderWithItemData: CurrentOrderItem[] = [];
   totalPrice: number = 0;
 
-  getUserOrder(){
-    axios.get(`/api/orders/` + this.$store.getters.getLoginStatus)
+  beforeMount(){
+    axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
     .then((res) => {
-      this.orders = res.data.orders;
-      this.getCurrentOrder();
-    })
-  }
+      this.currentOrder = res.data.order;
 
-  getCurrentOrder(){
-    for(var i = 0; i < this.orders.length; i++){
-      if(this.orders[i].shippingStatus == "Cart"){
-        this.currentOrder = this.orders[i];
-        i = this.orders.length;
-        this.getAllOrderItemsFromCurrentOrder();
-      }
-    }
-  }
-
-  getAllOrderItemsFromCurrentOrder(){
-    axios.get(`/api/orderItems/` + this.currentOrder.id)
-    .then((res) => {
-      this.orderItemsInCurrentOrder = res.data.items;
-      this.getAllItemsFromCurrentOrderItems();
-    })
-  }
-
-  getAllItemsFromCurrentOrderItems(){
-    this.itemsInCurrentOrder = [];
-    for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
-      console.log(this.orderItemsInCurrentOrder[i].ItemId)
-      // no idea why this has to be capital Item but it only works like this, changing the front end model to compensate
-      axios.get(`/api/items/` + this.orderItemsInCurrentOrder[i].ItemId)
+      axios.get(`/api/orderItems/` + this.currentOrder.id)
       .then((res) => {
-        this.itemsInCurrentOrder.push(res.data.item);
-      })
-    }
+        this.orderItemsInCurrentOrder = res.data.items;
+
+        this.itemsInCurrentOrder = [];
+        var ids = []
+        for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
+          console.log(this.orderItemsInCurrentOrder[i].ItemId)
+          ids.push(this.orderItemsInCurrentOrder[i].ItemId)
+        }
+
+        axios.get(`/api/items/list/` + ids)
+        .then((res) => {
+          this.itemsInCurrentOrder = res.data.items;
+          this.updateCombinedData()
+        })
+      });
+    });
   }
 
-  getCombinedData(){
+  updateCombinedData(){
     this.orderItemsInCurrentOrderWithItemData = [];
     this.totalPrice = 0;
     for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
@@ -227,7 +207,7 @@ export default class Cart extends App {
       temp.price = this.orderItemsInCurrentOrder[i].price;
       temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
       this.orderItemsInCurrentOrderWithItemData.push(temp);
-      this.totalPrice += temp.price * temp.quantity;
+      this.totalPrice += temp.price;
     }
     console.log(this.orderItemsInCurrentOrderWithItemData);
   }
