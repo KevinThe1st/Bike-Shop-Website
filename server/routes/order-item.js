@@ -5,12 +5,12 @@ const { Order } = require('../models');
 const { Item } = require('../models');
 const { OrderItem } = require('../models');
 
-function updateOrderTotal(order, orderItem, res){
-  order.totalPrice += orderItem.price;
-  order.save().then((order) => {
-    return res.json({ updated: 'Success' });
-  });
-}
+// function updateOrderTotal(order, orderItem, res){
+//   order.totalPrice += orderItem.price;
+//   order.save().then((order) => {
+//     return res.json({ updated: 'Success' });
+//   });
+// }
 
 function updateCartOrder(order, itemId, quantity, res) {
   Item.findOne({ where: {
@@ -25,7 +25,7 @@ function updateCartOrder(order, itemId, quantity, res) {
         orderItem.quantity = quantity;
         orderItem.price = item.price * quantity;
         orderItem.save().then((orderItem) => {
-          updateOrderTotal(order, orderItem, res)
+          return res.json({ updated: 'Success' });
         });
       }
       else {
@@ -36,7 +36,7 @@ function updateCartOrder(order, itemId, quantity, res) {
         orderItemT.setOrder(order, {save: false});
         orderItemT.setItem(item, {save: false});
         orderItemT.save().then((orderItemNew) => {
-          updateOrderTotal(order, orderItemNew, res);
+          return res.json({ updated: 'Success' });
         });
       }
     });

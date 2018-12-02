@@ -94,7 +94,7 @@
                         </div>
                         <div class = "row">
                             <div class = "col-sm-12 itemIndex">
-                              item id: {{index}}
+                              item id: {{item.id}}
                             </div>
                         </div>
                         <div class = "row">
@@ -180,21 +180,18 @@ export default class Cart extends App {
     axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
     .then((res) => {
       this.currentOrder = res.data.order;
-
       axios.get(`/api/orderItems/` + this.currentOrder.id)
       .then((res) => {
         this.orderItemsInCurrentOrder = res.data.items;
-
         this.itemsInCurrentOrder = [];
-        var ids = []
+        var ids = [];
         for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
-          console.log(this.orderItemsInCurrentOrder[i].ItemId)
-          ids.push(this.orderItemsInCurrentOrder[i].ItemId)
+          ids.push(this.orderItemsInCurrentOrder[i].ItemId);
         }
 
-        axios.get(`/api/items/list/` + ids)
-        .then((res) => {
-          this.itemsInCurrentOrder = res.data.items;
+        axios.put(`/api/items/list/`, {ids})
+        .then((res2) => {
+          this.itemsInCurrentOrder = res2.data.items;
           this.updateCombinedData()
         })
       });
@@ -203,8 +200,8 @@ export default class Cart extends App {
 
   updateCombinedData(){
     this.orderItemsInCurrentOrderWithItemData = [];
-    this.totalPrice = 0;
     this.totalQuantity = 0;
+    this.totalPrice = 0;
     for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
       var temp = new CurrentOrderItem;
       temp.id = this.itemsInCurrentOrder[i].id;
@@ -213,10 +210,9 @@ export default class Cart extends App {
       temp.price = this.orderItemsInCurrentOrder[i].price;
       temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
       this.orderItemsInCurrentOrderWithItemData.push(temp);
-      this.totalPrice += temp.price;
       this.totalQuantity += temp.quantity;
+      this.totalPrice += temp.price
     }
-    console.log(this.orderItemsInCurrentOrderWithItemData);
   }
 
   removeItems(itemId) {
