@@ -22,7 +22,7 @@ router.get('/items/:id', function (req, res) {
           numberOfAsyncReturns++;
           if(numberOfAsyncReturns == orderItems.length){
             res.json(itemList);
-          }
+          };
         });
       });
     });
