@@ -7,52 +7,67 @@ const createUser = () => User.create({
   "firstName": "Justin",
 })
 
-const createOrder = () => createUser.then((user) => {
-  Order.create({
+const createOrder = () => createUser().then((user) => {
+  var order = Order.build({
     "shippingStatus": "verified",
     "totalPrice": 399.99,
     "storePickup": true,
-    "userId": user.id,
-  });
+  })
+  order.setUser(user);
+  return order.save();
 });
 
 describe('Order', function () {
-  /*
   describe('Get all orders', function () {
     it('Return 200', function (done) {
-      createOrder;
-      request
-        .get('/orders')
-        .expect(200)
-        .expect(function (res) {
-          console.log(res.body);
-        })
-        .end(done);
+      createOrder()
+        .then(() => {
+          request
+            .get('/orders')
+            .expect(200)
+            .expect(function (res) {
+              //console.log(res.body);
+            })
+            .end(done);
+        });
     });
   });
 
   describe('Create an order', function () {
     it('Return 200', function (done) {
-      request
-        .put('/orders')
-        .send(validOrder)
-        .expect(200)
-        .end(done);
+      createUser()
+        .then((user) => {
+          request
+            .put('/orders')
+            .send({
+              "shippingStatus": "verified",
+              "totalPrice": 399.99,
+              "storePickup": true,
+              "userId": user.id,
+            })
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
     });
   });
-
+  /*
   describe('Delete an order', function () {
     it('Return 200', function (done) {
-      createOrder.then(() => {
-        request
-          .delete('/orders/' + order.id)
-          .expect(200)
-          .expect(function (res) {
-            assert.equal(Object.keys(res.body).length, 1);
-            assert.equal(res.body.delete, true);
-          })
-          .end(done);
-      });
+      createOrder()
+        .then(() => {
+          request
+            .delete('/orders/' + order.id)
+            .expect(function (res, err) {
+              console.log(res.body);
+              //assert.equal(Object.keys(res.body).length, 1);
+              //assert.equal(res.body.delete, true);
+            })
+            .expect(200)
+            .end(done);
+        });
     });
   });
   */

@@ -24,12 +24,13 @@ module.exports = {
         type: Sequelize.DATE
       },
       parentId: {
-        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'Categories',
           key: 'id',
-        }
+        },
+        allowNull: true,
+        onDelete: 'cascade'
       }
     });
   },

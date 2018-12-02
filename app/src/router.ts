@@ -63,6 +63,26 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/Profile.vue'),
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('./views/Cart.vue'),
+    },
+    {
+      path: '/adminItemManagement',
+      name: 'adminItemManagement',
+      component: () => import('./views/AdminItemManagement.vue'),
+    },
+    {
+      path: '/adminAccountManagement',
+      name: 'adminAccountManagement',
+      component: () => import('./views/AdminAccountManagement.vue'),
+    },
+    {
+      path: '/adminOrderManagement',
+      name: 'adminOrderManagement',
+      component: () => import('./views/AdminOrderManagement.vue'),
     }
   ],
 });
