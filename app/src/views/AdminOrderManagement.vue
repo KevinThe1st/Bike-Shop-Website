@@ -74,8 +74,10 @@ export default class Home extends Vue {
   }
 
   getItemsAssociatedWithShippingOrder(orderIndex){
-    axios.get(`/api/orderItems/` + this.shippingOrders[orderIndex].id)
+    console.log(this.shippingOrders[orderIndex].id);
+    axios.get(`/api/orders/items/` + this.shippingOrders[orderIndex].id)
     .then((res) => {
+      console.log(res.data);
       var listOfItemsAssociatedWithOrder = res.data.items;
       this.itemsAssociatedWithShippingOrders[orderIndex] = listOfItemsAssociatedWithOrder;
       this.numberOfLoadedItemSets++;
