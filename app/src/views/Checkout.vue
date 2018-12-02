@@ -1,3 +1,4 @@
+
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
@@ -12,7 +13,7 @@ export default class Checkout extends Vue {
   shippingType: "";
 
   getOrder(){
-    
+
   }
 }
 </script>
