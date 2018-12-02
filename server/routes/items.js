@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../models');
-const { ItemCategory } = require('../models');
+const { Item, ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
   if (req.query.search == undefined) {

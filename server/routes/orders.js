@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Order, User } = require('../models');
+const { Item, OrderItem, Order, User } = require('../models');
 
 router.get('/', function (req, res) {
   Order.findAll().then((orders) => {
@@ -8,25 +8,47 @@ router.get('/', function (req, res) {
   });
 });
 
-router.get('/cart/:userId', function (req, res) {
-  Order.findOne({ where: { userId: req.params.userId, shippingStatus: 'Cart' } }).then((order) => {
-    if (order) {
-      return res.json({ order });
-    }
-    else{
-      User.findById(req.params.userId).then((user) => {
-        var orderT = Order.build({
-          shippingStatus: "Cart",
-          totalPrice: 0.0,
-          storePickup: false
-        });
-        orderT.setUser(user, {save: false});
-        orderT.save().then((orderNew) => {
-          return res.json({ orderT });
+router.get('/items/:id', function (req, res) {
+  let itemList = [];
+  Order.findById(req.params.id)
+  .then((order) => {
+    OrderItem.findAll({where: {orderId: order.id}})
+    .then((orderItems) => {
+      let numberOfAsyncReturns = 0;
+      orderItems.forEach(orderItem => {
+        Item.findById(orderItem.ItemId)
+        .then((item) => {
+          itemList.push(item);
+          numberOfAsyncReturns++;
+          if(numberOfAsyncReturns == orderItems.length){
+            res.json(itemList);
+          }
         });
       });
-    }
+    });
   });
+});
+
+router.get('/cart/:userId', function (req, res) {
+  Order.findOne({ where: { userId: req.params.userId, shippingStatus: 'Cart' } })
+    .then((order) => {
+      if (order) {
+        return res.json({ order });
+      }
+      else {
+        User.findById(req.params.userId).then((user) => {
+          var orderT = Order.build({
+            shippingStatus: "Cart",
+            totalPrice: 0.0,
+            storePickup: false
+          });
+          orderT.setUser(user, { save: false });
+          orderT.save().then((orderNew) => {
+            return res.json({ orderT });
+          });
+        });
+      }
+    });
 });
 
 router.get('/:userId', function (req, res) {
@@ -60,7 +82,7 @@ router.put('/', function (req, res) {
         totalPrice,
         storePickup,
       })
-      order.setUser(user, {save: false});
+      order.setUser(user, { save: false });
       order.save().then((order) => {
         res.json({ created: 'Success' })
       });
@@ -68,18 +90,6 @@ router.put('/', function (req, res) {
     .catch(() => {
       res.json({ created: 'Failure' });
     });
-  /*
-  Order.create({
-    shippingStatus,
-    totalPrice,
-    storePickup,
-    //userId,
-  }).then((order) => {
-    res.json({ created: 'Success' });
-  }).catch(() => {
-    res.json({ created: 'Failure' });
-  });
-  */
 });
 
 router.patch('/:id/:shippingStatus', function (req, res) {

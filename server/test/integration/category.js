@@ -63,7 +63,7 @@ describe('Category', function () {
               request
                 .get('/categories/' + category.parentId)
                 .expect(function (res) {
-                  //console.log(res.body);
+                  console.log(res.body);
                 })
                 .expect(200)
                 .end(done);
