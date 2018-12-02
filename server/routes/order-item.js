@@ -82,4 +82,22 @@ router.put('/cart', function (req, res) {
   });
 });
 
+router.put('/deleteItems', function (req, res) {
+  const {
+    itemId,
+    orderId,
+  } = req.body;
+  OrderItem.destroy({
+    where: {
+      itemId: itemId,
+      orderId: orderId
+    },
+    truncate: false
+  }).then((orderItem) => {
+    res.json({deleted: 'True'})
+  }).catch(() => {
+    res.status(403).json({ deleted: 'Failure' });
+  });
+});
+
 module.exports = router;

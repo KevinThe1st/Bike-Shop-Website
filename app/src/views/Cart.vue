@@ -105,8 +105,7 @@
                             <div class = "col-sm-2">
 
                                 <br><br><br><br><br>
-
-                                <button class="btn btn-danger" id="removeButton">Remove</button>
+                                <button class="btn btn-danger" id="removeButton" v-on:click="removeItems(item.id)">Remove</button>
                             </div>
                             <div class = "col-sm-2 priceStyle">
                                 ${{item.price}}
@@ -174,6 +173,10 @@ export default class Cart extends App {
   totalQuantity = 0
 
   beforeMount(){
+    this.getCartData()
+  }
+
+  getCartData(){
     axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
     .then((res) => {
       this.currentOrder = res.data.order;
@@ -201,8 +204,10 @@ export default class Cart extends App {
   updateCombinedData(){
     this.orderItemsInCurrentOrderWithItemData = [];
     this.totalPrice = 0;
+    this.totalQuantity = 0;
     for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
       var temp = new CurrentOrderItem;
+      temp.id = this.itemsInCurrentOrder[i].id;
       temp.picName = this.itemsInCurrentOrder[i].picName;
       temp.name = this.itemsInCurrentOrder[i].name;
       temp.price = this.orderItemsInCurrentOrder[i].price;
@@ -212,6 +217,15 @@ export default class Cart extends App {
       this.totalQuantity += temp.quantity;
     }
     console.log(this.orderItemsInCurrentOrderWithItemData);
+  }
+
+  removeItems(itemId) {
+    axios.put('/api/orderItems/deleteItems', {
+      itemId: itemId,
+      orderId: this.currentOrder.id
+    }).then((res) => {
+      this.getCartData()
+    });
   }
 }
 </script>
