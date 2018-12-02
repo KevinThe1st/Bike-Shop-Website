@@ -77,9 +77,7 @@ export default class Home extends Vue {
     console.log(this.shippingOrders[orderIndex].id);
     axios.get(`/api/orders/items/` + this.shippingOrders[orderIndex].id)
     .then((res) => {
-      console.log(res.data);
-      var listOfItemsAssociatedWithOrder = res.data.items;
-      this.itemsAssociatedWithShippingOrders[orderIndex] = listOfItemsAssociatedWithOrder;
+      this.itemsAssociatedWithShippingOrders[orderIndex] = res.data;
       this.numberOfLoadedItemSets++;
     });
   }
