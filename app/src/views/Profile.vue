@@ -3,28 +3,42 @@
     <h3>Profile</h3>
 
     <form>
+      <div id="first" v-if="clicked === false">
+        <h5>First Name:</h5>
+        <h6>{{profile[0].firstName}}</h6>
+      </div>
+      <div id="last" v-if="clicked === false">
+        <h5>Last Name:</h5>
+        <h6>{{profile[0].lastName}}</h6>
+      </div>
+      <div id="uname" v-if="clicked === false">
+        <h5>Username:</h5>
+        <h6>{{profile[0].username}}</h6>
+      </div>
+      <div id="pass" v-if="clicked === false">
+        <h5>Password:</h5>
+        <h6>{{profile[0].password}}</h6>
+      </div>
 
-      <button @click="newEmail()" type="button" class="btn btn-primary danielButton" v-if="newE === false">Change email</button>
-      <div id="eField" class="form-group" v-if="newE === true">
-        <label for="exampleInputEmail1">Enter your new email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" v-model="EmailMessage">
+      <button id="Update" @click="update()" type="button" class="btn btn-primary" v-if="clicked === false">Update</button>
+      <div id="fField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputFirstName1">Enter first name</label>
+        <input type="name" class="form-control" id="exampleInputFirstName1" placeholder="First Name" v-model="FirstMessage">
+      </div>
+      <div id="lField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputLastName1">Enter last name</label>
+        <input type="lastName" class="form-control" id="exampleInputLastName1" placeholder="Last Name" v-model="LastMessage">
+      </div>
+      <div id="uField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputUsername1">Enter your new username</label>
+        <input type="username" class="form-control" id="exampleInputUsername1" placeholder="Username" v-model="UsernameMessage">
         </div>
-      <br>
-      <br>
-      <button @click="newPass()" type="button" class="btn btn-primary danielButton" v-if="newP === false">Change password</button>
-      <div id="pField" class="form-group" v-if="newP === true">
+      <div id="pField" class="form-group" v-if="clicked === true">
         <label for="exampleInputPassword1">Enter your new password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="PasswordMessage">
       </div>
       <br>
-      <br>
-      <button @click="newAdd()" type="button" class="btn btn-primary" v-if="newA === false">Change address</button>
-      <div id="aField" class="form-group" v-if="newA === true">
-        <label for="exampleInputAddress1">Enter your new address</label>
-        <input type="address" class="form-control" id="exampleInputAddress1" placeholder="Address" v-model="AddressMessage">
-      </div>
-      <br>
-      <br>
+
       <button @click="saveChanges()" type="submit" class="btn btn-primary saveButton" v-if="changes === true">Save changes</button>
 
     </form>
@@ -47,59 +61,49 @@ import axios from 'axios';
 
 export default class Profile extends Vue {
 
+  clicked:boolean = false;
   changes:boolean = false;
 
-  newE:boolean = false;
-  newP:boolean = false;
-  newA:boolean = false;
 
-  EmailMessage: string = '';
+  FirstMessage: string = '';
+  LastMessage: string = '';
+  UsernameMessage: string = '';
   PasswordMessage: string = '';
-  AddressMessage: string = '';
 
-  email: string = "leeroy.jenkins@placeholder.onion";
-  location: string = "Very\nNice\nPlaceholder";
 
-  newEmail(){
-    this.changes = true;
-    this.newE = true;
+  profile: any[] = [{
+    firstName: "Hansel",
+    lastName: "Thorpedo",
+    username: "Placeholder",
+    password: "password",
+    address: "Placeholder Blvd"
+  }];
+
+  beforeMount(){
+    axios
+      .get('/api/users/' + this.$store.getters.getLoginStatus)
+      .then((res) => {
+        console.log(this.profile);
+        this.profile = [res.data.user]
+        console.log(this.profile);
+      })
   }
 
-  newPass(){
+  update(){
     this.changes = true;
-    this.newP = true;
-  }
-
-  newAdd(){
-    this.changes = true;
-    this.newA = true;
+    this.clicked = true;
   }
 
   saveChanges(){
-    axios.put(`/api/users`, {
-      if (newE == true){
-        email: this.EmailMessage;
-      }
-      if (newP == true){
-        password: this.PasswordMessage;
-      }
-      if (newA == true){
-        address: this.AddressMessage;
-      }
+    axios.put(`/api/users/edit`, {
+        id: this.$store.getters.getLoginStatus,
+        firstName: this.FirstMessage,
+        lastName: this.LastMessage,
+        username: this.UsernameMessage,
+        password: this.PasswordMessage
     }).then((res) => {
-      this.userItem = res.data;
-      if(res.status == 200){
-        console.log("Update Successful");
-        this.missing = [];
-        this.$store.commit('login', res.data.user_id);
-        this.$router.push('/')
-      }
-      else{
-        console.log("Missing: " + res.data.missing); //an array
-        this.missing = res.data.missing;
-        console.log("Var: " + this.missing);
-      }
-      this.showMissing();
+      console.log("Update Successful");
+      this.$store.commit('login', res.data.user_id);
     })
   }
 
@@ -119,6 +123,8 @@ export default class Profile extends Vue {
   margin-left: 20px;
 
 }
+
+
 
 .saveButton
 {
