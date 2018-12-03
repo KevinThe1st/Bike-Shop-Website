@@ -80,6 +80,11 @@ export default new Router({
       path: '/checkout',
       name: 'checkout',
       component: () => import('./views/Checkout.vue'),
-    }
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('./views/Orders.vue'),
+    },
   ],
 });

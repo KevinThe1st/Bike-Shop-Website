@@ -31,6 +31,7 @@
           <b-nav-item-dropdown text="Profile" v-if="this.$store.getters.getLoginStatus" right>
             <b-dropdown-item href="/account">Account</b-dropdown-item>
             <b-dropdown-item to="/cart">Cart</b-dropdown-item>
+            <b-dropdown-item href="/orders">My Orders</b-dropdown-item>
             <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Item Management</b-dropdown-item>
             <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
             <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Order Management</b-dropdown-item>
