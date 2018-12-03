@@ -1,48 +1,209 @@
 <template>
   <div id="admin-order-management">
-    Shipping
-    <li v-for="(order, orderIndex) in shippingOrders"
-    v-if="itemsAssociatedWithOrders[0].length == shippingOrders.length && usersAssociatedWithOrders[0].length == shippingOrders.length &&
-         orderItemsAssociatedWithOrders[0].length == shippingOrders.length">
-      {{order}}
-      {{usersAssociatedWithOrders[0][orderIndex]}}
-      <button type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
-      <ul>
-        <li v-for="(item, itemIndex) in itemsAssociatedWithOrders[0][orderIndex]">
-          {{item}}
-          {{orderItemsAssociatedWithOrders[0][orderIndex][itemIndex]}}
-        </li>
-      </ul>
-    </li>
-    Completed
-    <li v-for="(order, orderIndex) in completedOrders"
-    v-if="itemsAssociatedWithOrders[1].length == completedOrders.length && usersAssociatedWithOrders[1].length == completedOrders.length &&
-         orderItemsAssociatedWithOrders[1].length == completedOrders.length">
-      {{order}}
-      {{usersAssociatedWithOrders[1][orderIndex]}}
-      <button type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
-      <ul>
-        <li v-for="(item, itemIndex) in itemsAssociatedWithOrders[1][orderIndex]">
-          {{item}}
-          {{orderItemsAssociatedWithOrders[1][orderIndex][itemIndex]}}
-        </li>
-      </ul>
-    </li>
-    Cancelled
-    {{orderItemsAssociatedWithOrders[2]}}
-    <li v-for="(order, orderIndex) in cancelledOrders"
-    v-if="itemsAssociatedWithOrders[2].length == cancelledOrders.length && usersAssociatedWithOrders[2].length == cancelledOrders.length &&
-         orderItemsAssociatedWithOrders[2].length == cancelledOrders.length">
-      {{order}}
-      {{usersAssociatedWithOrders[2][orderIndex]}}
-      <button type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
-      <ul>
-        <li v-for="(item, itemIndex) in itemsAssociatedWithOrders[2][orderIndex]">
-          {{item}}
-          {{orderItemsAssociatedWithOrders[2][orderIndex][itemIndex]}}
-        </li>
-      </ul>
-    </li>
+    <div id = "container">
+      <div id = "row">
+          <div id = "col-sm-12">
+              <div id= "ManageOrdersText">Manage Orders</div>
+          </div>
+      </div>
+
+    </div>
+
+
+    <div id = "container">
+      <div id = "row">
+          <div id = "col-sm-12">
+              <div class="manageOrdersHeaders">Shipping</div>
+              <br>
+              <ul class="noCartBulletsOrderManagement">
+                <li v-for="(order, orderIndex) in shippingOrders" v-if="itemsAssociatedWithOrders[0].length == shippingOrders.length && usersAssociatedWithOrders[0].length == shippingOrders.length &&
+                     orderItemsAssociatedWithOrders[0].length == shippingOrders.length">
+                  <div class = "row">
+                      <div class = "col-sm-2"><p class ="orderManagerNumber">Order #{{order.id}}</p></div>
+                      <div class = "col-sm-10"></div>
+                  </div>
+                  <div class = "row">
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">Total Price: ${{order.totalPrice}}</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == true"><p class ="orderInfoHeader">In-store Pickup: yes</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == false"><p class ="orderInfoHeader">In-store Pickup: no</p></div>
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">User:
+                        {{usersAssociatedWithOrders[0][orderIndex]}}</p>
+                      </div>
+                      <div class = "col-sm-3">
+                        <button class="btn btn-success" type="submit" v-on:click="completedOrder(orderIndex)">Complete Order</button>
+                        <br><br>
+                        <button class="btn btn-danger" type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
+
+                      </div>
+                  </div>
+
+                  <table class="manageOrdersTables">
+                    <tr class="manageOrderTableStyles">
+                        <td class="manageOrderTableStyles">
+                          <p>Item ID</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Name</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Price</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Quantity</p>
+                        </td>
+                    </tr>
+                    <template v-for="(item, itemIndex) in itemsAssociatedWithOrders[0][orderIndex]">
+                        <tr class="manageOrderTableStyles">
+                          <td class="manageOrderTableStyles">
+                              {{item.id}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.name}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.price}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                            {{orderItemsAssociatedWithOrders[0][orderIndex][itemIndex]}}
+                          </td>
+                        </tr>
+                    </template>
+                  </table>
+                  <br>
+
+                </li>
+              </ul>
+          </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div id = "container">
+      <div id = "row">
+          <div id = "col-sm-12">
+              <div class="manageOrdersHeaders">Completed</div>
+              <br>
+              <ul class="noCartBulletsOrderManagement">
+                <li v-for="(order, index) in completedOrders">
+                  <div class = "row">
+                      <div class = "col-sm-2"><p class ="orderManagerNumber">Order #{{order.id}}</p></div>
+                      <div class = "col-sm-10"></div>
+                  </div>
+                  <div class = "row">
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">Total Price: ${{order.totalPrice}}</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == true"><p class ="orderInfoHeader">In-store Pickup: yes</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == false"><p class ="orderInfoHeader">In-store Pickup: no</p></div>
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">User: </p></div>
+                      <div class = "col-sm-3"></div>
+                  </div>
+
+<!--
+                  <table class="manageOrdersTables">
+                    <tr class="manageOrderTableStyles">
+                        <td class="manageOrderTableStyles">
+                          <p>Item ID</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Name</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Price</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Quantity</p>
+                        </td>
+                    </tr>
+                    <template v-for="(item, itemIndex) in itemsAssociatedWithShippingOrders[orderIndex]">
+                        <tr class="manageOrderTableStyles">
+                          <td class="manageOrderTableStyles">
+                              {{item.id}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.name}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.price}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+
+                          </td>
+                        </tr>
+                    </template>
+                  </table> -->
+                  <br>
+
+                </li>
+              </ul>
+          </div>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div id = "container">
+      <div id = "row">
+          <div id = "col-sm-12">
+              <div class="manageOrdersHeaders">Cancelled</div>
+              <br>
+              <ul class="noCartBulletsOrderManagement">
+                <li v-for="(order, index) in cancelledOrders">
+                  <div class = "row">
+                      <div class = "col-sm-2"><p class ="orderManagerNumber">Order #{{order.id}}</p></div>
+                      <div class = "col-sm-10"></div>
+                  </div>
+                  <div class = "row">
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">Total Price: ${{order.totalPrice}}</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == true"><p class ="orderInfoHeader">In-store Pickup: yes</p></div>
+                      <div class = "col-sm-3" v-if="order.storePickup == false"><p class ="orderInfoHeader">In-store Pickup: no</p></div>
+                      <div class = "col-sm-3"><p class ="orderInfoHeader">User: </p></div>
+                      <div class = "col-sm-3"></div>
+                  </div>
+
+    <!--
+                  <table class="manageOrdersTables">
+                    <tr class="manageOrderTableStyles">
+                        <td class="manageOrderTableStyles">
+                          <p>Item ID</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Name</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Price</p>
+                        </td>
+                        <td class="manageOrderTableStyles">
+                          <p>Quantity</p>
+                        </td>
+                    </tr>
+                    <template v-for="(item, itemIndex) in itemsAssociatedWithShippingOrders[orderIndex]">
+                        <tr class="manageOrderTableStyles">
+                          <td class="manageOrderTableStyles">
+                              {{item.id}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.name}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+                              {{item.price}}
+                          </td>
+                          <td class="manageOrderTableStyles">
+
+                          </td>
+                        </tr>
+                    </template>
+                  </table> -->
+                  <br>
+
+                </li>
+              </ul>
+          </div>
+      </div>
+
+    </div>
+>>>>>>> 8f2a8ade5d024ffa76b862757818faeed3db2a9f
   </div>
 </template>
 
@@ -197,5 +358,48 @@ export default class AdminOrderManagement extends Vue {
 <style lang="scss">
 #admin-order-management {
   padding: 80px 0px;
+  margin-left: 10px;
 }
+
+#ManageOrdersText {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.manageOrdersHeaders {
+  font-weight: bold;
+  color: blue;
+  font-size: 18px;
+}
+
+.noCartBulletsOrderManagement {
+  ul {
+    list-style-type: none;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+
+.orderManagerNumber {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.orderInfoHeader {
+  font-size: 18px;
+}
+
+.manageOrdersTables {
+  border-spacing: 20px;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.manageOrderTableStyles {
+  border: 1px solid black;
+}
+
+
 </style>

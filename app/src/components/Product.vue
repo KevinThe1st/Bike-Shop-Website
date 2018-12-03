@@ -6,12 +6,15 @@
       </p>
       <div class = "container">
           <div class = "row">
-            <div class = "col-sm-6">
+            <div class = "col-sm-4">
               <img v-bind:src="picName" width = 200px>
             </div>
-            <div class = "col-sm-6">
-              <br>
-              <br>
+            <div class = "col-sm-5">
+              <p>
+                Description: {{descLong}}
+              </p>
+            </div>
+            <div class = "col-sm-3">
               <p>
                 Price: ${{price}}
               </p>
