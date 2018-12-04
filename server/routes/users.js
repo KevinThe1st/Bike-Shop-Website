@@ -12,8 +12,23 @@ router.get('/', function(req, res) {
 
 /* GET specific user listing. */
 router.get('/:id', function(req, res) {
-  User.findById(req.params.id).then((user) => {
-    res.json({user});
+     User.findById(req.params.id).then((user) => {
+       res.json({user});
+     });
+   });
+
+router.put('/edit', function(req, res) {
+  const { id, firstName, lastName, username, password } = req.body;
+  User.findById(id).then((user) => {
+    if(user) {
+        user.firstName = firstName;
+        user.lastName = lastName;
+        user.username = username;
+        user.password = password;
+        user.save().then(user => {
+          return res.json({ updated: user.id });
+        });
+    }
   });
 });
 
