@@ -5,20 +5,8 @@
     <input type="text" v-model="itemStock" placeholder="stock">
     <input type="text" v-model="itemDescShort" placeholder="short desc">
     <input type="text" v-model="itemDescLong" placeholder="long desc">
-    <input type="text" v-model="itemPicName" placeholder="picture name">
-    <!--form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <h1>Upload images</h1>
-        <div class="dropbox">
-          <input type="file" multiple :name="uploadFieldName" :disabled="isSaving" @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length"
-            accept="image/*" class="input-file">
-            <p v-if="isInitial">
-              Drag your file(s) here to begin<br> or click to browse
-            </p>
-            <p v-if="isSaving">
-              Uploading {{ fileCount }} files...
-            </p>
-        </div>
-      </form-->
+    <!--input type="text" v-model="itemPicName" placeholder="picture name"-->
+    <file-upload :url='url' :thumb-url='thumbUrl' :headers="headers" @change="onFileChange"></file-upload>
     <div id="category-bar">
       <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
         <ul class ="noBullets">
@@ -41,6 +29,12 @@
     <b-alert variant="danger" dismissible :show="failed" @dismissed="failed=false">
       Item failed to create
     </b-alert>
+    <div id="existing-items">
+      <li v-for="(item, index) in allItems">
+        {{item}}
+        <button type="submit" v-on:click="">Edit Item</button>
+      </li>
+    </div>
   </div>
 </template>
 
@@ -48,7 +42,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 import App from '../App.vue';
-import { CategoryItem } from '@/models';
+import { CategoryItem, ShopItem } from '@/models';
 
 @Component({
   data() {
@@ -68,7 +62,11 @@ export default class AdminItemManagement extends App {
   categoryIds: number[] = [];
   successful: boolean = false;
   failed: boolean = false;
+  allItems: ShopItem[] = [];
 
+  // file upload fields
+  uploadedFiles: [];
+  uploadFieldName: 'photos';
   /*
    * TODO: need to add file upload stuff
    */
@@ -106,6 +104,13 @@ export default class AdminItemManagement extends App {
     });
   }
 
+  getAllItems(){
+    axios.get(`/api/items`)
+    .then((res) => {
+      this.allItems = res.data.items;
+    });
+  }
+
   getAllTopLevelCategories(){
     this.topLevelCategories = [];
     this.loadedTopLevelCategoryCount = 0;
@@ -140,6 +145,34 @@ export default class AdminItemManagement extends App {
 
   beforeMount(){
     this.getAllTopLevelCategories();
+    this.getAllItems();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadedFiles = [];
+  }
+
+  save(formData) {
+    // upload data to the server
+    upload(formData)
+    .then(x => {
+      this.uploadedFiles = [].concat(x);
+    });
+  }
+
+  filesChange(fieldName, fileList) {
+    // handle file changes
+    const formData = new FormData();
+
+    if (!fileList.length) return;
+
+    // append the files to FormData
+    Array.from(Array(fileList.length).keys()).map(x => {
+      formData.append(fieldName, fileList[x], fileList[x].name);
+    });
+
+    this.save(formData);
   }
 }
 </script>
