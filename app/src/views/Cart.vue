@@ -142,7 +142,11 @@
 
               <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
               <br>
-              <button class="btn btn-success" href="/about">Proceed to Checkout</button>
+              <router-link :to="{name: 'checkout'}">
+                <button class="btn btn-success">Proceed to Checkout</button>
+              </router-link>
+
+
 
         </div>
 
@@ -216,7 +220,7 @@ export default class Cart extends App {
   }
 
   removeItems(itemId) {
-    axios.put('/api/orderItems/deleteItems', {
+    axios.put('/api/orderItems/deleteItemFromCart', {
       itemId: itemId,
       orderId: this.currentOrder.id
     }).then((res) => {
