@@ -142,7 +142,11 @@
 
               <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
               <br>
-              <button class="btn btn-success" href="/about">Proceed to Checkout</button>
+              <router-link :to="{name: 'checkout'}">
+                <button class="btn btn-success">Proceed to Checkout</button>
+              </router-link>
+
+
 
         </div>
 
