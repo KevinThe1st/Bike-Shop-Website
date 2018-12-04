@@ -13,9 +13,11 @@ router.get('/', function (req, res) {
 /* GET specific user listing. */
 router.get('/:id', function (req, res) {
   User.findById(req.params.id).then((user) => {
-    res.json({ user });
-  }).catch(() => {
-    res.status(404).status({ error: "Not Found" });
+    if (user == null) {
+      res.status(404).json({ user });
+    } else {
+      res.json({ user });
+    }
   });
 });
 
@@ -54,14 +56,15 @@ router.put('/login', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-  const idToDelete = req.params.id;
-  //// TODO: make sure person calling is admin
-  User.findById(idToDelete).then((user) => {
-    user.destroy().then(() => {
-      res.json({ deleted: true });
-    });
-  }).catch(() => {
-    res.status(404).status({ deleted: false });
+  User.findById(req.params.id).then((user) => {
+    if (user == null) {
+      res.status(404).json({ deleted: false });
+    }
+    else {
+      user.destroy().then(() => {
+        res.json({ deleted: true });
+      });
+    }
   });
 });
 

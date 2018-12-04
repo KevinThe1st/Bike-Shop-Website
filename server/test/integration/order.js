@@ -62,7 +62,7 @@ describe('Order', function () {
             request
               .patch('/orders/' + order.id + '/Completed')
               .expect(function (res) {
-                console.log(res.body);
+                //console.log(res.body);
               })
               .expect(200)
               .end(done);

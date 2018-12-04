@@ -63,7 +63,7 @@ describe('Category', function () {
               request
                 .get('/categories/' + category.parentId)
                 .expect(function (res) {
-                  console.log(res.body);
+                  //console.log(res.body);
                 })
                 .expect(200)
                 .end(done);
@@ -91,7 +91,7 @@ describe('Category', function () {
             .expect(200)
             .expect(function (res) {
               assert.equal(Object.keys(res.body).length, 1);
-              assert.equal(res.body.delete, true);
+              assert.equal(res.body.deleted, true);
             })
             .end(done);
         });
