@@ -4,8 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     type : DataTypes.STRING,
     street1: DataTypes.STRING,
     street2: DataTypes.STRING,
-    state: DataTypes.STRING,
     city: DataTypes.STRING,
+    state: DataTypes.STRING,
     zip: DataTypes.STRING,
   }, {});
   Address.associate = function(models) {
