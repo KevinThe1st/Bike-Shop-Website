@@ -29,7 +29,11 @@
               <div class = "col-sm-3">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
-                <b-form-input id="input-default" type="text" placeholder="Address"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Street 1"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Street 2"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="City"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="State"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Zip"></b-form-input>
               </div>
           </div>
           <hr>
@@ -49,7 +53,11 @@
               <div class = "col-sm-3">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
-                <b-form-input id="input-default" type="text" placeholder="Address"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Street 1"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Street 2"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="City"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="State"></b-form-input>
+                <b-form-input id="input-default" type="text" placeholder="Zip"></b-form-input>
               </div>
           </div>
           <hr>
