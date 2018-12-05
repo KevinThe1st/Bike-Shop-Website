@@ -1,6 +1,6 @@
-const { User, Address, Item, Order, OrderItem, Session, Category, ItemCategory } = require('../models');
+const { User, Address, Item, Order, OrderItem, Session, Category, ItemCategory, Textbox} = require('../models');
 const { Op } = require('sequelize');
-const models = [User, Address, Item, Order, OrderItem, Session, Category, ItemCategory];
+const models = [User, Address, Item, Order, OrderItem, Session, Category, ItemCategory, Textbox];
 
 module.exports = function truncate() {
   return Promise.all(
