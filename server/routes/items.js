@@ -103,8 +103,6 @@ router.put('/modifyItem', function (req, res) {
     stock,
     descShort,
     descLong,
-    picName,
-    categories,
   } = req.body;
   Item.findById(id).then((item) => {
     if (categories.length == 0) {
@@ -116,7 +114,6 @@ router.put('/modifyItem', function (req, res) {
     item.stock = stock;
     item.descShort = descShort;
     item.descLong = descLong;
-    item.picName = picName;
 
     item.save().then((item1) => {
       ItemCategory.findAll({ where: { itemId: id } }).then((itemCat) => {
