@@ -16,12 +16,14 @@ router.get('/parents', function (req, res) {
 
 router.get('/:id', function (req, res) {
   Category.findById(req.params.id).then((category) => {
+    if (category == null)
+      return res.status(404).json({ category });
     return res.json({ category });
   });
 });
 
 router.get('/parent/:id', function (req, res) {
-  Category.findAll({where: {parentId: req.params.id}}).then((category) => {
+  Category.findAll({ where: { parentId: req.params.id } }).then((category) => {
     return res.json({ category });
   });
 });
@@ -29,17 +31,17 @@ router.get('/parent/:id', function (req, res) {
 router.put('/', function (req, res) {
   const {
     name,
-    type,
-    parId,
+    parentId,
   } = req.body;
+  if (name == null)
+    return res.status(403).json({ created: false });
   Category.create({
     name,
-    type,
-    parId,
+    parentId,
   }).then((category) => {
-    res.json({ created: 'Success' });
+    res.json({ created: true });
   }).catch(() => {
-    res.json({ created: 'Failure' });
+    res.status(403).json({ created: false });
   });
 });
 
@@ -47,10 +49,10 @@ router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Category.findById(idToDelete).then((category) => {
     category.destroy().then(() => {
-      res.json({ delete: true });
+      res.json({ deleted: true });
     });
   }).catch(() => {
-    res.json({ delete: false });
+    res.status(404).json({ deleted: false });
   });
 });
 

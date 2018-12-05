@@ -55,6 +55,41 @@ export default new Router({
       path: '/account',
       name: 'account',
       component: () => import(/* webpackChunkName: "account" */ './views/Account.vue'),
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('./views/Cart.vue'),
+    },
+    {
+      path: '/adminItemManagement',
+      name: 'adminItemManagement',
+      component: () => import('./views/AdminItemManagement.vue'),
+    },
+    {
+      path: '/adminAccountManagement',
+      name: 'adminAccountManagement',
+      component: () => import('./views/AdminAccountManagement.vue'),
+    },
+    {
+      path: '/adminOrderManagement',
+      name: 'adminOrderManagement',
+      component: () => import('./views/AdminOrderManagement.vue'),
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('./views/Checkout.vue'),
+    },
+    {
+      path: '/adminPageManagement',
+      name: 'adminPageManagement',
+      component: () => import('./views/AdminPageManagement.vue'),
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('./views/Orders.vue'),
     }
   ],
 });

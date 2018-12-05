@@ -70,9 +70,10 @@
           </div>
         </div>
 
+        <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
+
     </div>
   </div>
-
 
 </template>
 
@@ -93,17 +94,19 @@ export default class About extends Vue {
 
   aboutUs: string = "I am a placeholder, look at me!\nI am a placeholder, look at me!\n";
   location: string = "Very\nNice\nPlaceholder";
+  bottomTxt = "Placeholder";
 
   mounted(){
     axios
       .get('/api/textbox/location')
       .then((res) => {
-        this.location = res.data.item.text;
+        this.location = res.data.text.text;
+        this.bottomTxt = res.data.text.text;
       })
     axios
       .get('/api/textbox/about')
       .then((res) => {
-        this.aboutUs = res.data.item.text;
+        this.aboutUs = res.data.text.text;
       })
   }
 }
@@ -184,5 +187,10 @@ export default class About extends Vue {
   font-size: 70px;
 
 
+}
+
+#bottomTxt {
+  padding: 30px;
+  text-align: center;
 }
 </style>

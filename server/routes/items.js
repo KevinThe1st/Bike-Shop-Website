@@ -1,12 +1,20 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../models');
-const { ItemCategory } = require('../models');
+const { Item, ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
-  Item.findAll().then((items) => {
-    return res.json({ items });
-  });
+  if (req.query.search == undefined) {
+    Item.findAll().then((items) => {
+      return res.json({ items });
+    });
+  } else {
+    Item.findAll({
+      where: { name: { $like: req.query.search + '%' } },
+      order: [['name', 'ASC']]
+    }).then((items) => {
+      return res.json({ items });
+    });
+  };
 });
 
 router.get('/new', function (req, res) {
@@ -27,30 +35,39 @@ router.get('/pricesLow', function (req, res) {
   });
 });
 
-router.get('/search/:query', function (req, res) {
-  Item.findAll({
-    where: { name: { $like: req.params.query + '%' } },
-    order: [['name', 'ASC']]
-  }).then((items) => {
-    return res.json({ items });
-  });
-});
-
 // axios set params for array
 router.get('/byCat/:categoryId', function (req, res) {
-  ItemCategory.findAll({ where: { categoryId: req.params.categoryId } }).then((items) => {
+  ItemCategory.findAll({ where: { categoryId: req.params.categoryId } }).then((itemCats) => {
+    if (itemCats.length == 0)
+      return res.status(404).json({ itemCats });
     var ids = []
-    for (var i = 0; i < items.length; i++) {
-      ids.push(items[i].getDataValue('ItemId'))
+    for (var i = 0; i < itemCats.length; i++) {
+      ids.push(itemCats[i].getDataValue('ItemId'))
     }
     Item.findAll({ where: { id: ids } }).then((items) => {
+      if (items.length == 0)
+        return res.status(404).json({ items });
       return res.json({ items });
     });
   });
 });
 
+router.put('/list', function (req, res) {
+  const { ids } = req.body;
+  Item.findAll({ where: { id: ids } })
+    .then((items) => {
+      if (items.length == 0) {
+        return res.status(404).json({ items });
+      }
+      return res.json({ items });
+    });
+});
+
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
+    if (item == null) {
+      return res.status(404).json({ error: "Not Found" });
+    }
     return res.json({ item });
   });
 });
@@ -62,7 +79,8 @@ router.put('/', function (req, res) {
     stock,
     descShort,
     descLong,
-    categoryId,
+    picName,
+    categories,
   } = req.body;
   Item.create({
     name,
@@ -70,15 +88,45 @@ router.put('/', function (req, res) {
     stock,
     descShort,
     descLong,
+    picName,
   }).then((item) => {
-    ItemCategory.create({
-      itemId: item.id,
-      categoryId
-    }).then((ic) => {
-      return res.json({ created: 'Success' });
+    if (categories.length == 0) {
+      return res.status(403).json({ created: 'Failure', id: item.id });
+    };
+    categories.forEach(catId => {
+      var newItemCategory = ItemCategory.create({
+        ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
+        CategoryId: catId
+      });
+    });
+    // console.log("adding: " + Object.keys(ItemCategory.rawAttributes));
+    return res.json({ created: 'Success' });
+  }).catch(() => {
+    return res.status(403).json({ created: 'Failure', id: item.id });
+  });
+});
+
+router.put('/modifyItem', function (req, res) {
+  const {
+    id,
+    name,
+    price,
+    stock,
+    descShort,
+    descLong,
+  } = req.body;
+  Item.findById(id).then((item) => {
+    console.log(name);
+    item.name = name;
+    item.price = price;
+    item.stock = stock;
+    item.descShort = descShort;
+    item.descLong = descLong;
+    item.save().then(() => {
+      return res.json({ modified: true, id: item.id });
     });
   }).catch(() => {
-    return res.status(403).json({ created: 'Failure' });
+    return res.status(403).json({ modified: false });
   });
 });
 
@@ -89,7 +137,7 @@ router.delete('/:id', function (req, res) {
       return res.json({ delete: true });
     });
   }).catch(() => {
-    return res.json({ delete: false });
+    return res.status(404).json({ delete: false });
   });
 });
 

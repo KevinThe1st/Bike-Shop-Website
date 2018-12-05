@@ -5,27 +5,37 @@
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-      <b-navbar-brand to="/">Foxcycle</b-navbar-brand>
+      <b-navbar-brand to="/">Foxycle</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
         <b-navbar-nav>
-          <b-nav-item to="/shop">Shop</b-nav-item>
+          <b-nav-item id="NavbarShop" to="/shop">Shop</b-nav-item>
           <b-nav-item to="/services">Services</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto"Ht>
 
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+
+
+
+            <router-link :to="{name: 'shop'}">
+              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+            </router-link>
           </b-nav-form>
 
           <b-nav-item-dropdown text="Profile" v-if="this.$store.getters.getLoginStatus" right>
             <b-dropdown-item href="/account">Account</b-dropdown-item>
-            <b-dropdown-item href="#">Orders</b-dropdown-item>
+            <b-dropdown-item to="/cart">Cart</b-dropdown-item>
+            <b-dropdown-item href="/orders">My Orders</b-dropdown-item>
+            <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin' || this.$store.getters.getLoginPermissionLevel == 'Employee'">Admin Item Management</b-dropdown-item>
+            <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
+            <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin' || this.$store.getters.getLoginPermissionLevel == 'Employee'">Admin Order Management</b-dropdown-item>
+            <b-dropdown-item to="/adminPageManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Page Management</b-dropdown-item>
             <b-dropdown-item href="#" v-on:click="$store.commit('logout')">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
 

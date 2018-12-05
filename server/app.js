@@ -11,7 +11,9 @@ var itemsRouter = require('./routes/items');
 var textRouter = require('./routes/text')
 var ordersRouter = require('./routes/orders');
 var categoriesRouter = require('./routes/categories');
-var serviceRouter = require('./routes/services')
+var serviceRouter = require('./routes/services');
+var orderItemRouter = require('./routes/order-item');
+var addressRouter = require('./routes/addresses')
 
 var app = express();
 
@@ -33,6 +35,8 @@ app.use('/textbox', textRouter);
 app.use('/orders', ordersRouter);
 app.use('/categories', categoriesRouter);
 app.use('/services', serviceRouter);
+app.use('/orderItems', orderItemRouter);
+app.use('/addresses', addressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,6 +52,20 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.route('/upload').post(function (req, res, next) {
+  var fstream;
+  req.pipe(req.busboy);
+  req.busboy.on('file', function (fieldname, file, filename) {
+    console.log("Uploading: " + filename);
+    fstream = fs.createWriteStream(__dirname + '/img/' + filename);
+    file.pipe(fstream);
+    fstream.on('close', function () {
+      console.log("Upload Finished of " + filename);
+      res.redirect('back');           //where to go next
+    });
+  });
 });
 
 module.exports = app;

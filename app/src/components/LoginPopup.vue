@@ -22,10 +22,12 @@
             </p>
           </div>
           <div class="modal-footer">
+            <button id="forgotPasswordButton" v-on:click="passwordAlert()">Forgot Password?</button><!-- An empty button to send an email to client.  Does not work as email auto service is not set up, but would be filled in case of site deployment -->
             <router-link :to="{name: 'register'}">
               <button class="btn btn-primary" v-on:click="close()">Register</button>
             </router-link>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="save()">Login</button>
+            <button type="button" id="loginButton" class="btn btn-secondary" data-dismiss="modal" v-on:click="save()">Login</button>
+
           </div>
         </div>
       </div>
@@ -50,16 +52,19 @@ export default class LoginPopup extends Vue {
     }).then((res) => {
       if(res.status == 200){
         this.$store.commit('login', res.data.user_id)
+        this.$store.commit('permission', res.data.type)
         this.close();
       }
       console.log("Login response:" + res.status);
     })
   }
   close() {
-    console.log("asdf");
     this.username = ''
     this.password = ''
     this.$emit('close');
+  }
+  passwordAlert() {
+    alert("An email has been sent to recover your passcode");
   }
 }
 </script>
@@ -73,6 +78,12 @@ export default class LoginPopup extends Vue {
     width:10px;
     height:auto;
     display:inline-block;
+  }
+
+  #forgotPasswordButton {
+    border: none;
+    background-color: white;
+    color: blue;
   }
 
 </style>

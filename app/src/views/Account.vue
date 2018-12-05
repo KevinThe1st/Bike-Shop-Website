@@ -1,36 +1,85 @@
 <template>
-  <div id="account">
-    <p id = "accountText">Foxycle Cyclery
-    </p>
-    <carousel id="carousel1" perPage=1 autoplay autoplayTimeout=3500 loop>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagenew1.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagenew5.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagenew6.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagenew4.png" width = 100%>
-        </slide>
-    </carousel>
+  <div id="profile">
+    <h3>Account</h3>
 
-    <div class = "container">
-        <div class = "row">
-          <div class = "col-sm-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit.
-          </div>
-          <div class = "col-sm-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Quisque non tellus orci ac. Purus faucibus ornare suspendisse sed nisi lacus sed.
-          </div>
-          <div class = "col-sm-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Urna et pharetra pharetra massa massa. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit.
-          </div>
+    <form>
+      <div id="first" v-if="clicked === false">
+        <h5>First Name:</h5>
+        <h6>{{profile[0].firstName}}</h6>
+      </div>
+      <div id="last" v-if="clicked === false">
+        <h5>Last Name:</h5>
+        <h6>{{profile[0].lastName}}</h6>
+      </div>
+      <div id="uname" v-if="clicked === false">
+        <h5>Username:</h5>
+        <h6>{{profile[0].username}}</h6>
+      </div>
+      <div id="pass" v-if="clicked === false">
+        <h5>Password:</h5>
+        <h6>{{profile[0].password}}</h6>
+      </div>
+      <div id="sa" v-if="clicked === false">
+        <h5>Shipping Address:</h5>
+        <div v-for="(address, index) in allAddresses" v-if="address.type == 'Shipping'">
+          <h6>{{address.street1}}</h6>
+          <h6>{{address.street2}}</h6>
+          <h6>{{address.city}}</h6>
+          <h6>{{address.state}}</h6>
+          <h6>{{address.zip}}</h6>
+          <br>
         </div>
-    </div>
+      </div>
+      <div id="ba"  v-if="clicked === false">
+        <h5>Billing Address:</h5>
+        <div v-for="(address, index) in allAddresses" v-if="address.type == 'Billing'">
+          <h6>{{address.street1}}</h6>
+          <h6>{{address.street2}}</h6>
+          <h6>{{address.city}}</h6>
+          <h6>{{address.state}}</h6>
+          <h6>{{address.zip}}</h6>
+          <br>
+        </div>
+      </div>
 
+      <button id="Update" @click="update()" type="button" class="btn btn-primary" v-if="clicked === false">Update</button>
+      <div id="fField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputFirstName1">Enter first name</label>
+        <input type="text" class="form-control" id="exampleInputFirstName1" placeholder="First Name" v-model="FirstMessage">
+      </div>
+      <div id="lField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputLastName1">Enter last name</label>
+        <input type="text" class="form-control" id="exampleInputLastName1" placeholder="Last Name" v-model="LastMessage">
+      </div>
+      <div id="uField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputUsername1">Enter your new username</label>
+        <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username" v-model="UsernameMessage">
+        </div>
+      <div id="pField" class="form-group" v-if="clicked === true">
+        <label for="exampleInputPassword1">Enter your new password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="PasswordMessage">
+      </div>
+      <div id="saField" class="form-group" v-if="clicked === true">
+        <label>Enter your new shipping address</label>
+        <input type="text" class="form-control" id="ss1" placeholder="Street 1" v-model="sStreet1Message">
+        <input type="text" class="form-control" id="ss2" placeholder="Street 2" v-model="sStreet2Message">
+        <input type="text" class="form-control" id="scity" placeholder="City" v-model="sCityMessage">
+        <input type="text" class="form-control" id="sstate" placeholder="State" v-model="sStateMessage">
+        <input type="text" class="form-control" id="szip" placeholder="ZIP code" v-model="sZIPMessage">
+      </div>
+      <div id="baField" class="form-group" v-if="clicked === true">
+        <label>Enter your new billing address</label>
+        <input type="text" class="form-control" id="bs1" placeholder="Street 1" v-model="bStreet1Message">
+        <input type="text" class="form-control" id="bs2" placeholder="Street 2" v-model="bStreet2Message">
+        <input type="text" class="form-control" id="bcity" placeholder="City" v-model="bCityMessage">
+        <input type="text" class="form-control" id="bstate" placeholder="State" v-model="bStateMessage">
+        <input type="text" class="form-control" id="bzip" placeholder="ZIP code" v-model="bZIPMessage">
+      </div>
+      <br>
+
+      <button @click="saveChanges()" type="submit" class="btn btn-primary saveButton" v-if="changes === true">Save changes</button>
+
+    </form>
   </div>
 </template>
 
@@ -39,41 +88,128 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Carousel, Slide } from 'vue-carousel';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import axios from 'axios';
+
 
 @Component({
   components: {
-    Carousel,
-    Slide,
+  },
+  })
+
+
+export default class Account extends Vue {
+
+  clicked:boolean = false;
+  changes:boolean = false;
+
+
+  FirstMessage: string = '';
+  LastMessage: string = '';
+  UsernameMessage: string = '';
+  PasswordMessage: string = '';
+
+  sStreet1Message: string = '';
+  sStreet2Message: string = '';
+  sCityMessage: string = '';
+  sStateMessage: string = '';
+  sZIPMessage: string = '';
+
+  bStreet1Message: string = '';
+  bStreet2Message: string = '';
+  bCityMessage: string = '';
+  bStateMessage: string = '';
+  bZIPMessage: string = '';
+
+
+  profile: any[] = [{
+    firstName: "Hansel",
+    lastName: "Thorpedo",
+    username: "Placeholder",
+    password: "password",
+  }];
+
+  allAddresses: AddressItem[] = [];
+
+  beforeMount(){
+    axios
+      .get('/api/users/' + this.$store.getters.getLoginStatus)
+      .then((res) => {
+        this.profile = [res.data.user]
+        console.log("bye");
+      })
+    axios
+      .get('/api/addresses/user/' + this.$store.getters.getLoginStatus)
+      .then((res) => {
+        console.log(res.data);
+        this.allAddresses = res.data.addresses
+        console.log(this.allAddresses[0]);
+
+      })
   }
 
-})
-export default class Account extends Vue {}
+  update(){
+    this.changes = true;
+    this.clicked = true;
+  }
+
+  saveChanges(){
+    axios.put(`/api/users/edit`, {
+        id: this.$store.getters.getLoginStatus,
+        firstName: this.FirstMessage,
+        lastName: this.LastMessage,
+        username: this.UsernameMessage,
+        password: this.PasswordMessage
+    }).then((res) => {
+      console.log("Update Successful");
+      this.$store.commit('login', res.data.user_id);
+    })
+    axios.put('/api/addresses/', {
+        type: "Shipping",
+        street1: this.sStreet1Message,
+        street2: this.sStreet2Message,
+        state: this.sCityMessage,
+        city: this.sStateMessage,
+        zip : this.sZIPMessage,
+        userId: this.$store.getters.getLoginStatus
+    }).then((res) => {
+      console.log("Update Successful");
+    })
+    axios.put('/api/addresses/', {
+        type: "Billing",
+        street1: this.bStreet1Message,
+        street2: this.bStreet2Message,
+        state: this.bCityMessage,
+        city: this.bStateMessage,
+        zip : this.bZIPMessage,
+        userId: this.$store.getters.getLoginStatus
+    }).then((res) => {
+      console.log("Update Successful");
+    })
+  }
+
+}
 </script>
 
 <style lang="scss">
-#account {
-  padding: 0px 0px;
-  text-align: center;
+
+.logoClass {
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
 }
 
-#carousel1 {
-  padding: 0px;
-  margin: 0px;
-  z-index: -1;
-}
-
-#accountText {
-  color: #FFFF00;
-  font-family: "Courier New", "Times New Roman", serif;
-  font-style: italic;
-  font-weight: bold;
-  position: absolute;
-  text-align: center;
-  padding: 0px;
-  margin: auto 0px;
-
-  font-size: 70px;
-
+#profile {
+  padding: 75px 0px;
+  margin-left: 20px;
 
 }
+
+
+
+.saveButton
+{
+  background-color: #4CAF50; /* Green */
+  border: none;
+}
+
 </style>

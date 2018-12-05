@@ -17,6 +17,7 @@
     "mysql2": "^1.6.1",
     "pug": "2.0.0-beta11",
     "sequelize": "^4.39.0",
+    "supertest": "^3.3.0",
     "vue-carousel": "^0.16.0-rc1"
   },
   "devDependencies": {

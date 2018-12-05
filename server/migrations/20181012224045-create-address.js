@@ -17,10 +17,10 @@ module.exports = {
       street2: {
         type: Sequelize.STRING
       },
-      state: {
+      city: {
         type: Sequelize.STRING
       },
-      city: {
+      state: {
         type: Sequelize.STRING
       },
       zip: {
@@ -34,13 +34,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
           key: 'id'
         },
-        allowNull: false
+        allowNull: false, 
+        onDelete: 'cascade'
       },
     });
   },

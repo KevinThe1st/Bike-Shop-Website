@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const { Service } = require('../models');
 
-/* GET specific item listing. */
 router.get('/', function(req, res) {
   Service.findAll().then((items) => {
     res.json({items});
@@ -15,6 +14,8 @@ router.put('/', function(req, res) {
     desc,
     picName,
   } = req.body;
+  if (name == null || name.length == 0)
+    return res.status(404).json({ error: "Service needs a name" });
   Service.findOne({ where: { name: name } }).then(item => {
     if(item) {
       item.desc = desc;
