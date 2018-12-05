@@ -96,6 +96,28 @@ router.patch('/:id/:shippingStatus', function (req, res) {
   Order.findById(req.params.id).then((order) => {
     order.updateAttributes({
       shippingStatus: req.params.shippingStatus,
+    }).then((order1) => {
+      res.json({ updated: true })
+    });
+  });
+});
+
+router.patch('/pickup/:id/:pickupBool', function (req, res) {
+  Order.findById(req.params.id).then((order) => {
+    order.updateAttributes({
+      storePickup: req.params.pickupBool,
+    }).then((order1) => {
+      res.json({ updated: true })
+    });
+  });
+});
+
+router.patch('/price/:id/:totalPrice', function (req, res) {
+  Order.findById(req.params.id).then((order) => {
+    order.updateAttributes({
+      totalPrice: req.params.totalPrice,
+    }).then((order1) => {
+      res.json({ updated: true })
     });
   });
 });

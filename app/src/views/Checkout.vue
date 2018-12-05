@@ -94,13 +94,13 @@
               <div class = "col-sm-1"></div>
               <div class = "col-sm-4">
                 <div>
-                  <input type="radio" name="radioset2" checked>
+                  <input type="radio" name="radioset2" checked v-on:click="storePickup=false">
                   <label class="marginLeftRadio">Deliver to Shipping Address</label>
                 </div>
               </div>
               <div class = "col-sm-4">
                 <div>
-                  <input type="radio" name="radioset2">
+                  <input type="radio" name="radioset2" v-on:click="storePickup=true">
                   <label class="marginLeftRadio">Pick-up In-Store</label>
                 </div>
               </div>
@@ -114,7 +114,7 @@
               <div class = "col-sm-8"></div>
           </div>
           <div class = "row">
-              <button class = "btn btn-success" id = "checkoutButton">Place your order</button>
+              <button class = "btn btn-success" id = "checkoutButton" v-on:click="finalizeCheckout()">Place your order</button>
           </div>
 
 
@@ -127,12 +127,11 @@
             <div id="checkoutSideBox">
                 <p id = "checkoutSideBoxTopText">Review Order</p>
                 <br>
-                <p class = "checkoutSideBoxBodyText">__ Total Items</p>
-                <p class = "checkoutSideBoxBodyText">Total Price $__ </p>
+                <p class = "checkoutSideBoxBodyText">Total Price ${{this.totalPrice}} </p>
                 <br>
                 <br>
                 <br>
-                <button class = "btn-sm btn-success" id = "checkoutButtonSmall">Place your order</button>
+                <button class = "btn-sm btn-success" id = "checkoutButtonSmall" v-on:click="finalizeCheckout()">Place your order</button>
 
             </div>
 
@@ -158,8 +157,23 @@ export default class Checkout extends Vue {
   shippingAddress: AddressItem = null;
   billingAddress: AddressItem = null;
   order: OrderItem = null;
+  storePickup: Boolean = false;
 
   totalPrice = 0
+  totalItems = 0
+
+
+  fuck(){
+    console.log("FUCKFUCKFUCKFUCK")
+  }
+
+
+  finalizeCheckout(){
+    axios.patch(`/api/orders/pickup/` + this.order.id + `/` + this.storePickup)
+    axios.patch(`/api/orders/` + this.order.id + `/Shipping`).then(() => {
+      this.$router.push({name: 'home'})
+    })
+  }
 
   getUsersAddresses(){
     axios.get(`/api/addresses/user/` + this.userId)
@@ -178,11 +192,11 @@ export default class Checkout extends Vue {
   }
 
   getOrderData(){
-    axios.get('/api/order/cart/' + this.userId)
+    axios.get('/api/orders/cart/' + this.userId)
     .then((res) => {
       this.order = res.data.order
       this.totalPrice = this.order.totalPrice
-    })
+    });
   }
 
   beforeMount(){
