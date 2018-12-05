@@ -13,7 +13,7 @@ module.exports = {
         },
         {
           name: 'Free tune-up',
-          desc: 'Every bicycle sold at Foxcycle includes a free tune-up within 6 months of purchase.',
+          desc: 'Every bicycle sold at Foxycle includes a free tune-up within 6 months of purchase.',
           picName: '../assets/servicesMan.png',
           createdAt: new Date(),
           updatedAt: new Date()
