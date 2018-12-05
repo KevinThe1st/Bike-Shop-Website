@@ -14,6 +14,8 @@ router.put('/', function(req, res) {
     desc,
     picName,
   } = req.body;
+  if (name == null || name.length == 0)
+    return res.status(404).json({ error: "Service needs a name" });
   Service.findOne({ where: { name: name } }).then(item => {
     if(item) {
       item.desc = desc;

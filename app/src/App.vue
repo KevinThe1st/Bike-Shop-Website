@@ -5,12 +5,12 @@
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-      <b-navbar-brand to="/">Foxcycle</b-navbar-brand>
+      <b-navbar-brand to="/">Foxycle</b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
 
         <b-navbar-nav>
-          <b-nav-item to="/shop">Shop</b-nav-item>
+          <b-nav-item id="NavbarShop" to="/shop">Shop</b-nav-item>
           <b-nav-item to="/services">Services</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
         </b-navbar-nav>
@@ -32,9 +32,10 @@
             <b-dropdown-item href="/account">Account</b-dropdown-item>
             <b-dropdown-item to="/cart">Cart</b-dropdown-item>
             <b-dropdown-item href="/orders">My Orders</b-dropdown-item>
-            <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Item Management</b-dropdown-item>
+            <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin' || this.$store.getters.getLoginPermissionLevel == 'Employee'">Admin Item Management</b-dropdown-item>
             <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
-            <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Order Management</b-dropdown-item>
+            <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin' || this.$store.getters.getLoginPermissionLevel == 'Employee'">Admin Order Management</b-dropdown-item>
+            <b-dropdown-item to="/adminPageManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Page Management</b-dropdown-item>
             <b-dropdown-item href="#" v-on:click="$store.commit('logout')">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
 

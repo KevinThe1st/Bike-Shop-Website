@@ -49,6 +49,7 @@ export default class Product extends Vue {
       quantity: this.qty,
     }).then((res) => {
       console.log("Item(s) added:" + res.data.updated);
+      alert("Added product to cart!");
     })
   }
 }

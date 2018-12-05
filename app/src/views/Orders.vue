@@ -3,7 +3,7 @@
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
-              <div id= "ManageOrdersText">My Orders</div>
+              <div id= "SeeOrdersText">My Orders</div>
           </div>
       </div>
 
@@ -325,7 +325,7 @@ export default class Orders extends Vue {
   margin-left: 10px;
 }
 
-#ManageOrdersText {
+#SeeOrdersText {
   font-weight: bold;
   font-size: 20px;
   text-align: center;

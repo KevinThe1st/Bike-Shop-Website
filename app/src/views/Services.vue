@@ -70,7 +70,7 @@ export default class Services extends Vue {
     axios
       .get('/api/textbox/location')
       .then((res) => {
-        this.bottomTxt = res.data.item.text;
+        this.bottomTxt = res.data.text.text;
       })
   }
 }

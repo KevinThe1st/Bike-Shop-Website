@@ -174,7 +174,6 @@ export default class Account extends Vue {
     }).then((res) => {
       console.log("Update Successful");
     })
-
     axios.put('/api/addresses/', {
         type: "Billing",
         street1: this.bStreet1Message,

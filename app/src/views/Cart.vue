@@ -142,8 +142,7 @@
 
               <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
               <br>
-              <router-link :to="{name: 'checkout'}">
-                <button class="btn btn-success">Proceed to Checkout</button>
+                <button class="btn btn-success" v-on:click="prepCheckout()">Proceed to Checkout</button>
               </router-link>
 
 
@@ -178,6 +177,12 @@ export default class Cart extends App {
 
   beforeMount(){
     this.getCartData()
+  }
+
+  prepCheckout(){
+    axios.patch(`/api/orders/price/` + this.currentOrder.id + `/` + this.totalPrice).then(() => {
+      this.$router.push({name: 'checkout'})
+    })
   }
 
   getCartData(){
