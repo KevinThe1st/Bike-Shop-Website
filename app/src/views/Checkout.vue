@@ -117,7 +117,7 @@
 
           <div class = "row">
               <div class = "col-sm-4 checkoutBold">
-                  Total Price: $
+                  Total Price: $ {{totalPrice}}
               </div>
               <div class = "col-sm-8"></div>
           </div>
@@ -158,13 +158,16 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import axios from 'axios';
-import { AddressItem } from '@/models';
+import { AddressItem, OrderItem } from '@/models';
 
 @Component
 export default class Checkout extends Vue {
   userId: number;
   shippingAddress: AddressItem = null;
   billingAddress: AddressItem = null;
+  order: OrderItem = null;
+
+  totalPrice = 0
 
   getUsersAddresses(){
     axios.get(`/api/addresses/user/` + this.userId)
@@ -182,9 +185,18 @@ export default class Checkout extends Vue {
     });
   }
 
+  getOrderData(){
+    axios.get('/api/order/cart/' + this.userId)
+    .then((res) => {
+      this.order = res.data.order
+      this.totalPrice = this.order.totalPrice
+    })
+  }
+
   beforeMount(){
     this.userId = this.$store.getters.getLoginStatus;
     this.getUsersAddresses();
+    this.getOrderData();
   }
 
 }

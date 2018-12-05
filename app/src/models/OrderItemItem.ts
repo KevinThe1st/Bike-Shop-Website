@@ -1,8 +1,9 @@
 export class OrderItemItem {
-  quantity: number;
-  price: number;
+  id!: number;
+  quantity!: number;
+  price!: number;
   createdAt!: Date;
   updatedAt!: Date;
-  orderId!: number;
+  OrderId!: number;
   ItemId!: number;
 }

@@ -85,6 +85,11 @@ export default new Router({
       path: '/adminPageManagement',
       name: 'adminPageManagement',
       component: () => import('./views/AdminPageManagement.vue'),
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('./views/Orders.vue'),
     }
   ],
 });

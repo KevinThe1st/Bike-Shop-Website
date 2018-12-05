@@ -48,8 +48,9 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
-router.get('/list/:id', function (req, res) {
-  Item.findAll({ id: req.params.id }).then((items) => {
+router.put('/list/', function (req, res) {
+  const { ids } = req.body;
+  Item.findAll({ where: { id: ids }}).then((items) => {
     return res.json({ items });
   });
 });
@@ -91,6 +92,30 @@ router.put('/', function (req, res) {
     return res.json({ created: 'Success' });
   }).catch(() => {
     return res.status(403).json({ created: 'Failure', id: item.id });
+  });
+});
+
+router.put('/modifyItem', function (req, res) {
+  const {
+    id,
+    name,
+    price,
+    stock,
+    descShort,
+    descLong,
+  } = req.body;
+  Item.findById(id).then((item) => {
+    console.log(name);
+    item.name = name;
+    item.price = price;
+    item.stock = stock;
+    item.descShort = descShort;
+    item.descLong = descLong;
+    item.save().then(() => {
+      return res.json({ modified: true, id: item.id });
+    });
+  }).catch(() => {
+    return res.status(403).json({ modified: false });
   });
 });
 

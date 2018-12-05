@@ -22,7 +22,7 @@
                 Stock: {{stock}}
               </p>
               <p class ="inlineBlock">Quantity: </p>
-              <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" v-model="qty" placeholder="0">
+              <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" v-model="qty" placeholder="1">
               <br>
               <button class="btn btn-success" id = "buttonClass" v-on:click="addToCart()">Add to Cart</button>
             </div>
@@ -51,7 +51,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Product extends Vue {
-  qty = 0
+  qty = 1
   addToCart(){
     axios.put('/api/orderItems/cart', {
       userId: this.$store.getters.getLoginStatus,

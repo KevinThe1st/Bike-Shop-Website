@@ -1,50 +1,88 @@
 <template>
   <div id="admin-item-management">
-    <input type="text" v-model="itemName" placeholder="name">
-    <input type="text" v-model="itemPrice" placeholder="price">
-    <input type="text" v-model="itemStock" placeholder="stock">
-    <input type="text" v-model="itemDescShort" placeholder="short desc">
-    <input type="text" v-model="itemDescLong" placeholder="long desc">
-    <!--input type="text" v-model="itemPicName" placeholder="picture name"-->
-    <file-upload :url='url' :thumb-url='thumbUrl' :headers="headers" @change="onFileChange"></file-upload>
-    <div id="category-bar">
-      <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
-        <ul class ="noBullets">
-          <li v-for="(category, categoryIndex) in topLevelCategories">
-            {{category.name}}
-            <ul class ="noBullets">
-              <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
-                <input type="checkbox" v-on:click="categoryChanged(categoryIndex, subcategoryIndex)">
-                {{subcategory.name}}
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+    <div id = "ManageItemsText">
+        Manage Items
     </div>
-    <button type="submit" v-on:click="addNewItem()">save</button>
+    <div class="ManageItemsHeader">Add New Item</div>
+    <button type="submit" class = "btn btn-primary" v-on:click="addingANewItem = true">Create New Item</button>
+    <div id="add-new-item" v-if="addingANewItem">
+      <input type="text" v-model="itemName" placeholder="name">
+      <input type="text" v-model="itemPrice" placeholder="price">
+      <input type="text" v-model="itemStock" placeholder="stock">
+      <input type="text" v-model="itemDescShort" placeholder="short desc">
+      <input type="text" v-model="itemDescLong" placeholder="long desc">
+      <upload-image url='/upload' button_html='Drag a product image here'></upload-image>
+      <!--input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"-->
+      <div id="category-bar">
+        <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
+          <ul class ="noItemManagerBullets">
+            <li v-for="(category, categoryIndex) in topLevelCategories">
+              {{category.name}}
+              <ul class ="noBullets">
+                <li v-for="(subcategory, subcategoryIndex) in category.subcategories">
+                  <input type="checkbox" v-on:click="categoryChanged(categoryIndex, subcategoryIndex)">
+                  {{subcategory.name}}
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <button type="submit" v-on:click="addNewItem()">Save</button>
+    </div>
     <b-alert variant="success" dismissible :show="successful" @dismissed="successful=false">
       Item was successfully created
     </b-alert>
     <b-alert variant="danger" dismissible :show="failed" @dismissed="failed=false">
       Item failed to create
     </b-alert>
+    <hr>
     <div id="existing-items">
-      <li v-for="(item, index) in allItems">
-        {{item}}
-        <button type="submit" v-on:click="">Edit Item</button>
+    <div class="ManageItemsHeader">Edit Existing Item</div>
+    <ul class="noItemManagerBullets">
+      <li class = "noItemManagerBullets" v-for="(item, index) in allItems">
+        <div class="itemManagerDiv">
+          <div class = "container">
+            <div class = "row">
+              <div class = "col-sm-2">ID: {{item.id}}</div>
+              <div class = "col-sm-3">Name: {{item.name}}</div>
+              <div class = "col-sm-2">Price: ${{item.price}}</div>
+              <div class = "col-sm-2">Stock: {{item.stock}}</div>
+              <div class = "col-sm-3">
+                Short Description: {{item.descShort}}
+                <br>
+                Long Description: {{item.descLong}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <button type="submit" v-on:click="beginEditingItem(index)">Edit Item</button>
+        <div id="edit-item" v-if="editing == index">
+          <input type="text" v-model="editingName" placeholder="name">
+          <input type="text" v-model="editingPrice" placeholder="price">
+          <input type="text" v-model="editingStock" placeholder="stock">
+          <input type="text" v-model="editingDescShort" placeholder="short desc">
+          <input type="text" v-model="editingDescLong" placeholder="long desc">
+          <button type="submit" v-on:click="saveEdit()">Save</button>
+        </div>
       </li>
+    </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import UploadImage from 'vue-upload-image';
 import axios from 'axios';
 import App from '../App.vue';
 import { CategoryItem, ShopItem } from '@/models';
 
 @Component({
+  components: {
+    UploadImage
+  },
   data() {
     return {
       itemName: '',
@@ -52,7 +90,12 @@ import { CategoryItem, ShopItem } from '@/models';
       itemStock: '',
       itemDescShort: '',
       itemDescLong: '',
-      itemPicName: ''
+      itemPicName: '',
+      editingName: '',
+      editingPrice: '',
+      editingStock: '',
+      editingDescShort: '',
+      editingDescLong: ''
     }
   }
 })
@@ -63,6 +106,8 @@ export default class AdminItemManagement extends App {
   successful: boolean = false;
   failed: boolean = false;
   allItems: ShopItem[] = [];
+  addingANewItem: boolean = false;
+  editing: number = -1;
 
   // file upload fields
   uploadedFiles: [];
@@ -72,18 +117,7 @@ export default class AdminItemManagement extends App {
    */
 
   addNewItem(){
-    /*
-    I could check for invalid stuff before a backend request or I could make the request and deete the items if it's
-    malformed in some way.
-
-    if(this.$data.itemPrice.length == 0 || this.$data.itemName.length == 0 || this.$data.itemStock.length == 0 ||
-       this.$data.itemDescShort.length == 0 || this.$data.itemDescLong.length == 0 || this.$data.itemPicName.length == 0){
-      this.failed = true;
-      this.successful = false;
-      return;
-    }
-    */
-
+    this.addingANewItem = false;
     axios.put(`/api/items`, {
       name: this.$data.itemName,
       price: parseFloat(this.$data.itemPrice),
@@ -102,6 +136,41 @@ export default class AdminItemManagement extends App {
       this.successful = false;
       axios.delete(`/api/items/` + error.response.data.id); // should probably do this at some point
     });
+  }
+
+  beginEditingItem(indexIntoAllItems){
+    this.editing = indexIntoAllItems;
+    this.$data.editingName = this.allItems[indexIntoAllItems].name;
+    this.$data.editingPrice = this.allItems[indexIntoAllItems].price;
+    this.$data.editingStock = this.allItems[indexIntoAllItems].stock;
+    this.$data.editingDescShort = this.allItems[indexIntoAllItems].descShort;
+    this.$data.editingDescLong = this.allItems[indexIntoAllItems].descLong;
+  }
+
+  saveEdit(){
+    axios.put(`/api/items/modifyItem`, {
+      id: this.allItems[this.editing].id,
+      name: this.$data.editingName,
+      price: parseFloat(this.$data.editingPrice),
+      stock: parseInt(this.$data.editingStock),
+      descShort: this.$data.editingDescShort,
+      descLong: this.$data.editingDescLong,
+    }).then((res) => {
+      console.log(res.data);
+      this.successful = true;
+      this.failed = false;
+      var tempId = res.data.id;
+      this.allItems[tempId-1].name = this.$data.editingName;
+      this.allItems[tempId-1].price = parseFloat(this.$data.editingPrice);
+      this.allItems[tempId-1].stock = parseInt(this.$data.editingStock);
+      this.allItems[tempId-1].descShort = this.$data.editingDescShort;
+      this.allItems[tempId-1].descLong = this.$data.editingDescLong;
+    }).catch((error) => {
+      console.log(error.response);
+      this.failed = true;
+      this.successful = false;
+    });
+    this.editing = -1;
   }
 
   getAllItems(){
@@ -146,9 +215,9 @@ export default class AdminItemManagement extends App {
   beforeMount(){
     this.getAllTopLevelCategories();
     this.getAllItems();
-    this.reset();
+    //this.reset();
   }
-
+/*
   reset() {
     this.uploadedFiles = [];
   }
@@ -173,12 +242,38 @@ export default class AdminItemManagement extends App {
     });
 
     this.save(formData);
-  }
+  }*/
 }
 </script>
 
 <style lang="scss">
 #admin-item-management {
   padding: 80px 10px;
+}
+
+#ManageItemsText {
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.ManageItemsHeader {
+  color: blue;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.noItemManagerBullets {
+  ul {
+    list-style-type: none;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+
+.itemManagerDiv {
+  border: 1px solid black;
+  margin: 10px;
 }
 </style>

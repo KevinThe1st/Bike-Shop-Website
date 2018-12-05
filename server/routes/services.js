@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const { Service } = require('../models');
 
-/* GET specific item listing. */
 router.get('/', function(req, res) {
   Service.findAll().then((items) => {
     res.json({items});
