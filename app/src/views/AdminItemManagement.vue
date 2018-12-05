@@ -7,7 +7,8 @@
       <input type="text" v-model="itemStock" placeholder="stock">
       <input type="text" v-model="itemDescShort" placeholder="short desc">
       <input type="text" v-model="itemDescLong" placeholder="long desc">
-      <upload-image url='/upload' button_html='Drag a product image here'></upload-image>
+      <input type="text" v-model="itemPicName" placeholder="file name">
+      <!--upload-image url='/upload' button_html='Submit'></upload-image-->
       <!--input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"-->
       <div id="category-bar">
         <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">

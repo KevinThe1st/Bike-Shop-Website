@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//var busboy = require('connect-busboy');
+//var fs = require('fs-extra');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,9 +15,12 @@ var ordersRouter = require('./routes/orders');
 var categoriesRouter = require('./routes/categories');
 var serviceRouter = require('./routes/services');
 var orderItemRouter = require('./routes/order-item');
-var addressRouter = require('./routes/addresses')
+var addressRouter = require('./routes/addresses');
+//var uploadRouter = require('./routes/upload');
 
 var app = express();
+//app.use(busboy());
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +42,7 @@ app.use('/categories', categoriesRouter);
 app.use('/services', serviceRouter);
 app.use('/orderItems', orderItemRouter);
 app.use('/addresses', addressRouter);
+//app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,18 +60,22 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.route('/upload').post(function (req, res, next) {
-  var fstream;
-  req.pipe(req.busboy);
-  req.busboy.on('file', function (fieldname, file, filename) {
-    console.log("Uploading: " + filename);
-    fstream = fs.createWriteStream(__dirname + '/img/' + filename);
-    file.pipe(fstream);
-    fstream.on('close', function () {
-      console.log("Upload Finished of " + filename);
-      res.redirect('back');           //where to go next
-    });
-  });
-});
+/*app.route('/upload')
+  .post(function (req, res, next) {
+
+        var fstream;
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) {
+            console.log("Uploading: " + filename);
+
+            //Path where image will be uploaded
+            fstream = fs.createWriteStream(__dirname + '/img/' + filename);
+            file.pipe(fstream);
+            fstream.on('close', function () {
+                console.log("Upload Finished of " + filename);
+                res.redirect('back');           //where to go next
+            });
+        });
+    });*/
 
 module.exports = app;
