@@ -35,6 +35,7 @@
             <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Item Management</b-dropdown-item>
             <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
             <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Order Management</b-dropdown-item>
+            <b-dropdown-item to="/adminPageManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Page Management</b-dropdown-item>
             <b-dropdown-item href="#" v-on:click="$store.commit('logout')">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
 
