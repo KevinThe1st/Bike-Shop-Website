@@ -16,12 +16,14 @@ router.get('/parents', function (req, res) {
 
 router.get('/:id', function (req, res) {
   Category.findById(req.params.id).then((category) => {
+    if (category == null)
+      return res.status(404).json({ category });
     return res.json({ category });
   });
 });
 
 router.get('/parent/:id', function (req, res) {
-  Category.findAll({where: {parentId: req.params.id}}).then((category) => {
+  Category.findAll({ where: { parentId: req.params.id } }).then((category) => {
     return res.json({ category });
   });
 });
@@ -29,12 +31,12 @@ router.get('/parent/:id', function (req, res) {
 router.put('/', function (req, res) {
   const {
     name,
-    type,
     parentId,
   } = req.body;
+  if (name == null)
+    return res.status(403).json({ created: false });
   Category.create({
     name,
-    type,
     parentId,
   }).then((category) => {
     res.json({ created: true });
@@ -50,7 +52,7 @@ router.delete('/:id', function (req, res) {
       res.json({ deleted: true });
     });
   }).catch(() => {
-    res.status(403).json({ deleted: false });
+    res.status(404).json({ deleted: false });
   });
 });
 
