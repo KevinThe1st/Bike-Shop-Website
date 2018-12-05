@@ -83,9 +83,7 @@ export default class Account extends Vue {
     axios
       .get('/api/users/' + this.$store.getters.getLoginStatus)
       .then((res) => {
-        console.log(this.profile);
         this.profile = [res.data.user]
-        console.log(this.profile);
       })
   }
 

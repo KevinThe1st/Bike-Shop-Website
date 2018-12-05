@@ -37,9 +37,9 @@ router.put('/', function (req, res) {
     type,
     parentId,
   }).then((category) => {
-    res.json({ created: 'Success' });
+    res.json({ created: true });
   }).catch(() => {
-    res.json({ created: 'Failure' });
+    res.status(403).json({ created: false });
   });
 });
 
@@ -47,10 +47,10 @@ router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Category.findById(idToDelete).then((category) => {
     category.destroy().then(() => {
-      res.json({ delete: true });
+      res.json({ deleted: true });
     });
   }).catch(() => {
-    res.json({ delete: false });
+    res.status(403).json({ deleted: false });
   });
 });
 
