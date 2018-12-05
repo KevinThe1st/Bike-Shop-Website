@@ -154,7 +154,7 @@ describe('Item', function () {
           });
         });
     });
-    
+
     it('No item with category returns 404', function (done) {
       Category.create(validCategory)
         .then((category) => {
@@ -177,7 +177,7 @@ describe('Item', function () {
       Item.create(validItem)
         .then(() => {
           request
-            .get('/items/list')
+            .put('/items/list')
             .send({
               ids: [9999]
             })
@@ -193,7 +193,7 @@ describe('Item', function () {
       Item.create(validItem)
         .then((item) => {
           request
-            .get('/items/list')
+            .put('/items/list')
             .send({
               ids: [item.id]
             })

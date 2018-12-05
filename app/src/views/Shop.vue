@@ -144,7 +144,7 @@ export default class Shop extends App {
     axios
       .get('/api/textbox/location')
       .then((res) => {
-        this.bottomTxt = res.data.item.text;
+        this.bottomTxt = res.data.text.text;
       })
   }
 

@@ -100,13 +100,13 @@ export default class About extends Vue {
     axios
       .get('/api/textbox/location')
       .then((res) => {
-        this.location = res.data.item.text;
-        this.bottomTxt = res.data.item.text;
+        this.location = res.data.text.text;
+        this.bottomTxt = res.data.text.text;
       })
     axios
       .get('/api/textbox/about')
       .then((res) => {
-        this.aboutUs = res.data.item.text;
+        this.aboutUs = res.data.text.text;
       })
   }
 }

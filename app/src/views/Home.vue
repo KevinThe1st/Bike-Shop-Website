@@ -170,22 +170,22 @@ export default class Home extends Vue {
     axios
       .get('/api/textbox/home1')
       .then((res) => {
-        this.home1 = res.data.item.text;
+        this.home1 = res.data.text.text;
       })
     axios
       .get('/api/textbox/home2')
       .then((res) => {
-        this.home2 = res.data.item.text;
+        this.home2 = res.data.text.text;
       })
     axios
       .get('/api/textbox/home3')
       .then((res) => {
-        this.home3 = res.data.item.text;
+        this.home3 = res.data.text.text;
       })
     axios
       .get('/api/textbox/location')
       .then((res) => {
-        this.bottomTxt = res.data.item.text;
+        this.bottomTxt = res.data.text.text;
       })
   }
 }
