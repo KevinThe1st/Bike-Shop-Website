@@ -41,17 +41,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Product extends Vue {
-  props: {
-    id: Number,
-    price: Number,
-    stock: Number,
-    name: String,
-    descShort: String,
-    descLong: String,
-    picName: String,
-  }
-})
-export default class Product extends Vue {
   qty = 1
   addToCart(){
     axios.put('/api/orderItems/cart', {

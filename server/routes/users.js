@@ -18,7 +18,8 @@ router.get('/:id', function(req, res) {
    });
 
 router.put('/edit', function(req, res) {
-  const { id, firstName, lastName, username, password } = req.body;
+  const { id, firstName, lastName, username, password,
+   } = req.body;
   User.findById(id).then((user) => {
     if(user) {
         if (firstName) {
@@ -33,6 +34,7 @@ router.put('/edit', function(req, res) {
         if (password) {
             user.password = password;
         }
+
         user.save().then(user => {
           return res.json({ updated: user.id });
         });
