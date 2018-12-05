@@ -138,6 +138,102 @@ describe('Item', function () {
     });
   });
 
+  describe('Get items with category id', function () {
+    it('Invalid category id returns 404', function (done) {
+      Category.create(validCategory)
+        .then((category) => {
+          Item.create(validItem)
+          .then(() => {
+            request
+            .get('/items/byCat/9999')
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+          });
+        });
+    });
+    
+    it('No item with category returns 404', function (done) {
+      Category.create(validCategory)
+        .then((category) => {
+          Item.create(validItem)
+          .then(() => {
+            request
+            .get('/items/byCat/' + category.id)
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+          });
+        });
+    });
+  });
+
+  describe('Get items with list of Item IDs', function () {
+    it('All IDs invalid returns 404', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          request
+            .get('/items/list')
+            .send({
+              ids: [9999]
+            })
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+        });
+    });
+
+    it('At least one ID valid returns 200', function (done) {
+      Item.create(validItem)
+        .then((item) => {
+          request
+            .get('/items/list')
+            .send({
+              ids: [item.id]
+            })
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
+    });
+  });
+
+  describe('Get specific item by Item ID', function () {
+    it('Invalid ID returns 404', function (done) {
+      Item.create(validItem)
+        .then(() => {
+          request
+            .get('/items/9999')
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+        });
+    });
+
+    it('Valid ID returns 200', function (done) {
+      Item.create(validItem)
+        .then((item) => {
+          request
+            .get('/items/' + item.id)
+            .expect(function (res, err) {
+              //console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
+    });
+  });
+
   describe('Create an item with categories', function () {
     it('Return 200', function (done) {
       Category.create(validCategory)
