@@ -32,7 +32,7 @@
                       <div class = "col-sm-3">
                         <button class="btn btn-success" type="submit" v-on:click="completeOrder(orderIndex)">Complete Order</button>
                         <br><br>
-                        <button class="btn btn-danger" type="submit" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
+                        <button class="btn btn-danger" type="submit" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'" v-on:click="cancelOrder(orderIndex)">Cancel Order</button>
 
                       </div>
                   </div>

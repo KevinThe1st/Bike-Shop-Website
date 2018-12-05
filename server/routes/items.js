@@ -105,39 +105,17 @@ router.put('/modifyItem', function (req, res) {
     descLong,
   } = req.body;
   Item.findById(id).then((item) => {
-    if (categories.length == 0) {
-      return res.status(403).json({ modified: false, id: item.id });
-    };
-
+    console.log(name);
     item.name = name;
     item.price = price;
     item.stock = stock;
     item.descShort = descShort;
     item.descLong = descLong;
-
-    item.save().then((item1) => {
-      ItemCategory.findAll({ where: { itemId: id } }).then((itemCat) => {
-        var ids = []
-        for (var i = 0; i < itemCat.length; i++) {
-          ids.push(itemCat[i].id)
-        }
-        ItemCategory.destroy({
-          where: {
-            id: ids
-          }
-        }).then((empty) => {
-          categories.forEach(catId => {
-            var newItemCategory = ItemCategory.create({
-              ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
-              CategoryId: catId
-            });
-          });
-        });
-      });
+    item.save().then(() => {
+      return res.json({ modified: true, id: item.id });
     });
-    return res.json({ modified: true });
   }).catch(() => {
-    return res.status(403).json({ modified: false, id: item.id });
+    return res.status(403).json({ modified: false });
   });
 });
 

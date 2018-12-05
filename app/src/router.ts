@@ -85,6 +85,6 @@ export default new Router({
       path: '/orders',
       name: 'orders',
       component: () => import('./views/Orders.vue'),
-    },
+    }
   ],
 });

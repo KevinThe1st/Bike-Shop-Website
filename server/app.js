@@ -54,4 +54,18 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.route('/upload').post(function (req, res, next) {
+  var fstream;
+  req.pipe(req.busboy);
+  req.busboy.on('file', function (fieldname, file, filename) {
+    console.log("Uploading: " + filename);
+    fstream = fs.createWriteStream(__dirname + '/img/' + filename);
+    file.pipe(fstream);
+    fstream.on('close', function () {
+      console.log("Upload Finished of " + filename);
+      res.redirect('back');           //where to go next
+    });
+  });
+});
+
 module.exports = app;
