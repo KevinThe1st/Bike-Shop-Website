@@ -6,12 +6,15 @@
       </p>
       <div class = "container">
           <div class = "row">
-            <div class = "col-sm-6">
+            <div class = "col-sm-4">
               <img v-bind:src="picName" width = 200px>
             </div>
-            <div class = "col-sm-6">
-              <br>
-              <br>
+            <div class = "col-sm-5">
+              <p>
+                Description: {{descLong}}
+              </p>
+            </div>
+            <div class = "col-sm-3">
               <p>
                 Price: ${{price}}
               </p>
@@ -19,7 +22,7 @@
                 Stock: {{stock}}
               </p>
               <p class ="inlineBlock">Quantity: </p>
-              <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" v-model="qty" placeholder="0">
+              <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" v-model="qty" placeholder="1">
               <br>
               <button class="btn btn-success" id = "buttonClass" v-on:click="addToCart()">Add to Cart</button>
             </div>
@@ -49,7 +52,7 @@ export default class Product extends Vue {
   }
 })
 export default class Product extends Vue {
-  qty = 0
+  qty = 1
   addToCart(){
     axios.put('/api/orderItems/cart', {
       userId: this.$store.getters.getLoginStatus,

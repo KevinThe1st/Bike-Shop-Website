@@ -75,6 +75,16 @@ export default new Router({
       path: '/adminOrderManagement',
       name: 'adminOrderManagement',
       component: () => import('./views/AdminOrderManagement.vue'),
-    }
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('./views/Checkout.vue'),
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('./views/Orders.vue'),
+    },
   ],
 });

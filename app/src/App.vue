@@ -20,12 +20,18 @@
 
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+
+
+
+            <router-link :to="{name: 'shop'}">
+              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+            </router-link>
           </b-nav-form>
 
           <b-nav-item-dropdown text="Profile" v-if="this.$store.getters.getLoginStatus" right>
             <b-dropdown-item href="/account">Account</b-dropdown-item>
             <b-dropdown-item to="/cart">Cart</b-dropdown-item>
+            <b-dropdown-item href="/orders">My Orders</b-dropdown-item>
             <b-dropdown-item to="/adminItemManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Item Management</b-dropdown-item>
             <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
             <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Order Management</b-dropdown-item>

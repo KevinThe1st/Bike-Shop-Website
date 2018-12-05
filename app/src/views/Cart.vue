@@ -94,7 +94,7 @@
                         </div>
                         <div class = "row">
                             <div class = "col-sm-12 itemIndex">
-                              item id: {{index}}
+                              item id: {{item.id}}
                             </div>
                         </div>
                         <div class = "row">
@@ -105,8 +105,7 @@
                             <div class = "col-sm-2">
 
                                 <br><br><br><br><br>
-
-                                <button class="btn btn-danger" id="removeButton">Remove</button>
+                                <button class="btn btn-danger" id="removeButton" v-on:click="removeItems(item.id)">Remove</button>
                             </div>
                             <div class = "col-sm-2 priceStyle">
                                 ${{item.price}}
@@ -141,9 +140,13 @@
 
         <div class = "col-sm-12" id = "centeredDiv">
 
-              <p id = "SubtotalPrice">Subtotal price ({{orderItemsInCurrentOrderWithItemData.length}} items): ${{totalPrice}}</p>
+              <p id = "SubtotalPrice">Subtotal price ({{totalQuantity}} items): ${{totalPrice}}</p>
               <br>
-              <button class="btn btn-success">Proceed to Checkout</button>
+              <router-link :to="{name: 'checkout'}">
+                <button class="btn btn-success">Proceed to Checkout</button>
+              </router-link>
+
+
 
         </div>
 
@@ -151,13 +154,6 @@
 
 
     </div>
-
-
-
-
-
-    <input type="button" v-on:click="getUserOrder()">
-    <input type="button" v-on:click="getCombinedData()">
 
 
 
@@ -178,58 +174,58 @@ export default class Cart extends App {
   itemsInCurrentOrder: ShopItem[] = [];
   orderItemsInCurrentOrderWithItemData: CurrentOrderItem[] = [];
   totalPrice: number = 0;
+  totalQuantity = 0
 
-  getUserOrder(){
-    axios.get(`/api/orders/` + this.$store.getters.getLoginStatus)
+  beforeMount(){
+    this.getCartData()
+  }
+
+  getCartData(){
+    axios.get(`/api/orders/cart/` + this.$store.getters.getLoginStatus)
     .then((res) => {
-      this.orders = res.data.orders;
-      this.getCurrentOrder();
-    })
-  }
-
-  getCurrentOrder(){
-    for(var i = 0; i < this.orders.length; i++){
-      if(this.orders[i].shippingStatus == "Cart"){
-        this.currentOrder = this.orders[i];
-        i = this.orders.length;
-        this.getAllOrderItemsFromCurrentOrder();
-      }
-    }
-  }
-
-  getAllOrderItemsFromCurrentOrder(){
-    axios.get(`/api/orderItems/` + this.currentOrder.id)
-    .then((res) => {
-      this.orderItemsInCurrentOrder = res.data.items;
-      this.getAllItemsFromCurrentOrderItems();
-    })
-  }
-
-  getAllItemsFromCurrentOrderItems(){
-    this.itemsInCurrentOrder = [];
-    for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
-      console.log(this.orderItemsInCurrentOrder[i].ItemId)
-      // no idea why this has to be capital Item but it only works like this, changing the front end model to compensate
-      axios.get(`/api/items/` + this.orderItemsInCurrentOrder[i].ItemId)
+      this.currentOrder = res.data.order;
+      axios.get(`/api/orderItems/` + this.currentOrder.id)
       .then((res) => {
-        this.itemsInCurrentOrder.push(res.data.item);
-      })
-    }
+        this.orderItemsInCurrentOrder = res.data.items;
+        this.itemsInCurrentOrder = [];
+        var ids = [];
+        for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
+          ids.push(this.orderItemsInCurrentOrder[i].ItemId);
+        }
+
+        axios.put(`/api/items/list/`, {ids})
+        .then((res2) => {
+          this.itemsInCurrentOrder = res2.data.items;
+          this.updateCombinedData()
+        })
+      });
+    });
   }
 
-  getCombinedData(){
+  updateCombinedData(){
     this.orderItemsInCurrentOrderWithItemData = [];
+    this.totalQuantity = 0;
     this.totalPrice = 0;
     for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
       var temp = new CurrentOrderItem;
+      temp.id = this.itemsInCurrentOrder[i].id;
       temp.picName = this.itemsInCurrentOrder[i].picName;
       temp.name = this.itemsInCurrentOrder[i].name;
       temp.price = this.orderItemsInCurrentOrder[i].price;
       temp.quantity = this.orderItemsInCurrentOrder[i].quantity;
       this.orderItemsInCurrentOrderWithItemData.push(temp);
-      this.totalPrice += temp.price * temp.quantity;
+      this.totalQuantity += temp.quantity;
+      this.totalPrice += temp.price
     }
-    console.log(this.orderItemsInCurrentOrderWithItemData);
+  }
+
+  removeItems(itemId) {
+    axios.put('/api/orderItems/deleteItemFromCart', {
+      itemId: itemId,
+      orderId: this.currentOrder.id
+    }).then((res) => {
+      this.getCartData()
+    });
   }
 }
 </script>

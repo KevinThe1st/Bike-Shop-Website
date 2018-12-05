@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { Item } = require('../models');
-const { ItemCategory } = require('../models');
+const { Item, ItemCategory } = require('../models');
 
 router.get('/', function (req, res) {
   if (req.query.search == undefined) {
@@ -49,6 +48,13 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
+router.put('/list/', function (req, res) {
+  const { ids } = req.body;
+  Item.findAll({ where: { id: ids }}).then((items) => {
+    return res.json({ items });
+  });
+});
+
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
     return res.json({ item });
@@ -86,6 +92,52 @@ router.put('/', function (req, res) {
     return res.json({ created: 'Success' });
   }).catch(() => {
     return res.status(403).json({ created: 'Failure', id: item.id });
+  });
+});
+
+router.put('/modifyItem', function (req, res) {
+  const {
+    id,
+    name,
+    price,
+    stock,
+    descShort,
+    descLong,
+  } = req.body;
+  Item.findById(id).then((item) => {
+    if (categories.length == 0) {
+      return res.status(403).json({ modified: false, id: item.id });
+    };
+
+    item.name = name;
+    item.price = price;
+    item.stock = stock;
+    item.descShort = descShort;
+    item.descLong = descLong;
+
+    item.save().then((item1) => {
+      ItemCategory.findAll({ where: { itemId: id } }).then((itemCat) => {
+        var ids = []
+        for (var i = 0; i < itemCat.length; i++) {
+          ids.push(itemCat[i].id)
+        }
+        ItemCategory.destroy({
+          where: {
+            id: ids
+          }
+        }).then((empty) => {
+          categories.forEach(catId => {
+            var newItemCategory = ItemCategory.create({
+              ItemId: item.id, // don't know why these have to capital also but I spent way too much time trying to figure that out
+              CategoryId: catId
+            });
+          });
+        });
+      });
+    });
+    return res.json({ modified: true });
+  }).catch(() => {
+    return res.status(403).json({ modified: false, id: item.id });
   });
 });
 

@@ -13,7 +13,7 @@ const createOrder = () => createUser().then((user) => {
     "totalPrice": 399.99,
     "storePickup": true,
   })
-  order.setUser(user);
+  order.setUser(user, {save: false});
   return order.save();
 });
 
