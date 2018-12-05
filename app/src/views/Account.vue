@@ -1,5 +1,5 @@
 <template>
-  <div id="account">
+  <div id="profile">
     <h3>Account</h3>
 
     <form>
@@ -59,7 +59,7 @@ import axios from 'axios';
   })
 
 
-export default class Profile extends Vue {
+export default class Account extends Vue {
 
   clicked:boolean = false;
   changes:boolean = false;
@@ -110,9 +110,13 @@ export default class Profile extends Vue {
 
 <style lang="scss">
 
+.logoClass {
+  padding: 5px;
+  margin: 5px;
+  width: 100%;
+}
 
-
-#account {
+#profile {
   padding: 75px 0px;
   margin-left: 20px;
 

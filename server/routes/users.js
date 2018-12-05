@@ -21,12 +21,38 @@ router.put('/edit', function(req, res) {
   const { id, firstName, lastName, username, password } = req.body;
   User.findById(id).then((user) => {
     if(user) {
-        user.firstName = firstName;
-        user.lastName = lastName;
-        user.username = username;
-        user.password = password;
+        if (firstName) {
+            user.firstName = firstName;
+        }
+        if (lastName) {
+            user.lastName = lastName;
+        }
+        if (username) {
+            user.username = username;
+        }
+        if (password) {
+            user.password = password;
+        }
         user.save().then(user => {
           return res.json({ updated: user.id });
+        });
+    }
+  });
+});
+
+router.put('/type', function(req, res) {
+  const { id } = req.body;
+  User.findById(id).then((user) => {
+    if(user.type == "Customer") {
+        user.type = "Employee";
+        user.save().then(user => {
+          return res.json({ updated: user.id });
+        });
+    }
+    else {
+        user.type = "Customer";
+        user.save().then(user => {
+        return res.json({ updated: user.id });
         });
     }
   });
