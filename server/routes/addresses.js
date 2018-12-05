@@ -10,9 +10,9 @@ router.get('/', function (req, res) {
 
 router.get('/:id', function (req, res) {
   Address.findById(req.params.id).then((address) => {
-    res.json({ address });
-  }).catch(() => {
-    res.status(404).json({ error: "Not Found" });
+    if (address == null)
+      return res.status(404).json({ error: "Not Found" });
+    return res.json({ address });
   });
 });
 
@@ -37,6 +37,8 @@ router.put('/', function (req, res) {
 
   User.findById(userId)
     .then((user) => {
+      if (user == null)
+        return res.status(404).json({ created: false });
       var address = Address.build({
         type,
         street1,
@@ -47,22 +49,24 @@ router.put('/', function (req, res) {
       })
       address.setUser(user, { save: false });
       address.save().then((address) => {
-        res.json({ created: true })
-      });
+        return res.json({ created: true })
+      })
+    }).catch(() => {
+      return res.status(403).json({ created: false });
     })
     .catch(() => {
-      res.json({ created: false });
+      return res.status(403).json({ created: false });
     });
 });
 
 router.delete('/:id', function (req, res) {
   Address.findById(req.params.id).then((address) => {
+    if (address == null)
+      return res.status(404).json({ deleted: false });
     address.destroy().then(() => {
       res.json({ deleted: true });
     });
-  }).catch(() => {
-    res.status(404).json({ deleted: false });
-  });
+  })
 });
 
 module.exports = router;

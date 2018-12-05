@@ -20,122 +20,90 @@ const createAddress = () => createUser().then((user) => {
   return address.save();
 });
 
+//Deadlock issue: Run one at a time
+
 describe('Address', function () {
-  describe('Get all addresses', function () {
-    it.skip('Return 200', function (done) {
+  describe('Get all Addresses', function () {
+    it('Return 200', function (done) {
       createAddress()
         .then(() => {
           request
             .get('/addresses')
             .expect(function (res) {
-              console.log(res.body);
+              //console.log(res.body);
             })
             .expect(200)
             .end(done);
         });
     });
   });
-  /*
-  describe('Get, function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
-        .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items?search=c')
-                    .expect(function (res) {
-                      //console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
-        });
-    });
-  });
-  /*
-  describe('Get all items by updatedAt', function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
-        .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items/new')
-                    .expect(function (res) {
-                      //console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
-        });
-    });
-  });
 
-  describe('Get all items by price low to high', function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
+  describe('Get Address by ID', function () {
+    it('Invalid ID returns 404', function (done) {
+      createAddress()
         .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items/pricesLow')
-                    .expect(function (res) {
-                      //console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
-        });
-    });
-  });
-
-  describe('Get all items by price high to low', function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
-        .then(() => {
-          Item.create(validItemExpensive)
-            .then(() => {
-              Item.create(validItemCheap)
-                .then(() => {
-                  request
-                    .get('/items/pricesHigh')
-                    .expect(function (res) {
-                      //console.log(res.body);
-                    })
-                    .expect(200)
-                    .end(done);
-                });
-            });
-        });
-    });
-  });
-
-  describe('Create an item with categories', function () {
-    it('Return 200', function (done) {
-      Category.create(validCategory)
-        .then((category) => {
           request
-            .put('/items')
+            .get('/addresses/9999')
+            .expect(function (res) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+        });
+    });
+
+    it.only('Valid ID returns 200', function (done) {
+      createAddress()
+        .then((address) => {
+          request
+            .get('/addresses/' + address.id)
+            .expect(function (res) {
+              //console.log(res.body);
+            })
+            .expect(200)
+            .end(done);
+        });
+    });
+  });
+
+  describe('Create Specific Address', function () {
+    it('Invalid user ID returns 404', function (done) {
+      createUser()
+        .then((user) => {
+          request
+            .put('/addresses/')
             .send({
-              "name": "chair",
-              "price": 399.99,
-              "stock": 10,
-              "descShort": "short description",
-              "descLong": "long description",
-              "picName": "pic",
-              "categories": [category.id]
+              "type": "Billing",
+              "street1": "123 Sesame Street",
+              "street2": "AAAAAAAAAAAA",
+              "city": "New York",
+              "state": "NY",
+              "zip": "45678",
+              "userId": 9999
             })
-            .expect(function (res, err) {
+            .expect(function (res) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+        });
+    });
+
+    it('Valid request body returns 200', function (done) {
+      createUser()
+        .then((user) => {
+          request
+            .put('/addresses/')
+            .send({
+              "type": "Billing",
+              "street1": "123 Sesame Street",
+              "street2": "AAAAAAAAAAAA",
+              "city": "New York",
+              "state": "NY",
+              "zip": "45678",
+              "userId": user.id
+            })
+            .expect(function (res) {
               //console.log(res.body);
             })
             .expect(200)
@@ -144,23 +112,31 @@ describe('Address', function () {
     });
   });
 
-  describe('Delete an item', function () {
-    it('Return 200', function (done) {
-      Item.create(validItem)
-        .then((item) => {
+  describe('Delete Specific Address', function () {
+    it('Invalid ID returns 404', function (done) {
+      createAddress()
+        .then(() => {
           request
-            .delete('/items/' + item.id)
+            .delete('/addresses/9999')
+            .expect(function (res) {
+              //console.log(res.body);
+            })
+            .expect(404)
+            .end(done);
+        });
+    });
+
+    it('Valid ID returns 200', function (done) {
+      createAddress()
+        .then((address) => {
+          request
+            .delete('/addresses/' + address.id)
             .expect(function (res) {
               //console.log(res.body);
             })
             .expect(200)
-            .expect(function (res) {
-              assert.equal(Object.keys(res.body).length, 1);
-              assert.equal(res.body.delete, true);
-            })
             .end(done);
         });
     });
   });
-  */
 });
