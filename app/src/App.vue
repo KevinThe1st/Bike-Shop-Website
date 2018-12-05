@@ -10,7 +10,7 @@
       <b-collapse is-nav id="nav_collapse">
 
         <b-navbar-nav>
-          <b-nav-item to="/shop">Shop</b-nav-item>
+          <b-nav-item id="NavbarShop" to="/shop">Shop</b-nav-item>
           <b-nav-item to="/services">Services</b-nav-item>
           <b-nav-item to="/about">About</b-nav-item>
         </b-navbar-nav>

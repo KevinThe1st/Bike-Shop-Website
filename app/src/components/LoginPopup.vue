@@ -26,7 +26,7 @@
             <router-link :to="{name: 'register'}">
               <button class="btn btn-primary" v-on:click="close()">Register</button>
             </router-link>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-on:click="save()">Login</button>
+            <button type="button" id="loginButton" class="btn btn-secondary" data-dismiss="modal" v-on:click="save()">Login</button>
 
           </div>
         </div>
