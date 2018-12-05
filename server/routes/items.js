@@ -37,26 +37,37 @@ router.get('/pricesLow', function (req, res) {
 
 // axios set params for array
 router.get('/byCat/:categoryId', function (req, res) {
-  ItemCategory.findAll({ where: { categoryId: req.params.categoryId } }).then((items) => {
+  ItemCategory.findAll({ where: { categoryId: req.params.categoryId } }).then((itemCats) => {
+    if (itemCats.length == 0)
+      return res.status(404).json({ itemCats });
     var ids = []
-    for (var i = 0; i < items.length; i++) {
-      ids.push(items[i].getDataValue('ItemId'))
+    for (var i = 0; i < itemCats.length; i++) {
+      ids.push(itemCats[i].getDataValue('ItemId'))
     }
     Item.findAll({ where: { id: ids } }).then((items) => {
+      if (items.length == 0)
+        return res.status(404).json({ items });
       return res.json({ items });
     });
   });
 });
 
-router.put('/list/', function (req, res) {
+router.get('/list', function (req, res) {
   const { ids } = req.body;
-  Item.findAll({ where: { id: ids }}).then((items) => {
-    return res.json({ items });
-  });
+  Item.findAll({ where: { id: ids } })
+    .then((items) => {
+      if (items.length == 0) {
+        return res.status(404).json({ items });
+      }
+      return res.json({ items });
+    });
 });
 
 router.get('/:id', function (req, res) {
   Item.findById(req.params.id).then((item) => {
+    if (item == null) {
+      return res.status(404).json({ error: "Not Found" });
+    }
     return res.json({ item });
   });
 });
@@ -151,7 +162,7 @@ router.delete('/:id', function (req, res) {
       return res.json({ delete: true });
     });
   }).catch(() => {
-    return res.json({ delete: false });
+    return res.status(404).json({ delete: false });
   });
 });
 
