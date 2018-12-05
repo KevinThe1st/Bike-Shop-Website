@@ -15,10 +15,10 @@ router.get('/:addressId', function (req, res) {
 });
 
 router.get('/user/:userId', function (req, res) {
-  Address.findAll({ where: { userId: req.params.userId } }).then((addresses) => {
-    return res.json({ addresses });
-  });
-});
+     Address.findAll({ where: { userId: req.params.userId } }).then((addresses) => {
+       return res.json({ addresses });
+     });
+   });
 
 router.put('/', function (req, res) {
   const {

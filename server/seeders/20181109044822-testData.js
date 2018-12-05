@@ -37,33 +37,21 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home1',
-<<<<<<< HEAD
-        text: 'Locally-based in San Luis Obispo',
-=======
         text: 'Located in San Luis Obispo, we are the closest bike shop to Cal Poly, San Luis Obispo; a quick ride from downtown and an easy commute from Cuesta college, '
         + 'we place community first.',
->>>>>>> 49328d3376df070dbbcb9bd163a2c2a984e1285b
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home2',
-<<<<<<< HEAD
-        text: 'Best quality bicycles and gear',
-=======
         text: 'Voted 2018\'s Best Bike Shop by Mustang News, our goal is to provide a high level of expertise while being completely honest with you when '
         + 'it comes to advice, sales, fittings, and even guarantees.',
->>>>>>> 49328d3376df070dbbcb9bd163a2c2a984e1285b
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'home3',
-<<<<<<< HEAD
-        text: 'Experts in all things cycling',
-=======
         text: 'We have been providing the Central Coast with great customer service since 1980.  From the beginning, we have put you and your bike first.',
->>>>>>> 49328d3376df070dbbcb9bd163a2c2a984e1285b
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
@@ -75,12 +63,8 @@ module.exports = {
       }], {}),
       queryInterface.bulkInsert('Textboxes', [{
         name: 'about',
-<<<<<<< HEAD
-        text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the support needed to ignite and fuel your biking passion',
-=======
         text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the'
         + ' knowledge and support to ignite and fuel your biking passion',
->>>>>>> 49328d3376df070dbbcb9bd163a2c2a984e1285b
         createdAt: new Date(),
         updatedAt: new Date()
       }], {}),
