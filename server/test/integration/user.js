@@ -147,7 +147,7 @@ describe('User', function () {
         });
     });
 
-    it.skip('Valid pair returns 200 (need front end)', function (done) {
+    it.skip('Valid pair returns 200 (needs front end)', function (done) {
       User.create(validUser)
         .then(() => {
           request

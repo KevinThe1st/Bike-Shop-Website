@@ -17,7 +17,7 @@ const createOrder = () => createUser().then((user) => {
   return order.save();
 });
 
-describe('Order', function () {
+describe.skip('Order', function () {
   describe('Get all orders', function () {
     it('Return 200', function (done) {
       createOrder()
@@ -71,15 +71,14 @@ describe('Order', function () {
     });
   });
 
-  /*
   describe('Delete an order', function () {
     it('Return 200', function (done) {
       createOrder()
-        .then(() => {
+        .then((order) => {
           request
             .delete('/orders/' + order.id)
             .expect(function (res, err) {
-              console.log(res.body);
+              //console.log(res.body);
               //assert.equal(Object.keys(res.body).length, 1);
               //assert.equal(res.body.delete, true);
             })
@@ -88,5 +87,4 @@ describe('Order', function () {
         });
     });
   });
-  */
 });
