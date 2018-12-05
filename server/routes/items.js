@@ -52,7 +52,7 @@ router.get('/byCat/:categoryId', function (req, res) {
   });
 });
 
-router.get('/list', function (req, res) {
+router.put('/list', function (req, res) {
   const { ids } = req.body;
   Item.findAll({ where: { id: ids } })
     .then((items) => {
