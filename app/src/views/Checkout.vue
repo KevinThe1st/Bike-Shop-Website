@@ -16,10 +16,8 @@
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">1</div>
               <div class = "col-sm-2 checkoutBold">Shipping Address</div>
-              <div class = "col-sm-1"></div>
-
               <div class = "col-sm-2"></div>
-              <div class = "col-sm-3">
+              <div class = "col-sm-5">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
                 <b-form-input id="input-default1" type="text" v-model="shippingAddress.street1"></b-form-input>
@@ -28,15 +26,14 @@
                 <b-form-input id="input-default4" type="text" v-model="shippingAddress.state"></b-form-input>
                 <b-form-input id="input-default5" type="text" v-model="shippingAddress.zip"></b-form-input>
               </div>
+              <div class = "col-sm-2"></div>
           </div>
           <hr>
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">2</div>
               <div class = "col-sm-2 checkoutBold">Billing Address</div>
-              <div class = "col-sm-1"></div>
-
               <div class = "col-sm-2"></div>
-              <div class = "col-sm-3">
+              <div class = "col-sm-5">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
                 <b-form-input id="input-default1" type="text" v-model="billingAddress.street1"></b-form-input>
@@ -45,6 +42,7 @@
                 <b-form-input id="input-default4" type="text" v-model="billingAddress.state"></b-form-input>
                 <b-form-input id="input-default5" type="text" v-model="billingAddress.zip"></b-form-input>
               </div>
+              <div class = "col-sm-2"></div>
           </div>
           <hr>
           <div class = "row">
@@ -103,7 +101,7 @@
 
           <div class = "row">
               <div class = "col-sm-4 checkoutBold">
-                  Total Price: $ {{totalPrice}}
+                  Total Price: ${{totalPrice}}
               </div>
               <div class = "col-sm-8"></div>
           </div>

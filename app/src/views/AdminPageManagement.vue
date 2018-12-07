@@ -12,13 +12,14 @@
     <div id="container">
       <div id = "row">
         <div id = "col-sm-12">
-            <div class = "ManagePagesHeaders">All textboxes on site</div>
+            <div class = "ManagePagesHeaders">Edit Notifications/Announcements</div>
             <div id="container">
               <div id = "row">
                 <div id = "col-sm-6">
                     <div v-for="field in textfields">
                       <div class = "ManagePagesSubHeaders">{{field.name}}</div>
-                      <b-form-input id="input-default" class = "ManagePagesInputs" type="text" v-model="field.text"></b-form-input>
+
+                      <textarea id="input-default comment" class = "ManagePagesInputs form-control" rows="5" type="text" v-model="field.text"></textarea>
                       <button class="btn btn-primary ManagePagesButton" v-on:click="update(field)">Update</button>
                       <br>
                     </div>
@@ -27,6 +28,7 @@
                 <div id = "col-sm-6"></div>
               </div>
             </div>
+
 
             <br>
 

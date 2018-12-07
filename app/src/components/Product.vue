@@ -22,9 +22,16 @@
                 Stock: {{stock}}
               </p>
               <p class ="inlineBlock">Quantity: </p>
-              <input class="form-control form-control-sm inlineBlock" id = "inputTextbox" type="text" v-model="qty" placeholder="1">
+              {{stock}}
+              <input class="form-control form-control-sm inlineBlock" id="inputTextbox" v-model="qty" type="number" :max="stock" min="0" placeholder="1">
               <br>
-              <button class="btn btn-success" id = "buttonClass" v-on:click="addToCart()">Add to Cart</button>
+              <div v-if="(qty > stock) || (qty < 1)" class="alert alert-danger" role="alert">
+                Your quantity cannot exceed the stock value or be less than 1
+              </div>
+              <b-alert :show="boolQty" dismissible fade variant="success" v-on:dismissed="changeDismissedToFalse()"> Item(s) added to cart
+              </b-alert>
+              <button class="btn btn-success" id = "buttonClass" :disabled="(qty > stock) || (qty < 1)" v-on:click="addToCart()">Add to Cart</button>
+
             </div>
           </div>
       </div>
@@ -39,6 +46,7 @@
 import axios from 'axios';
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
+
 @Component({
   props: {
     id: Number,
@@ -51,7 +59,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   }
 })
 export default class Product extends Vue {
-  qty = 1
+  qty = 1;
+  boolQty = false;
+
+
   addToCart(){
     axios.put('/api/orderItems/cart', {
       userId: this.$store.getters.getLoginStatus,
@@ -59,9 +70,14 @@ export default class Product extends Vue {
       quantity: this.qty,
     }).then((res) => {
       console.log("Item(s) added:" + res.data.updated);
-      alert("Added product to cart!");
+      this.boolQty = true;
     })
   }
+
+  changeDismissedToFalse(){
+    this.boolQty = false;
+  }
+
 }
 </script>
 
@@ -95,7 +111,7 @@ export default class Product extends Vue {
     }
 
     #inputTextbox {
-      width: 40px;
+      width: 60px;
     }
 
     .inlineBlock {
