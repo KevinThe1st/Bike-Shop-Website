@@ -20,7 +20,7 @@
 
               <div class = "col-sm-2"></div>
               <div class = "col-sm-3">
-                <button class = "btn btn-secondary">Update</button>
+                <button class = "btn btn-secondary" v-on:click="updateAddress(shippingAddress)">Update</button>
                 <br><br>
                 <b-form-input id="input-default1" type="text" v-model="shippingAddress.street1"></b-form-input>
                 <b-form-input id="input-default2" type="text" v-model="shippingAddress.street2"></b-form-input>
@@ -37,7 +37,7 @@
 
               <div class = "col-sm-2"></div>
               <div class = "col-sm-3">
-                <button class = "btn btn-secondary">Update</button>
+                <button class = "btn btn-secondary" v-on:click="updateAddress(billingAddress)">Update</button>
                 <br><br>
                 <b-form-input id="input-default1" type="text" v-model="billingAddress.street1"></b-form-input>
                 <b-form-input id="input-default2" type="text" v-model="billingAddress.street2"></b-form-input>
@@ -191,6 +191,20 @@ export default class Checkout extends Vue {
     this.userId = this.$store.getters.getLoginStatus;
     this.getUsersAddresses();
     this.getOrderData();
+  }
+
+  updateAddress(address){
+    axios.put('/api/addresses/edit/', {
+        type: address.type,
+        street1: address.street1,
+        street2: address.street2,
+        state: address.state,
+        city: address.city,
+        zip: address.zip,
+        userId: this.$store.getters.getLoginStatus
+    }).then((res) => {
+      console.log("Update Successful");
+    });
   }
 
 }
