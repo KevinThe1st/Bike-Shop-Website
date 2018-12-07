@@ -22,8 +22,8 @@ function updateCartOrder(order, itemId, quantity, res) {
     } }).then((orderItem) => {
       if (orderItem) {
         order.totalPrice -= orderItem.price;
-        orderItem.quantity = quantity;
-        orderItem.price = item.price * quantity;
+        orderItem.quantity += quantity;
+        orderItem.price = item.price * orderItem.quantity;
         orderItem.save().then((orderItem) => {
           return res.json({ updated: 'Success' });
         });

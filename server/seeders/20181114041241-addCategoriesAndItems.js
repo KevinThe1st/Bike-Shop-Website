@@ -140,6 +140,46 @@ module.exports = {
         picName: '../assets/default.png',
         createdAt: new Date(),
         updatedAt: new Date()
+      },
+      {
+        name: 'Overpriced shirt',
+        price: 100.00,
+        stock: 99,
+        descShort: 'foo',
+        descLong: 'bar',
+        picName: '../assets/default.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Fancy Helmet',
+        price: 501.00,
+        stock: 99,
+        descShort: 'foo',
+        descLong: 'bar',
+        picName: '../assets/default.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Crappy Helmet',
+        price: 20.00,
+        stock: 99,
+        descShort: 'foo',
+        descLong: 'bar',
+        picName: '../assets/default.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'Bell Sports Air Attack High Power Air Pump',
+        price: 50.00,
+        stock: 99,
+        descShort: 'foo',
+        descLong: 'bar',
+        picName: '../assets/default.png',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ], {});
 
@@ -162,18 +202,6 @@ module.exports = {
       },
       {
         categoryId: categoryRows2[3].id,
-        itemId: itemRows[0].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[0].id,
-        itemId: itemRows[1].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[1].id,
         itemId: itemRows[1].id,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -186,36 +214,12 @@ module.exports = {
       },
       {
         categoryId: categoryRows2[1].id,
-        itemId: itemRows[2].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[2].id,
-        itemId: itemRows[2].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[4].id,
         itemId: itemRows[3].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         categoryId: categoryRows2[0].id,
-        itemId: itemRows[3].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[1].id,
-        itemId: itemRows[4].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[5].id,
         itemId: itemRows[4].id,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -229,6 +233,66 @@ module.exports = {
       {
         categoryId: categoryRows2[2].id,
         itemId: itemRows[6].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[4].id,
+        itemId: itemRows[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[0].id,
+        itemId: itemRows[3].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[1].id,
+        itemId: itemRows[1].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[5].id,
+        itemId: itemRows[2].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[1].id,
+        itemId: itemRows[5].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[2].id,
+        itemId: itemRows[6].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[3].id,
+        itemId: itemRows[7].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[4].id,
+        itemId: itemRows[8].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[4].id,
+        itemId: itemRows[9].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[4].id,
+        itemId: itemRows[10].id,
         createdAt: new Date(),
         updatedAt: new Date()
       }

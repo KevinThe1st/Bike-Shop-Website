@@ -209,32 +209,8 @@ export default class Orders extends Vue {
   orderItemsAssociatedWithOrders: [OrderItemItem[]] = [[]];
   itemsAssociatedWithOrders: [ShopItem[]] = [[]];
 
-  cancelOrder(indexIntoShippingOrders){
-    axios.patch(`/api/orders/` + this.shippingOrders[indexIntoShippingOrders].id + `/Cancelled`);
-    // client side front end change
-    this.$set(this.shippingOrders[indexIntoShippingOrders], "shippingStatus", "Cancelled");
-    var transferredOrder = this.shippingOrders.splice(indexIntoShippingOrders, 1);
-    this.cancelledOrders.push(transferredOrder[0]);
-    var transferredItem = this.itemsAssociatedWithOrders[0].splice(indexIntoShippingOrders, 1);
-    var transferredOrderItem = this.orderItemsAssociatedWithOrders[0].splice(indexIntoShippingOrders, 1);
-    this.itemsAssociatedWithOrders[2].push(transferredItem[0]);
-    this.orderItemsAssociatedWithOrders[2].push(transferredOrderItem[0]);
-  }
-
-  completeOrder(indexIntoShippingOrders){
-    axios.patch(`/api/orders/` + this.shippingOrders[indexIntoShippingOrders].id + `/Complete`);
-    // client side front end change
-    this.$set(this.shippingOrders[indexIntoShippingOrders], "shippingStatus", "Complete");
-    var transferredOrder = this.shippingOrders.splice(indexIntoShippingOrders, 1);
-    this.completedOrders.push(transferredOrder[0]);
-    var transferredItem = this.itemsAssociatedWithOrders[0].splice(indexIntoShippingOrders, 1);
-    var transferredOrderItem = this.orderItemsAssociatedWithOrders[0].splice(indexIntoShippingOrders, 1);
-    this.itemsAssociatedWithOrders[1].push(transferredItem[0]);
-    this.orderItemsAssociatedWithOrders[1].push(transferredOrderItem[0]);
-  }
-
   getAllOrders(){
-    axios.get(`/api/orders/` + this.$store.getters.getLoginStatus)
+    axios.get(`/api/orders/user/` + this.$store.getters.getLoginStatus)
     .then((res) => {
       this.allOrders = res.data.orders;
       this.organizeOrders();

@@ -62,7 +62,7 @@ router.get('/:id', function (req, res) {
 router.get('/user/:userId', function (req, res) {
   Order.findAll({
     where: {
-      userId: req.param.userId,
+      userId: req.params.userId,
     }
   }).then((orders) => {
     res.json({ orders });
