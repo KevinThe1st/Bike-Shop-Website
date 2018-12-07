@@ -105,7 +105,7 @@
                             <div class = "col-sm-2">
 
                                 <br><br><br><br><br>
-                                <button class="btn btn-danger" id="removeButton" v-on:click="removeItems(item.id)">Remove</button>
+                                <button class="btn btn-danger" id="removeButton" v-on:click="removeItems(item)">Remove</button>
                             </div>
                             <div class = "col-sm-2 priceStyle">
                                 ${{item.price}}
@@ -197,12 +197,17 @@ export default class Cart extends App {
         for(var i = 0; i < this.orderItemsInCurrentOrder.length; i++){
           ids.push(this.orderItemsInCurrentOrder[i].ItemId);
         }
-
-        axios.put(`/api/items/list/`, {ids})
-        .then((res2) => {
-          this.itemsInCurrentOrder = res2.data.items;
-          this.updateCombinedData()
-        })
+        this.itemsInCurrentOrder = []
+        if(ids.length > 0){
+          axios.put(`/api/items/list/`, {ids})
+            .then((res2) => {
+              this.itemsInCurrentOrder = res2.data.items;
+              this.updateCombinedData();
+          })
+        }
+        else{
+          this.updateCombinedData();
+        }
       });
     });
   }
@@ -224,12 +229,13 @@ export default class Cart extends App {
     }
   }
 
-  removeItems(itemId) {
+  removeItems(item) {
     axios.put('/api/orderItems/deleteItemFromCart', {
-      itemId: itemId,
+      itemId: item.id,
       orderId: this.currentOrder.id
     }).then((res) => {
-      this.getCartData()
+      axios.patch(`/api/items/addStock/` + item.id + `/` + item.quantity);
+      this.getCartData();
     });
   }
 }

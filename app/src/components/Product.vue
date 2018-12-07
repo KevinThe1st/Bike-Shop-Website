@@ -58,8 +58,17 @@ export default class Product extends Vue {
       itemId: this.$props.id,
       quantity: this.qty,
     }).then((res) => {
-      console.log("Item(s) added:" + res.data.updated);
-      alert("Added product to cart!");
+      var newStock = this.$props.stock - this.qty;
+      axios.put(`/api/items/modifyItem`, {
+        id: this.$props.id,
+        name: this.$props.name,
+        price: this.$props.price,
+        stock: newStock,
+        descShort: this.$props.descShort,
+        descLong: this.$props.descLong,
+      }).then((res) => {
+        this.$props.stock -= this.qty
+      })
     })
   }
 }
