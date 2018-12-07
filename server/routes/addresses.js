@@ -36,13 +36,12 @@ const {
     zip,
     userId
   } = req.body;
-
   User.findById(userId)
     .then((user) => {
       if (user == null)
         return res.status(404).json({ created: false });
-      Address.findAll({ where: { userId: req.params.userId } }).then((addresses) => {
-      if (addresses) {
+      Address.findAll({ where: { userId: userId } }).then((addresses) => {
+        if (addresses) {
            for (var i = 0; i < addresses.length; i++) {
                 if (addresses[i].type == type) {
                     addresses[i].street1 = street1;
@@ -58,7 +57,6 @@ const {
            }
       }
       else {
-        console.log("dab");
         var address = Address.build({
               type,
               street1,
@@ -66,13 +64,13 @@ const {
               state,
               city,
               zip
-        })
+        });
         address.setUser(user, { save: false });
          address.save().then((address) => {
             return res.json({ created: true })
-         })
+         });
       }
-    })
+    });
     }).catch(() => {
       return res.status(403).json({ created: false });
     })

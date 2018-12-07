@@ -12,73 +12,24 @@
     <div id="container">
       <div id = "row">
         <div id = "col-sm-12">
-            <div class = "ManagePagesHeaders">Manage Homepage</div>
+            <div class = "ManagePagesHeaders">Edit Notifications/Announcements</div>
             <div id="container">
               <div id = "row">
                 <div id = "col-sm-6">
-                    <div class = "ManagePagesSubHeaders">Notification 1</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
-                    <div class = "ManagePagesSubHeaders">Notification 2</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
-                    <div class = "ManagePagesSubHeaders">Notification 3</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
+                    <div v-for="field in textfields">
+                      <div class = "ManagePagesSubHeaders">{{field.name}}</div>
+
+                      <textarea id="input-default comment" class = "ManagePagesInputs form-control" rows="5" type="text" v-model="field.text"></textarea>
+                      <button class="btn btn-primary ManagePagesButton" v-on:click="update(field)">Update</button>
+                      <br>
+                    </div>
                     <hr>
                 </div>
                 <div id = "col-sm-6"></div>
               </div>
             </div>
 
-            <br>
 
-            <div class = "ManagePagesHeaders">Manage About Page</div>
-            <div id="container">
-              <div id = "row">
-                <div id = "col-sm-6">
-                    <div class = "ManagePagesSubHeaders">About Page Text</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
-                    <hr>
-                </div>
-                <div id = "col-sm-6"></div>
-              </div>
-            </div>
-            <br>
-
-            <div class = "ManagePagesHeaders">Manage Services Page</div>
-            <div id="container">
-              <div id = "row">
-                <div id = "col-sm-6">
-                    <div class = "ManagePagesSubHeaders">Services Page Text</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
-                    <hr>
-                </div>
-                <div id = "col-sm-6"></div>
-              </div>
-            </div>
-            <br>
-
-            <div class = "ManagePagesHeaders">Manage Store Location</div>
-            <div id="container">
-              <div id = "row">
-                <div id = "col-sm-6">
-                    <div class = "ManagePagesSubHeaders">Store Location</div>
-                    <b-form-input id="input-default" class = "ManagePagesInputs" type="text" placeholder="Enter Text"></b-form-input>
-                    <button class="btn btn-primary ManagePagesButton">Update</button>
-                    <br>
-                    <hr>
-                </div>
-                <div id = "col-sm-6"></div>
-              </div>
-            </div>
             <br>
 
         </div>
@@ -94,7 +45,29 @@ import axios from 'axios';
 
 @Component
 export default class AdminPageManagement extends Vue {
+  textfields: any[] = [{
+    name: "PlaceHolder",
+    text: "I am text on a page that you can edit"
+  }];
 
+  update(text){
+    axios
+    .put('/api/textbox/', {
+      name: text.name,
+      text: text.text
+    })
+    .then((res) => {
+      this.beforeMount()
+    })
+  }
+
+  beforeMount(){
+    axios
+      .get('/api/textbox/')
+      .then((res) => {
+        this.textfields = res.data.text;
+      })
+  }
 }
 </script>
 

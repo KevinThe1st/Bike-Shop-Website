@@ -130,6 +130,19 @@ router.put('/modifyItem', function (req, res) {
   });
 });
 
+router.patch('/addStock/:id/:amount', function (req, res) {
+  Item.findById(req.params.id).then((order) => {
+    var newNum = order.stock + Number(req.params.amount);
+    order.updateAttributes({
+      stock: newNum,
+    }).then((order1) => {
+      res.json({ updated: true })
+    });
+  }).catch(() => {
+    res.status(403).json({ updated: false })
+  })
+});
+
 router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Item.findById(idToDelete).then((item) => {
