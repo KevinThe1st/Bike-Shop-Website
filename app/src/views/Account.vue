@@ -41,6 +41,28 @@
           <br>
         </div>
       </div>
+      <div id="sa" v-if="clicked === false">
+        <h5>Shipping Address:</h5>
+        <div v-for="(address, index) in allAddresses" v-if="address.type == 'Shipping'">
+          <h6>{{address.street1}}</h6>
+          <h6>{{address.street2}}</h6>
+          <h6>{{address.city}}</h6>
+          <h6>{{address.state}}</h6>
+          <h6>{{address.zip}}</h6>
+          <br>
+        </div>
+      </div>
+      <div id="ba"  v-if="clicked === false">
+        <h5>Billing Address:</h5>
+        <div v-for="(address, index) in allAddresses" v-if="address.type == 'Billing'">
+          <h6>{{address.street1}}</h6>
+          <h6>{{address.street2}}</h6>
+          <h6>{{address.city}}</h6>
+          <h6>{{address.state}}</h6>
+          <h6>{{address.zip}}</h6>
+          <br>
+        </div>
+      </div>
 
       <button id="Update" @click="update()" type="button" class="btn btn-primary" v-if="clicked === false">Update</button>
       <div id="fField" class="form-group" v-if="clicked === true">
@@ -161,6 +183,7 @@ export default class Account extends Vue {
       console.log("Update Successful");
       this.$store.commit('login', res.data.user_id);
     })
+
     axios.put('/api/addresses/edit', {
         type: "Shipping",
         street1: this.sStreet1Message,
@@ -172,6 +195,7 @@ export default class Account extends Vue {
     }).then((res) => {
       console.log("Update Successful");
     })
+
     axios.put('/api/addresses/edit', {
         type: "Billing",
         street1: this.bStreet1Message,
