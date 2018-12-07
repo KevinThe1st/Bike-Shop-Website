@@ -5,39 +5,39 @@
     <form>
       <div id="first" v-if="clicked === false">
         <h5>First Name:</h5>
-        <h6>{{profile[0].firstName}}</h6>
+        <h6 class = "accountInfo">{{profile[0].firstName}}</h6>
       </div>
       <div id="last" v-if="clicked === false">
         <h5>Last Name:</h5>
-        <h6>{{profile[0].lastName}}</h6>
+        <h6 class = "accountInfo">{{profile[0].lastName}}</h6>
       </div>
       <div id="uname" v-if="clicked === false">
         <h5>Username:</h5>
-        <h6>{{profile[0].username}}</h6>
+        <h6 class = "accountInfo">{{profile[0].username}}</h6>
       </div>
       <div id="pass" v-if="clicked === false">
         <h5>Password:</h5>
-        <h6>{{profile[0].password}}</h6>
+        <h6 class = "accountInfo">{{profile[0].password}}</h6>
       </div>
       <div id="sa" v-if="clicked === false">
         <h5>Shipping Address:</h5>
         <div v-for="(address, index) in allAddresses" v-if="address.type == 'Shipping'">
-          <h6>{{address.street1}}</h6>
-          <h6>{{address.street2}}</h6>
-          <h6>{{address.city}}</h6>
-          <h6>{{address.state}}</h6>
-          <h6>{{address.zip}}</h6>
+          <h6 class = "accountInfo">{{address.street1}}</h6>
+          <h6 class = "accountInfo">{{address.street2}}</h6>
+          <h6 class = "accountInfo">{{address.city}}</h6>
+          <h6 class = "accountInfo">{{address.state}}</h6>
+          <h6 class = "accountInfo">{{address.zip}}</h6>
           <br>
         </div>
       </div>
       <div id="ba"  v-if="clicked === false">
         <h5>Billing Address:</h5>
         <div v-for="(address, index) in allAddresses" v-if="address.type == 'Billing'">
-          <h6>{{address.street1}}</h6>
-          <h6>{{address.street2}}</h6>
-          <h6>{{address.city}}</h6>
-          <h6>{{address.state}}</h6>
-          <h6>{{address.zip}}</h6>
+          <h6 class = "accountInfo">{{address.street1}}</h6>
+          <h6 class = "accountInfo">{{address.street2}}</h6>
+          <h6 class = "accountInfo">{{address.city}}</h6>
+          <h6 class = "accountInfo">{{address.state}}</h6>
+          <h6 class = "accountInfo">{{address.zip}}</h6>
           <br>
         </div>
       </div>
@@ -142,8 +142,6 @@ export default class Account extends Vue {
       .then((res) => {
         console.log(res.data);
         this.allAddresses = res.data.addresses
-        console.log(this.allAddresses[0]);
-
       })
   }
 
@@ -163,7 +161,7 @@ export default class Account extends Vue {
       console.log("Update Successful");
       this.$store.commit('login', res.data.user_id);
     })
-    axios.put('/api/addresses/', {
+    axios.put('/api/addresses/edit', {
         type: "Shipping",
         street1: this.sStreet1Message,
         street2: this.sStreet2Message,
@@ -174,7 +172,7 @@ export default class Account extends Vue {
     }).then((res) => {
       console.log("Update Successful");
     })
-    axios.put('/api/addresses/', {
+    axios.put('/api/addresses/edit', {
         type: "Billing",
         street1: this.bStreet1Message,
         street2: this.bStreet2Message,
@@ -204,7 +202,10 @@ export default class Account extends Vue {
 
 }
 
-
+.accountInfo
+{
+  margin-left: 30px;
+}
 
 .saveButton
 {

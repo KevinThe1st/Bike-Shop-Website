@@ -36,7 +36,7 @@
             <b-dropdown-item to="/adminAccountManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Account Management</b-dropdown-item>
             <b-dropdown-item to="/adminOrderManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin' || this.$store.getters.getLoginPermissionLevel == 'Employee'">Admin Order Management</b-dropdown-item>
             <b-dropdown-item to="/adminPageManagement" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Admin Page Management</b-dropdown-item>
-            <b-dropdown-item href="#" v-on:click="$store.commit('logout')">Sign Out</b-dropdown-item>
+            <b-dropdown-item href="#" v-on:click="logout()">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-nav-item v-on:click = "showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</b-nav-item>
@@ -87,6 +87,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 })
 export default class App extends Vue {
   isPopupVisible: boolean = false;
+
+  logout() {
+    this.$store.commit('logout')
+    this.$router.push({name: 'home'})
+  }
 
   showModal() {
     this.isPopupVisible = true;
