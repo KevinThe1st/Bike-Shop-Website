@@ -17,23 +17,16 @@
               <div class = "col-sm-1 checkoutBold">1</div>
               <div class = "col-sm-2 checkoutBold">Shipping Address</div>
               <div class = "col-sm-1"></div>
-              <div class = "col-sm-3">
-                <div v-if="shippingAddress">
-                  {{shippingAddress}}
-                </div>
-                <div v-else>
-                  No address in system
-                </div>
-              </div>
+
               <div class = "col-sm-2"></div>
               <div class = "col-sm-3">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
-                <b-form-input id="input-default" type="text" placeholder="Street 1"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="Street 2"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="City"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="State"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="Zip"></b-form-input>
+                <b-form-input id="input-default1" type="text" v-model="shippingAddress.street1"></b-form-input>
+                <b-form-input id="input-default2" type="text" v-model="shippingAddress.street2"></b-form-input>
+                <b-form-input id="input-default3" type="text" v-model="shippingAddress.city"></b-form-input>
+                <b-form-input id="input-default4" type="text" v-model="shippingAddress.state"></b-form-input>
+                <b-form-input id="input-default5" type="text" v-model="shippingAddress.zip"></b-form-input>
               </div>
           </div>
           <hr>
@@ -41,23 +34,16 @@
               <div class = "col-sm-1 checkoutBold">2</div>
               <div class = "col-sm-2 checkoutBold">Billing Address</div>
               <div class = "col-sm-1"></div>
-              <div class = "col-sm-3">
-                <div v-if="billingAddress">
-                  {{billingAddress}}
-                </div>
-                <div v-else>
-                  No address in system
-                </div>
-              </div>
+
               <div class = "col-sm-2"></div>
               <div class = "col-sm-3">
                 <button class = "btn btn-secondary">Update</button>
                 <br><br>
-                <b-form-input id="input-default" type="text" placeholder="Street 1"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="Street 2"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="City"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="State"></b-form-input>
-                <b-form-input id="input-default" type="text" placeholder="Zip"></b-form-input>
+                <b-form-input id="input-default1" type="text" v-model="billingAddress.street1"></b-form-input>
+                <b-form-input id="input-default2" type="text" v-model="billingAddress.street2"></b-form-input>
+                <b-form-input id="input-default3" type="text" v-model="billingAddress.city"></b-form-input>
+                <b-form-input id="input-default4" type="text" v-model="billingAddress.state"></b-form-input>
+                <b-form-input id="input-default5" type="text" v-model="billingAddress.zip"></b-form-input>
               </div>
           </div>
           <hr>
@@ -169,12 +155,6 @@ export default class Checkout extends Vue {
 
   totalPrice = 0
   totalItems = 0
-
-
-  fuck(){
-    console.log("FUCKFUCKFUCKFUCK")
-  }
-
 
   finalizeCheckout(){
     axios.patch(`/api/orders/pickup/` + this.order.id + `/` + this.storePickup)
