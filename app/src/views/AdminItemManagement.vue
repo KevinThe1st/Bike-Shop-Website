@@ -11,8 +11,13 @@
       <input type="text" v-model="itemStock" placeholder="stock">
       <input type="text" v-model="itemDescShort" placeholder="short desc">
       <input type="text" v-model="itemDescLong" placeholder="long desc">
-      <upload-image url='/upload' button_html='Drag a product image here'></upload-image>
-      <!--input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"-->
+      <div v-if="!image">
+        <input type="file" @change="onFileChange">
+      </div>
+      <div v-else>
+        <img :src="image" style="width:200px;height:200px;" />
+        <button @click="removeImage">Remove image</button>
+      </div>
       <div id="category-bar">
         <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
           <ul class ="noItemManagerBullets">
@@ -95,7 +100,8 @@ import { CategoryItem, ShopItem } from '@/models';
       editingPrice: '',
       editingStock: '',
       editingDescShort: '',
-      editingDescLong: ''
+      editingDescLong: '',
+      image: ''
     }
   }
 })
@@ -109,12 +115,11 @@ export default class AdminItemManagement extends App {
   addingANewItem: boolean = false;
   editing: number = -1;
 
-  // file upload fields
-  uploadedFiles: [];
-  uploadFieldName: 'photos';
-  /*
-   * TODO: need to add file upload stuff
-   */
+  convertDataUrlToBlob(dataUrl) {
+    const arr = dataUrl.split(',');
+    const bstr = atob(arr[1]);
+    return bstr;
+}
 
   addNewItem(){
     this.addingANewItem = false;
@@ -124,12 +129,20 @@ export default class AdminItemManagement extends App {
       stock: parseInt(this.$data.itemStock),
       descShort: this.$data.itemDescShort,
       descLong: this.$data.itemDescLong,
-      picName: this.$data.itemPicName,
+      picName: '../shopImages/'+this.$data.itemPicName,
       categories: this.categoryIds
     }).then((res) => {
       console.log(res.data);
       this.successful = true;
       this.failed = false;
+
+      console.log("-----"+this.convertDataUrlToBlob(this.$data.image));
+      axios.put(`/api/upload/`, {
+        filename: this.$data.itemPicName,
+        data: this.convertDataUrlToBlob(this.$data.image),
+      }).then((res) => {
+        console.log("success");
+      });
     }).catch((error) => {
       console.log(error.response);
       this.failed = true;
@@ -215,34 +228,30 @@ export default class AdminItemManagement extends App {
   beforeMount(){
     this.getAllTopLevelCategories();
     this.getAllItems();
-    //this.reset();
-  }
-/*
-  reset() {
-    this.uploadedFiles = [];
   }
 
-  save(formData) {
-    // upload data to the server
-    upload(formData)
-    .then(x => {
-      this.uploadedFiles = [].concat(x);
-    });
+  onFileChange(e) {
+    var files = e.target.files || e.dataTransfer.files;
+    if (!files.length)
+      return;
+    this.$data.itemPicName = files[0].name;
+    this.createImage(files[0]);
   }
 
-  filesChange(fieldName, fileList) {
-    // handle file changes
-    const formData = new FormData();
+  createImage(file) {
+    var image = new Image();
+    var reader = new FileReader();
+    var vm = this;
 
-    if (!fileList.length) return;
+    reader.onload = (e) => {
+      vm.image = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 
-    // append the files to FormData
-    Array.from(Array(fileList.length).keys()).map(x => {
-      formData.append(fieldName, fileList[x], fileList[x].name);
-    });
-
-    this.save(formData);
-  }*/
+  removeImage(e) {
+    this.$data.image = '';
+  }
 }
 </script>
 

@@ -13,7 +13,8 @@ var ordersRouter = require('./routes/orders');
 var categoriesRouter = require('./routes/categories');
 var serviceRouter = require('./routes/services');
 var orderItemRouter = require('./routes/order-item');
-var addressRouter = require('./routes/addresses')
+var addressRouter = require('./routes/addresses');
+var uploadRouter = require('./routes/upload');
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/categories', categoriesRouter);
 app.use('/services', serviceRouter);
 app.use('/orderItems', orderItemRouter);
 app.use('/addresses', addressRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

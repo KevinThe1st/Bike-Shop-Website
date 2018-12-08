@@ -7,6 +7,7 @@
       <div class = "container">
           <div class = "row">
             <div class = "col-sm-4">
+              {{picName}}
               <img v-bind:src="picName" width = 200px>
             </div>
             <div class = "col-sm-5">
