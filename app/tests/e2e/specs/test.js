@@ -8,13 +8,11 @@ describe('Navigation Bar', () => {
   });
 
   it('Service Button', () => {
-    cy.visit('/');
     cy.contains('Services').click();
     cy.location('pathname').should('eq', '/services');
   });
 
   it('About Button', () => {
-    cy.visit('/');
     cy.contains('About').click();
     cy.location('pathname').should('eq', '/about');
   });
@@ -22,6 +20,7 @@ describe('Navigation Bar', () => {
 
 describe('Purchase an item', () => {
   it('Login as admin', () => {
+    cy.visit('/');
     cy.contains('Login').click();
     cy.get('#loginUsernameInput').type('admin');
     cy.get('#loginPasswordInput').type('password');
@@ -39,5 +38,27 @@ describe('Purchase an item', () => {
     cy.contains('Cart').click();
     cy.contains('Proceed to Checkout').click();
     cy.contains('Place your order').click();
+  });
+});
+
+describe('Edit account information', () => {
+  it('Change account name', () => {
+    // Login as admin
+    cy.visit('/');
+    cy.contains('Login').click();
+    cy.get('#loginUsernameInput').type('admin');
+    cy.get('#loginPasswordInput').type('password');
+    cy.get('#loginButton').click();
+
+    // Visit acooount page
+    cy.contains('Profile').click();
+    cy.contains('Account').click();
+    cy.location('pathname').should('eq', '/account');
+
+    // Change name
+    cy.contains('Update').click();
+    cy.get('#exampleInputFirstName1').type('LeBron');
+    cy.get('#exampleInputLastName1').type('Sprite Cranberry');
+    cy.get('#saveProfileChanges').click();
   });
 });
