@@ -1,5 +1,8 @@
 'use strict';
 const truncate = require('../test/truncate.js');
+const { Category } = require('../models');
+const { Op } = require('sequelize');
+const models = [Category];
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -195,61 +198,13 @@ module.exports = {
 
     return await queryInterface.bulkInsert('ItemCategories', [
       {
-        categoryId: categoryRows2[0].id,
+        categoryId: categoryRows2[4].id,
         itemId: itemRows[0].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        categoryId: categoryRows2[3].id,
-        itemId: itemRows[1].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[0].id,
-        itemId: itemRows[2].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[1].id,
-        itemId: itemRows[3].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[0].id,
-        itemId: itemRows[4].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[1].id,
-        itemId: itemRows[5].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[2].id,
-        itemId: itemRows[6].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
         categoryId: categoryRows2[4].id,
-        itemId: itemRows[2].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[0].id,
-        itemId: itemRows[3].id,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        categoryId: categoryRows2[1].id,
         itemId: itemRows[1].id,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -261,37 +216,53 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        categoryId: categoryRows2[1].id,
+        categoryId: categoryRows2[4].id,
+        itemId: itemRows[3].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[5].id,
+        itemId: itemRows[4].id,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        categoryId: categoryRows2[4].id,
         itemId: itemRows[5].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        categoryId: categoryRows2[2].id,
+        categoryId: categoryRows2[4].id,
         itemId: itemRows[6].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // the shirt
       {
-        categoryId: categoryRows2[3].id,
+        categoryId: categoryRows2[6].id,
         itemId: itemRows[7].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // the fancy helmet
       {
-        categoryId: categoryRows2[4].id,
+        categoryId: categoryRows2[7].id,
         itemId: itemRows[8].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // the crappy helmet
       {
-        categoryId: categoryRows2[4].id,
+        categoryId: categoryRows2[7].id,
         itemId: itemRows[9].id,
         createdAt: new Date(),
         updatedAt: new Date()
       },
+      // the pump
       {
-        categoryId: categoryRows2[4].id,
+        categoryId: categoryRows2[7].id,
         itemId: itemRows[10].id,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -301,7 +272,10 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     return Promise.all([
-      truncate(),
+      Category.destroy({ where: { parentId: { [Op.not]: null } } })
+      .then(() => {
+        Category.destroy({ where: {} });
+      }),
       queryInterface.bulkDelete('ItemCategories', null, {}),
       queryInterface.bulkDelete('Items', null, {}),
     ])
