@@ -1,5 +1,10 @@
 <template>
   <div class="CreateCustomer">
+
+    <!-- This page will allow a user to register for the website by setting up an account -->
+    <!-- Page has similar functionality to register page but is currently an intermediary -->
+
+    <!-- Display fields to enter registration info -->
     <h1>Create a New Customer Account</h1>
     <h3>Please enter a username and password:</h3>
     <input class="input" type="text" placeholder="Username" v-model="UsernameMessage">

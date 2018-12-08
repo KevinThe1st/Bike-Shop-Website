@@ -1,18 +1,25 @@
 <template>
   <div id="orders">
+
+    <!-- Page allows users to view their current and past orders -->
+
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+              <!-- Title for page -->
               <div id= "SeeOrdersText">My Orders</div>
           </div>
       </div>
 
     </div>
 
-
+    <!-- Container that holds current shipping info in bootstrap container -->
     <div id = "container">
+
+      <!-- Row that contains current shipping orders -->
       <div id = "row">
           <div id = "col-sm-12">
+
               <div class="manageOrdersHeaders">Shipping</div>
               <br>
               <ul class="noCartBulletsOrderManagement">
@@ -29,6 +36,7 @@
 
                   </div>
 
+                  <!-- Table that displays items in order -->
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">
                         <td class="manageOrderTableStyles">
@@ -70,8 +78,10 @@
 
     </div>
 
+    <!-- hr, horizontal rules display lines on page for styling -->
     <hr>
 
+    <!-- container that holds completed orders info -->
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
@@ -89,6 +99,8 @@
                       <div class = "col-sm-3" v-if="order.storePickup == true"><p class ="orderInfoHeader">In-store Pickup: yes</p></div>
                       <div class = "col-sm-3" v-if="order.storePickup == false"><p class ="orderInfoHeader">In-store Pickup: no</p></div>
                   </div>
+
+                  <!-- Table that displays items in orders -->
 
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">
@@ -133,6 +145,8 @@
 
     <hr>
 
+    <!-- Container that holds info on orders users had that were cancelled -->
+
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
@@ -151,6 +165,8 @@
                       <div class = "col-sm-3" v-if="order.storePickup == false"><p class ="orderInfoHeader">In-store Pickup: no</p></div>
 
                   </div>
+
+                  <!-- Table that displays items in orders -->
 
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">

@@ -1,5 +1,8 @@
 <template>
   <div id="register">
+
+    <!-- Page that allows users to register for website -->
+
     <h1>Create a New Customer Account</h1>
     <h3>Please enter a username and password:</h3>
     <p id="username">

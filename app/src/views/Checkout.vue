@@ -1,17 +1,27 @@
 <template>
   <div id="checkout">
 
+    <!-- This page will allow a user to view their total price, enter payment info and checkout -->
+
     <div class = "container">
       <div class = "row">
         <div class = "col-sm-12">
+
+          <!-- Title display for the page -->
+
           <p id="checkoutText">Checkout</p>
           <hr>
         </div>
       </div>
     </div>
 
+    <!-- Container to hold all page content -->
+
     <div class = "container">
       <div class = "row">
+
+        <!-- Container to hold payment and shipping info -->
+
         <div class = "col-sm-9">
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">1</div>
@@ -28,6 +38,7 @@
               </div>
               <div class = "col-sm-2"></div>
           </div>
+          <br>
           <hr>
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">2</div>
@@ -44,6 +55,7 @@
               </div>
               <div class = "col-sm-2"></div>
           </div>
+          <br>
           <hr>
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">3</div>
@@ -80,6 +92,7 @@
           </div>
           <hr>
 
+          <!-- Row to display radio buttons for pick-up method -->
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">4</div>
               <div class = "col-sm-2 checkoutBold">Delivery or Pick-up</div>
@@ -99,6 +112,8 @@
           </div>
           <hr>
 
+          <!-- Displays total price and button to finalize checkout -->
+
           <div class = "row">
               <div class = "col-sm-4 checkoutBold">
                   Total Price: ${{totalPrice}}
@@ -115,6 +130,8 @@
           <div class = "col-sm-1"></div>
 
           <div class = "col-sm-2">
+
+            <!-- Side div code to display side box; shows total price and also allows user to checkout -->
 
             <div id="checkoutSideBox">
                 <p id = "checkoutSideBoxTopText">Review Order</p>
@@ -157,7 +174,8 @@ export default class Checkout extends Vue {
   finalizeCheckout(){
     axios.patch(`/api/orders/pickup/` + this.order.id + `/` + this.storePickup)
     axios.patch(`/api/orders/` + this.order.id + `/Shipping`).then(() => {
-      this.$router.push({name: 'home'})
+      this.$router.push({name: 'home'});
+      alert("Your order has been placed!");
     })
   }
 

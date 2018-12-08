@@ -43,9 +43,9 @@ module.exports = {
     await queryInterface.bulkInsert('Addresses', [
       {
         type: 'Shipping',
-        street1: '201 Guantanamo Bay',
+        street1: '325 Via Mirabella',
         street2: '#5',
-        city: 'New York',
+        city: 'Thousand Oaks',
         state: 'California',
         zip: '94314',
         createdAt: new Date(),
@@ -54,9 +54,9 @@ module.exports = {
       },
       {
         type: 'Billing',
-        street1: '201 Guantanamo Bay',
+        street1: '2324 Canyon Circle',
         street2: '#5',
-        city: 'Moscow',
+        city: 'San Luis Obispo',
         state: 'California',
         zip: '94314',
         createdAt: new Date(),
@@ -65,10 +65,10 @@ module.exports = {
       },
       {
         type: 'Shipping',
-        street1: '201 Guantanamo Bay',
+        street1: '201 Via Carbella',
         street2: '#10',
-        city: 'New York',
-        state: 'California',
+        city: 'New Amersterdam',
+        state: 'New York',
         zip: '94314',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -76,9 +76,9 @@ module.exports = {
       },
       {
         type: 'Shipping',
-        street1: '201 Guantanamo Bay',
+        street1: '201 Guantanamo Street',
         street2: '#55',
-        city: 'New York',
+        city: 'San Diego',
         state: 'California',
         zip: '94314',
         createdAt: new Date(),
@@ -110,14 +110,23 @@ module.exports = {
       },
       {
         name: 'location',
-        text: 'Foxycle Cyclery \n(805) 492-4821 5934 \nGrand Ave San Luis Obispo, CA 93410',
+        text: 'Foxycle Cyclery \n(805) 492-4821 \n5934 Grand Ave San Luis Obispo, CA 93410',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'about',
         text: 'Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the'
-        + ' knowledge and support to ignite and fuel your biking passion',
+        + ' knowledge and support to ignite and fuel your biking passion.  We have been providing the Central Coast with great customer service since 1980.  From the beginning, we have put you and your bike first.'
+        + 'Voted 2018\'s Best Bike Shop by Mustang News, our goal is to provide a high level of expertise while being completely honest with you when it comes to advice, sales, and even guarantees.\n\n'
+        + 'Located in San Luis Obispo, we are the closest bike shop to Cal Poly, San Luis Obispo; a quick ride from downtown and an easy commute from Cuesta college, we place community first.  Come stop by!',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        name: 'service1',
+        text: 'We have been providing the Central Coast with great customer service since 1980.  From the beginning, we have put you and your bike first.  Our Mission: to provide the best bicycles, services, and gear selection backed by a staff of local experts that provide the best service.'
+        + 'We offer great knowledge and support to ignite and fuel your biking passion.  Please stop by and meet our friendly staff!',
         createdAt: new Date(),
         updatedAt: new Date()
       },

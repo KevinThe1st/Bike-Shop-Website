@@ -1,6 +1,8 @@
 <template>
   <div id="app">
 
+    <!-- Navbar code displayed below which is present on all pages and can redirect to other pages -->
+
     <b-navbar toggleable="md" type="dark" variant="secondary" fixed = "top">
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -19,12 +21,10 @@
         <b-navbar-nav class="ml-auto"Ht>
 
           <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
-
-
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search" v-model="searchTxt"/>
 
             <router-link :to="{name: 'shop'}">
-              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+              <b-button size="sm" class="my-2 my-sm-0" type="submit" v-on:click="search()">Search</b-button>
             </router-link>
           </b-nav-form>
 
@@ -46,22 +46,6 @@
       </b-collapse>
     </b-navbar>
 
-    <!-- navbar-1.vue -->
-
-<!--
-    <div id="nav"> -->
-      <!--
-        <img src="./assets/logo.png" alt="logo" id="logo">
-      -->
-<!--      <router-link to="/">Home</router-link>
-      <router-link to="/shop">Shop</router-link>
-      <router-link to="/services">Services</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/account">Account</router-link>
-      <div id="login">
-        <a v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</a>
-      </div>
-    </div> -->
     <LoginPopup
       v-bind:visible="isPopupVisible"
       v-on:close="closeModal"
@@ -75,6 +59,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Component from 'vue-class-component';
 import LoginPopup from '@/components/LoginPopup.vue';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -87,6 +72,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 })
 export default class App extends Vue {
   isPopupVisible: boolean = false;
+  searchTxt = ""
+
+  search(){
+
+  }
 
   logout() {
     this.$store.commit('logout')

@@ -1,15 +1,13 @@
 <template>
   <div id="home">
+    <!-- This is the home page.  It will display a sliding set of images and main shop information -->
 
-  <!--<img src = "../assets/FoxcycleLogoNew.png" id = "logoImage" width = 100% position=absolute top = 0>-->
-
-
-
-
-
+    <!-- Text to display name of shop on homepage.  Styling can be found below -->
     <p id = "homepageText">Foxycle Cyclery
     </p>
     <div>
+
+        <!-- Bootstrap carousel to show sliding images on homepage -->
         <b-carousel id="carousel1"
                     style="text-shadow: 1px 1px 2px #333;"
                     controls
@@ -24,6 +22,7 @@
         >
 
 
+        <!-- Displays slides for carousel -->
         <b-carousel-slide img-src="../assets/homepagebootstrap1.png">
           <h1>&quotThe best service on the central coast&quot<br>-Cycler Monthly</h1>
         </b-carousel-slide>
@@ -44,8 +43,6 @@
           <b-carousel-slide img-src="../assets/homepagenew6.png">
           </b-carousel-slide>
 
-
-
         </b-carousel>
 
       </div>
@@ -53,26 +50,7 @@
       <br>
 
 
-
-
-
-
-
-    <!--<carousel id="carousel1" perPage=1 autoplay autoplayTimeout=3500 loop paginationEnabled = false>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagebootstrap1.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagebootstrap2.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagebootstrap3.png" width = 100%>
-        </slide>
-        <slide>
-          <img alt="Vue logo" src="../assets/homepagenew6.png" width = 100%>
-        </slide>
-    </carousel> -->
-
+    <!-- Div that displays notifications on home page -->
     <div class = "container">
         <div class = "row">
           <div class = "col-sm-4">
@@ -89,6 +67,8 @@
 
     <br>
     <br>
+
+    <!-- Displays brands we carry with images -->
 
     <div class = "container">
       <h3 id = "BrandsTextHome">Brands we carry</h3>

@@ -1,8 +1,14 @@
 <template>
   <div id="admin-order-management">
+
+    <!-- Page can allow manager to view orders and edit them -->
+
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+
+              <!-- Page title -->
+
               <div id= "ManageOrdersText">Manage Orders</div>
           </div>
       </div>
@@ -13,8 +19,14 @@
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+
+              <!-- Rows of code to display shipping data -->
+
               <div class="manageOrdersHeaders">Shipping</div>
               <br>
+
+              <!-- Creates a list to display all shipping orders -->
+
               <ul class="noCartBulletsOrderManagement">
                 <li v-for="(order, orderIndex) in shippingOrders" v-if="itemsAssociatedWithOrders[0].length == shippingOrders.length && usersAssociatedWithOrders[0].length == shippingOrders.length &&
                      orderItemsAssociatedWithOrders[0].length == shippingOrders.length">
@@ -36,6 +48,8 @@
 
                       </div>
                   </div>
+
+                  <!-- Creates a table to display items in each order -->
 
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">
@@ -83,6 +97,9 @@
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+
+              <!-- Section to display completed orders -->
+
               <div class="manageOrdersHeaders">Completed</div>
               <br>
               <ul class="noCartBulletsOrderManagement">
@@ -100,6 +117,8 @@
                         {{usersAssociatedWithOrders[1][orderIndex].username}}</p>
                       </div>
                   </div>
+
+                  <!-- Display table of items for each individual order -->
 
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">
@@ -147,6 +166,9 @@
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+
+              <!-- Displays all cancelled orders -->
+
               <div class="manageOrdersHeaders">Cancelled</div>
               <br>
               <ul class="noCartBulletsOrderManagement">
@@ -164,6 +186,8 @@
                         {{usersAssociatedWithOrders[2][orderIndex].username}}</p>
                       </div>
                   </div>
+
+                  <!-- Table section to display tables for each order -->
 
                   <table class="manageOrdersTables">
                     <tr class="manageOrderTableStyles">

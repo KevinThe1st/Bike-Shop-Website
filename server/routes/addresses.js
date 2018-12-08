@@ -41,14 +41,24 @@ const {
       if (user == null)
         return res.status(404).json({ created: false });
       Address.findAll({ where: { userId: userId } }).then((addresses) => {
-      if (addresses) {
+        if (addresses) {
            for (var i = 0; i < addresses.length; i++) {
                 if (addresses[i].type == type) {
-                    addresses[i].street1 = street1;
-                    addresses[i].street2 = street2;
-                    addresses[i].city = city;
-                    addresses[i].state = state;
-                    addresses[i].zip = zip;
+                    if (street1) {
+                        addresses[i].street1 = street1;
+                    }
+                    if (street2) {
+                        addresses[i].street2 = street2;
+                    }
+                    if (city) {
+                        addresses[i].city = city;
+                    }
+                    if (state) {
+                        addresses[i].state = state;
+                    }
+                    if (zip) {
+                        addresses[i].zip = zip;
+                    }
                     addresses[i].save().then(address => {
                     return res.json({ updated: address.id });
                    });

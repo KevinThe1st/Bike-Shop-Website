@@ -1,9 +1,12 @@
 <template>
   <div id="services">
 
+    <!-- Page that displays the services of foxycle cyclery -->
+
+    <!-- Static image to be fixed as the background -->
     <img id = "backgroundImg" alt="Vue logo" src="../assets/BikeRepair.png" width = 100%>
 
-
+    <!-- Div that holds the majority of the page content -->
     <div id = "infoBox">
       <div class = "container infoBoxContainer">
 
@@ -22,6 +25,12 @@
         </div>
 
         <br>
+
+        <!-- Bottom text box to display services info and can be updated by manager to update this page -->
+
+        <div class = "row">
+          <p id="serviceTxt">{{serviceTxt}}</p>
+        </div>
 
         <div class = "row">
           <div class = "col-sm-12">
@@ -54,6 +63,7 @@ import axios from 'axios';
 })
 export default class Services extends Vue {
   bottomTxt = "Placeholder";
+  serviceTxt = "IM A PLACEHOLDER YES A VERY VERY NICE PLACEHOLDER"
 
   services: any[] = [{
     name: "Placeholder",
@@ -71,6 +81,11 @@ export default class Services extends Vue {
       .get('/api/textbox/location')
       .then((res) => {
         this.bottomTxt = res.data.text.text;
+      })
+    axios
+      .get('/api/textbox/service1')
+      .then((res) => {
+        this.serviceTxt = res.data.text.text;
       })
   }
 }

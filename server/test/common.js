@@ -1,4 +1,4 @@
-var { assert, expect } = require('chai');
+var { assert, expect } = require('chai').use(require('chai-subset'));
 const app = require('../app');
 const request = require('supertest')(app);
 const truncate = require('./truncate');
