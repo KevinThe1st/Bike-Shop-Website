@@ -74,7 +74,7 @@ module.exports = {
       {
         name: 'Trek Domane 4.0 Disc',
         price: 100.00,
-        stock: 20,
+        stock: 200,
         descShort: 'foo',
         descLong: 'bar',
         picName: '../assets/default.png',
