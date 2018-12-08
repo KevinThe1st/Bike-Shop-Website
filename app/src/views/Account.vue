@@ -92,6 +92,13 @@
                 changes
             </button>
 
+            <br>
+            <br>
+
+            <button type="submit" class="btn btn-primary cancelButton" v-if="changes === true">Cancel
+                changes
+            </button>
+
         </form>
     </div>
 </template>
@@ -99,6 +106,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Carousel, Slide } from 'vue-carousel';
+import { AddressItem } from '@/models';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import axios from 'axios';
@@ -148,7 +156,7 @@ export default class Account extends Vue {
       .get('/api/users/' + this.$store.getters.getLoginStatus)
       .then((res) => {
         this.profile = [res.data.user]
-        console.log(this.profile.password);
+        console.log(this.profile[0].password);
         console.log(this.profile);
         console.log(this.profile[0]);
       })
@@ -174,7 +182,6 @@ export default class Account extends Vue {
         password: this.PasswordMessage
     }).then((res) => {
       console.log("Update Successful");
-      this.$store.commit('login', res.data.user_id);
     })
 
     axios.put('/api/addresses/edit', {
@@ -248,6 +255,12 @@ export default class Account extends Vue {
 .saveButton
 {
   background-color: #4CAF50; /* Green */
+  border: none;
+}
+
+.cancelButton
+{
+  background-color: #B22222; /* Green */
   border: none;
 }
 
