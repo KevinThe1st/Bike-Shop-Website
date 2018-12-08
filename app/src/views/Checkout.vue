@@ -38,6 +38,7 @@
               </div>
               <div class = "col-sm-2"></div>
           </div>
+          <br>
           <hr>
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">2</div>
@@ -54,6 +55,7 @@
               </div>
               <div class = "col-sm-2"></div>
           </div>
+          <br>
           <hr>
           <div class = "row">
               <div class = "col-sm-1 checkoutBold">3</div>
@@ -172,7 +174,8 @@ export default class Checkout extends Vue {
   finalizeCheckout(){
     axios.patch(`/api/orders/pickup/` + this.order.id + `/` + this.storePickup)
     axios.patch(`/api/orders/` + this.order.id + `/Shipping`).then(() => {
-      this.$router.push({name: 'home'})
+      this.$router.push({name: 'home'});
+      alert("Your order has been placed!");
     })
   }
 
