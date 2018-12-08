@@ -1,7 +1,13 @@
 <template>
     <div id="profile">
-        <h3 id="accountHead">Account</h3>
 
+        <!-- This page will allow a user to view their account info, and update it -->
+
+
+        <!-- Account page header text -->
+        <h3 id = "AccountHeaderText">Account</h3>
+
+        <!-- Fields that will display a users current info -->
         <form id="aFields">
             <div class="displayInfo">
                 <div id="first" v-if="clicked === false">
@@ -21,6 +27,8 @@
                     <h6 class="accountInfo">**********</h6>
                 </div>
             </div>
+
+            <!-- Shipping address info -->
             <div class="displayInfo">
                 <div id="sa" v-if="clicked === false">
                     <h5>Shipping Address:</h5>
@@ -33,6 +41,8 @@
                         <br>
                     </div>
                 </div>
+
+                <!-- Billing address info -->
                 <div id="ba" class="aFields" v-if="clicked === false">
                     <h5>Billing Address:</h5>
                     <div v-for="(address, index) in allAddresses" v-if="address.type == 'Billing'">
@@ -46,7 +56,7 @@
                 </div>
             </div>
 
-
+            <!-- Update sections to update personal info -->
             <button id="Update" @click="update()" type="button" class="btn btn-primary" v-if="clicked === false">
                 Update
             </button>
@@ -235,14 +245,8 @@ export default class Account extends Vue {
 }
 
 
-
-
 .form-control {
     width: 500px;
-}
-
-.accountInfo
-{
 }
 
 .saveButton
@@ -251,6 +255,11 @@ export default class Account extends Vue {
   border: none;
 }
 
+#AccountHeaderText {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
 
 
 </style>
