@@ -98,14 +98,14 @@
             </div>
             <br>
 
-            <button @click="saveChanges()" type="submit" class="btn btn-primary saveButton" v-if="changes === true">Save
+            <button id="saveProfileChanges" @click="saveChanges()" type="submit" class="btn btn-primary saveButton" v-if="changes === true">Save
                 changes
             </button>
 
             <br>
             <br>
 
-            <button type="submit" class="btn btn-primary cancelButton" v-if="changes === true">Cancel
+            <button id="cancelProfileChanges" type="submit" class="btn btn-primary cancelButton" v-if="changes === true">Cancel
                 changes
             </button>
 
