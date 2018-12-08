@@ -1,6 +1,8 @@
 <template>
   <div id="app">
 
+    <!-- Navbar code displayed below which is present on all pages and can redirect to other pages -->
+
     <b-navbar toggleable="md" type="dark" variant="secondary" fixed = "top">
 
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>

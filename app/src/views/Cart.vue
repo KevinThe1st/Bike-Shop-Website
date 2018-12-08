@@ -1,5 +1,9 @@
 <template>
   <div id = "cart">
+
+    <!-- This is the main cart page.  Display items in a users cart and
+          allow them to proceed to checkout-->
+
     <div id="topCartContainer">
         <div>
           <div class = "col-sm-12">
@@ -52,6 +56,8 @@
           <div class = "col-sm-1"></div>
           <div class = "col-sm-2">
 
+            <!-- Code for the sidebox to display on the cart page -->
+
               <div id = "backToShopSidebox">
                 <div id = "container">
                     <div id = "row">
@@ -78,6 +84,8 @@
           </div>
 
       </div>
+
+      <!-- Display all items in cart in a loop -->
 
       <div class = "row">
         <div class = "row">
@@ -135,6 +143,8 @@
     </div>
 
     <div class = "container">
+
+      <!-- Display price, number of items and allow user to proceed to checkout -->
 
       <div class = "row">
 
