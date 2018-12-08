@@ -18,22 +18,26 @@ describe('Navigation Bar', () => {
     cy.contains('About').click();
     cy.location('pathname').should('eq', '/about');
   });
+});
 
-  it('Register', () => {
-    cy.visit('/');
+describe('Purchase an item', () => {
+  it('Login as admin', () => {
     cy.contains('Login').click();
-    cy.contains('Register').click();
-    cy.get('#username-box').type('username1');
-    cy.get('#createUserPasswordInput').type('password');
-    cy.get('#createUserFirstNameInput').type('e2e-customer-first');
-    cy.get('#createUserLastNameInput').type('e2e-customer-last');
-    cy.get('#button').click();
-  });
-
-  it('Login', () => {
-    cy.contains('Login').click();
-    cy.get('#loginUsernameInput').type('username1');
+    cy.get('#loginUsernameInput').type('admin');
     cy.get('#loginPasswordInput').type('password');
     cy.get('#loginButton').click();
+  });
+
+  it('Visit shop and add item', () => {
+    cy.get('#NavbarShop').click();
+    cy.location('pathname').should('eq', '/shop');
+    cy.contains('Add to Cart').click();
+  });
+    
+  it('View cart and checkout', () => {
+    cy.contains('Profile').click();
+    cy.contains('Cart').click();
+    cy.contains('Proceed to Checkout').click();
+    cy.contains('Place your order').click();
   });
 });
