@@ -21,12 +21,12 @@
         <b-navbar-nav class="ml-auto"Ht>
 
           <b-nav-form>
-            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
+            <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search" v-model="searchTxt"/>
 
 
 
             <router-link :to="{name: 'shop'}">
-              <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+              <b-button size="sm" class="my-2 my-sm-0" type="submit" v-on:click="search()">Search</b-button>
             </router-link>
           </b-nav-form>
 
@@ -77,6 +77,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import Component from 'vue-class-component';
 import LoginPopup from '@/components/LoginPopup.vue';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -89,6 +90,11 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 })
 export default class App extends Vue {
   isPopupVisible: boolean = false;
+  searchTxt = ""
+
+  search(){
+
+  }
 
   logout() {
     this.$store.commit('logout')
