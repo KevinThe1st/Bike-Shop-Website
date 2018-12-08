@@ -24,6 +24,12 @@
         <br>
 
         <div class = "row">
+          <p>Here is some text asdjkf;wioajfgipas djfgajfgh oasnfguiafdasj fiasdjf oahjdg hdjjd d hjdoasjdfh agjsdpd asdji onloadedmetadata
+          alskd;jfalk;sdfjaslkd;ffaskdl;jf;asldfj
+        lask;djfa;slkdfjal;sdjfla;sdfjl;</p>
+        </div>
+
+        <div class = "row">
           <div class = "col-sm-12">
             <img src = "../assets/tools.png" width = 100% height = "500px">
             <br>
