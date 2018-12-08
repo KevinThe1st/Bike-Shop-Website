@@ -36,6 +36,13 @@
         </div>
       </div>
     </div>
+    <b-btn v-b-modal="'myModal'">Show Modal</b-btn>
+
+    <!-- the modal -->
+    <b-modal id="myModal">
+      Hello From My Modal!
+    </b-modal>
+    </div>
   </div>
 </template>
 
