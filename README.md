@@ -34,3 +34,7 @@ Running End-to-End tests:
 4. In the popup window, click on "Run all specs"
 
 ** In case of deadlock while running shell scripts, try again until it doesn't
+
+Admin user:
+username: Admin
+password: password
