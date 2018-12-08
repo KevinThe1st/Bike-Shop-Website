@@ -32,7 +32,7 @@ const validCategory = {
   "type": null,
 };
 
-describe.only('Item', function () {
+describe('Item', function () {
   describe('Get all items', function () {
     it('Returns 200 and all added items', function (done) {
       Item.create(validItem)

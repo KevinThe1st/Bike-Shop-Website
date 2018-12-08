@@ -13,11 +13,11 @@
     <div class="ManageItemsHeader">Add New Item</div>
     <button type="submit" class = "btn btn-primary" v-on:click="addingANewItem = true">Create New Item</button>
     <div id="add-new-item" v-if="addingANewItem">
-      <input type="text" v-model="itemName" placeholder="name">
-      <input type="text" v-model="itemPrice" placeholder="price">
-      <input type="text" v-model="itemStock" placeholder="stock">
-      <input type="text" v-model="itemDescShort" placeholder="short desc">
-      <input type="text" v-model="itemDescLong" placeholder="long desc">
+      <input id="createNewItemName" type="text" v-model="itemName" placeholder="name">
+      <input id="createNewItemPrice" type="text" v-model="itemPrice" placeholder="price">
+      <input id="createNewItemStock" type="text" v-model="itemStock" placeholder="stock">
+      <input id="createNewItemShort" type="text" v-model="itemDescShort" placeholder="short desc">
+      <input id="createNewItemLong" type="text" v-model="itemDescLong" placeholder="long desc">
       <upload-image url='/upload' button_html='Drag a product image here'></upload-image>
       <!--input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"-->
       <div id="category-bar">
