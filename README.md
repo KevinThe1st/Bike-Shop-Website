@@ -29,7 +29,8 @@ Running API Tests:
 
 Running End-to-End tests:
 1. In server directory, run `./update.sh`
-2. In app directory, run `npm run test:e2e`
-3. In the popup window, click on "Run all specs"
+2. Run `npm run start`
+3. In app directory, run `npm run test:e2e`
+4. In the popup window, click on "Run all specs"
 
 ** In case of deadlock while running shell scripts, try again until it doesn't
