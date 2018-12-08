@@ -20,7 +20,7 @@ const validUser = {
   "firstName": "Justin",
 };
 
-describe.only('User', function () {
+describe('User', function () {
   describe('Get all users', function () {
     it('Returns 200 and added user appears in list', function (done) {
       User.create(validUser)

@@ -116,7 +116,6 @@ router.put('/modifyItem', function (req, res) {
     descLong,
   } = req.body;
   Item.findById(id).then((item) => {
-    console.log(name);
     item.name = name;
     item.price = price;
     item.stock = stock;
@@ -147,10 +146,10 @@ router.delete('/:id', function (req, res) {
   const idToDelete = req.params.id;
   Item.findById(idToDelete).then((item) => {
     item.destroy().then(() => {
-      return res.json({ delete: true });
+      return res.json({ deleted: true });
     });
   }).catch(() => {
-    return res.status(404).json({ delete: false });
+    return res.status(404).json({ deleted: false });
   });
 });
 
