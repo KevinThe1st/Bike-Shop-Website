@@ -1,6 +1,9 @@
 <template>
   <div id="admin-account-management">
+    <!-- Title for the page -->
     <h3>Users Accounts:</h3>
+
+    <!-- Categories to be displayed to manage users -->
     <div class = "row" id = "AdminPageTopLevelCategories">
       <div class="col-sm-1 AdminPageCategoryText">ID</div>
       <div class="col-sm-3 AdminPageCategoryText">Name</div>
@@ -8,6 +11,8 @@
       <div class="col-sm-2 AdminPageCategoryText">Type</div>
       <div class="col-sm-3 AdminPageCategoryText">Status</div>
     </div>
+
+    <!-- Fill data from backend about users -->
 
     <div class = "row">
       <div class="col-sm-1">
@@ -39,6 +44,8 @@
           </p>
         </div>
       </div>
+
+      <!-- Button to allow manager to change users to employees -->
       <div class="col-sm-3">
         <div v-for="(user, index) in allUsers" v-if="user.type != 'Admin'">
           <button id="status" @click="changeStatus(user)" type="button" class="btn btn-primary btn-sm myButton">Change</button>

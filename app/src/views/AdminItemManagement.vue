@@ -1,8 +1,14 @@
 <template>
   <div id="admin-item-management">
+
+    <!-- Page title -->
+
     <div id = "ManageItemsText">
         Manage Items
     </div>
+
+    <!-- Input fields to allow manager to add new items -->
+
     <div class="ManageItemsHeader">Add New Item</div>
     <button type="submit" class = "btn btn-primary" v-on:click="addingANewItem = true">Create New Item</button>
     <div id="add-new-item" v-if="addingANewItem">
@@ -14,6 +20,8 @@
       <upload-image url='/upload' button_html='Drag a product image here'></upload-image>
       <!--input type="file" accept="image/*" @change="uploadImage($event)" id="file-input"-->
       <div id="category-bar">
+        <!-- Categories section to be able to place categories on the new items -->
+
         <div id="top-level-categories" v-if="loadedTopLevelCategoryCount == topLevelCategories.length">
           <ul class ="noItemManagerBullets">
             <li v-for="(category, categoryIndex) in topLevelCategories">
@@ -30,6 +38,9 @@
       </div>
       <button type="submit" v-on:click="addNewItem()">Save</button>
     </div>
+
+    <!-- Alert to display if item was added successfully or not -->
+
     <b-alert variant="success" dismissible :show="successful" @dismissed="successful=false">
       Item was successfully created
     </b-alert>
@@ -37,6 +48,9 @@
       Item failed to create
     </b-alert>
     <hr>
+
+    <!-- Section to manage existing items with new fields -->
+
     <div id="existing-items">
     <div class="ManageItemsHeader">Edit Existing Item</div>
     <ul class="noItemManagerBullets">

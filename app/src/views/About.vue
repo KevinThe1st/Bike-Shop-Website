@@ -1,12 +1,17 @@
 <template>
   <div id="about">
+    <!-- This is the code for the about page. One can view info about the store
+         and a manager should be able to update it from the manage pages tab -->
 
+    <!-- Background image that will stay locked -->
     <img id = "backgroundImgAbout" alt="Vue logo" src="../assets/AboutUsBackground.png" width = 100%>
 
+    <!-- Container for text that can scroll up and down the page -->
 
     <div class = "container">
       <div class = "row">
         <div class = "col-sm-1"></div>
+        <!-- Div for the contact box that appears at the top -->
         <div class = "col-sm-3" id = "contactBox">
           <p id = "location" style="white-space: pre-wrap;">{{location}}</p>
         </div>
@@ -14,12 +19,15 @@
         </div>
       </div>
     </div>
+    <!-- Line breaks to separate the contact box from the bottom text -->
     <br>
     <br>
     <br>
     <br>
     <br>
     <br>
+
+    <!-- Main body content of the page is contained here -->
     <div id = "infoBoxAbout">
       <div class = "container infoBoxContainerAbout">
         <div class = "row">
@@ -40,11 +48,15 @@
 
       <br>
 
+      <!-- Brands we carry section of the page -->
+
       <div class = "container">
         <h3 id = "BrandsText">Brands we carry</h3>
       </div>
 
       <br>
+
+      <!-- Logos for brands contained below -->
 
       <div class = "container">
           <div class = "row">
@@ -69,6 +81,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Address is also displayed here -->
 
         <p id = "bottomTxt" style="white-space: pre-wrap;">{{bottomTxt}}</p>
 
