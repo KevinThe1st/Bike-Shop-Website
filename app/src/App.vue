@@ -23,8 +23,6 @@
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" type="text" placeholder="Search"/>
 
-
-
             <router-link :to="{name: 'shop'}">
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
             </router-link>
@@ -48,22 +46,6 @@
       </b-collapse>
     </b-navbar>
 
-    <!-- navbar-1.vue -->
-
-<!--
-    <div id="nav"> -->
-      <!--
-        <img src="./assets/logo.png" alt="logo" id="logo">
-      -->
-<!--      <router-link to="/">Home</router-link>
-      <router-link to="/shop">Shop</router-link>
-      <router-link to="/services">Services</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/account">Account</router-link>
-      <div id="login">
-        <a v-on:click="showModal" is-active=false v-if="!this.$store.getters.getLoginStatus">Login</a>
-      </div>
-    </div> -->
     <LoginPopup
       v-bind:visible="isPopupVisible"
       v-on:close="closeModal"

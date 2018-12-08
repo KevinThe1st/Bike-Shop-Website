@@ -1,7 +1,6 @@
 <template>
   <div id="home">
-
-  <!--<img src = "../assets/FoxcycleLogoNew.png" id = "logoImage" width = 100% position=absolute top = 0>-->
+    <!-- This is the home page.  It will display a sliding set of images and main shop information -->
 
     <!-- Text to display name of shop on homepage.  Styling can be found below -->
     <p id = "homepageText">Foxycle Cyclery
