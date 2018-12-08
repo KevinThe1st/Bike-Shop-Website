@@ -5,15 +5,15 @@ module.exports = {
     return Promise.all([
       queryInterface.bulkInsert('Services', [
         {
-          name: 'Get your bike serviced',
-          desc: 'Get your trusty little companion thoroughly serviced. Prices range from $5 - $100',
+          name: 'Custom Bike Fittings',
+          desc: 'Foxycle cyclery offers precise custom bike fittings for the avid cyclist. Prices range from $5 - $100',
           picName: '../assets/homepagenew6.png',
           createdAt: new Date(),
           updatedAt: new Date()
         },
         {
-          name: 'Free tune-up',
-          desc: 'Every bicycle sold at Foxycle includes a free tune-up within 6 months of purchase.',
+          name: 'Free Tune-Up Services within the first 6 months',
+          desc: 'Every bicycle sold at Foxycle includes free tune-ups and repairs within 6 months of purchase.',
           picName: '../assets/servicesMan.png',
           createdAt: new Date(),
           updatedAt: new Date()
