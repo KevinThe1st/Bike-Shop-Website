@@ -29,9 +29,7 @@
         <!-- Bottom text box to display services info and can be updated by manager to update this page -->
 
         <div class = "row">
-          <p>Here is some text asdjkf;wioajfgipas djfgajfgh oasnfguiafdasj fiasdjf oahjdg hdjjd d hjdoasjdfh agjsdpd asdji onloadedmetadata
-          alskd;jfalk;sdfjaslkd;ffaskdl;jf;asldfj
-        lask;djfa;slkdfjal;sdjfla;sdfjl;</p>
+          <p id="serviceTxt">{{serviceTxt}}</p>
         </div>
 
         <div class = "row">
@@ -65,6 +63,7 @@ import axios from 'axios';
 })
 export default class Services extends Vue {
   bottomTxt = "Placeholder";
+  serviceTxt = "IM A PLACEHOLDER YES A VERY VERY NICE PLACEHOLDER"
 
   services: any[] = [{
     name: "Placeholder",
@@ -82,6 +81,11 @@ export default class Services extends Vue {
       .get('/api/textbox/location')
       .then((res) => {
         this.bottomTxt = res.data.text.text;
+      })
+    axios
+      .get('/api/textbox/service1')
+      .then((res) => {
+        this.serviceTxt = res.data.text.text;
       })
   }
 }
