@@ -1,5 +1,8 @@
 <template>
   <div id="product">
+    <!-- A component that displays one item on the shop page -->
+
+    <!-- Displays info of product within this div -->
     <div id = "productStyle">
       <p id = "boldText">
         {{name}}

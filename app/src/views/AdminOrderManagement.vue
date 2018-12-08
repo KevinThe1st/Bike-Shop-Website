@@ -1,5 +1,8 @@
 <template>
   <div id="admin-order-management">
+
+    <!-- Page can allow manager to view orders and edit them -->
+
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">

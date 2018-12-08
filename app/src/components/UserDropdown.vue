@@ -1,4 +1,6 @@
 <template>
+
+  <!-- Dropdown menu for users that links to other pages -->
   <div class="dropdown">
     <router-link to="" class="dropdown-source">Account
       <i class="fa fa-caret-down"></i>

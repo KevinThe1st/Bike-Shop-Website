@@ -1,4 +1,6 @@
 <template>
+
+  <!-- Code used by carousel to store images and cycle -->
   <div>
     <vue-flux
    :options="fluxOptions"

@@ -1,8 +1,12 @@
 <template>
   <div id="shop">
+    <!-- Shop page that allows users to browse items and sort by category -->
+
     <div id="topContainer">
         <div>
           <div class = "col-sm-12">
+
+            <!-- Title display for the page -->
             <h1 id="ShopTopText">Shop</h1>
           </div>
         </div>
@@ -11,6 +15,8 @@
     <div>
       <div class = "row">
           <div class = "col-sm-2">
+
+                <!-- Div to display categories on the left hand side -->
                 <div id="category-bar">
                   <input v-model="message" placeholder="category name" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">
                   <button type="submit" v-on:click="addNewTopLevelCategory(message)" v-if="this.$store.getters.getLoginPermissionLevel == 'Admin'">Add New Category</button>
@@ -32,11 +38,15 @@
                   </div>
                 </div>
             </div>
+
+            <!-- Div to hold the items on display -->
             <div class = "col-sm-9" id = "itemsContainer">
                 <div id="item-panel">
                   <p id="resultsFoundText">{{displayedItems.length}} results found</p>
                   <ul class ="noBullets">
                     <li v-for="item in displayedItems">
+
+                      <!-- Passes data to a product item to display products -->
                       <Product
                         v-bind:id="item.id"
                         v-bind:price="item.price"

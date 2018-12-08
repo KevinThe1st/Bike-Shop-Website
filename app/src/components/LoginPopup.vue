@@ -1,4 +1,6 @@
 <template>
+
+  <!-- Popup which displays login box -->
   <div class = "model-backdrop" v-show="visible">
     <div class="modal d-block" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-sm" role="document">
@@ -21,6 +23,8 @@
               </slot>
             </p>
           </div>
+
+          <!-- Footer of login box.  Can allow user to reset password, login, or redirect to register -->
           <div class="modal-footer">
             <button id="forgotPasswordButton" v-on:click="passwordAlert()">Forgot Password?</button><!-- An empty button to send an email to client.  Does not work as email auto service is not set up, but would be filled in case of site deployment -->
             <router-link :to="{name: 'register'}">

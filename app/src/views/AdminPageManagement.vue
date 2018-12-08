@@ -1,8 +1,12 @@
 <template>
   <div id="admin-page-management">
+
+    <!-- This page will allow manager to edit content on other pages -->
+
     <div id = "container">
       <div id = "row">
           <div id = "col-sm-12">
+              <!-- Title for the page -->
               <div id= "ManagePagesText">Manage Notifications and Page Content</div>
           </div>
       </div>
@@ -12,6 +16,9 @@
     <div id="container">
       <div id = "row">
         <div id = "col-sm-12">
+
+            <!-- Display all fields in a loop for text boxes that can be edited -->
+          
             <div class = "ManagePagesHeaders">Edit Notifications/Announcements</div>
             <div id="container">
               <div id = "row">

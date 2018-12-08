@@ -1,5 +1,7 @@
 <template>
   <div id="admin-account-management">
+    <!-- Page allows admins to manager users/create employees -->
+
     <!-- Title for the page -->
     <h3>Users Accounts:</h3>
 

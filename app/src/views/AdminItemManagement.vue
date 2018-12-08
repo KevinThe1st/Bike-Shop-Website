@@ -1,5 +1,6 @@
 <template>
   <div id="admin-item-management">
+    <!-- Page allows managers to edit and add new items -->
 
     <!-- Page title -->
 

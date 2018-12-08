@@ -1,9 +1,12 @@
 <template>
   <div id="services">
 
+    <!-- Page that displays the services of foxycle cyclery -->
+
+    <!-- Static image to be fixed as the background -->
     <img id = "backgroundImg" alt="Vue logo" src="../assets/BikeRepair.png" width = 100%>
 
-
+    <!-- Div that holds the majority of the page content -->
     <div id = "infoBox">
       <div class = "container infoBoxContainer">
 
@@ -22,6 +25,8 @@
         </div>
 
         <br>
+
+        <!-- Bottom text box to display services info and can be updated by manager to update this page -->
 
         <div class = "row">
           <p>Here is some text asdjkf;wioajfgipas djfgajfgh oasnfguiafdasj fiasdjf oahjdg hdjjd d hjdoasjdfh agjsdpd asdji onloadedmetadata
